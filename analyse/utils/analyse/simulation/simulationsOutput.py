@@ -30,7 +30,6 @@ class SimulationsOutput:
         #_________________________
 
         self.workingDir    = self.outputDir + self.sessionName + self.workName
-
         self.statDir       = self.workingDir + 'statistics/'
         self.scalingDir    = self.workingDir + 'scaling/'
 
@@ -48,27 +47,30 @@ class SimulationsOutput:
     def procOutputDir(self, proc):
         return ( self.outputDir + self.sessionName + proc + '/' )
 
-    def fileSpeciesBin(self, proc, DOW, IOB, speciesBin):
+    def fileSpeciesBinProc(self, proc, DOW, IOB, speciesBin):
         return ( self.procOutputDir(proc) + DOW + IOB + speciesBin + '.bin' )
 
     #_________________________
 
     def scalingFieldDir(self, AOG, field, lol):
-        return self.scalingDir + AOG + field.name + '/' + lol + '/'
+        return ( self.scalingDir + AOG + field.name + '/' + lol + '/' )
 
     def fileScalingFieldSpecies(self, AOG, field, lol, species):
-        return self.scalingFieldDir(AOG, field, lol) + species + '.npy'
+        return ( self.scalingFieldDir(AOG, field, lol) + species + '.npy' )
 
     def fileFMScalingFieldSpecies(self, AOG, field, lol, species):
-        return self.scalingFieldDir(AOG, field,lol) + species + '_FM.npy'
+        return ( self.scalingFieldDir(AOG, field,lol) + species + '_FM.npy' )
 
+    #_________________________
 
+    def procPreprocessedDataDir(self, proc):
+        return ( self.workingDir + proc + '/' )
+
+    def procPreprocessedFieldDir(self, proc, AOG, field, lol):
+        return ( self.procPreprocessedDataDir(proc) + AOG + field.name + '/' + lol + '/' )
+
+#__________________________________________________
 '''
-def preprocessedDataProcDir(outputDir, sessionName, workSession, proc):
-    return workingDir(outputDir, sessionName, workSession) + proc '/'
-
-def preprocessedDataFieldDir(outputDir, sessionName, workSession, proc, AOG, fieldName, lol):
-    return preprocessedDataProcDir(outputDir, sessionName, workSession, proc) + AOG + fieldName + '/' + lol + '/'
 
 
 #def fileToAnalyse(proc, AOG, fieldName, lol, species):

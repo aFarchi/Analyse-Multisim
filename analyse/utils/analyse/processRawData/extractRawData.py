@@ -23,7 +23,7 @@ def extractRawData(simOutput, proc, AOG, GOR, species, printIO=False):
     for speBin in speciesBinList:
         for DOW in DryOrWet(AOG):
             for IOB in InCloudOrBelowCould(AOG, GOR)[DOW]:
-                fileName = simOutput.fileSpeciesBin(proc, DOW, IOB, speciesBin)
+                fileName = simOutput.fileSpeciesBinProc(proc, DOW, IOB, speciesBin)
                 if printIO:
                     print ('Reading '+fileName+' ...')
                 try:
