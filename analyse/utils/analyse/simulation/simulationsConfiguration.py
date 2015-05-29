@@ -4,7 +4,6 @@
 
 from datetime             import datetime
 from datetime             import timedelta
-from ...path.absolutePath import *
 
 #__________________________________________________
 
