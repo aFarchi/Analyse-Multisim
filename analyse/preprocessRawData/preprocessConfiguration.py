@@ -2,10 +2,10 @@
 # preprocessConfiguration.py
 #___________________________
 
-#from preprocessRawData          import preprocessRawDataForSpecies
-#from preprocessRawData          import preprocessRawDataForAllSpecies
-#from preprocessRawDataBigMemory import preprocessRawDataForSpeciesBigMemory
-#from preprocessRawDataBigMemory import preprocessRawDataForAllSpeciesBigMemory
+from preprocessRawData                          import preprocessRawDataForSpecies
+from preprocessRawData                          import preprocessRawDataForAllSpecies
+from preprocessRawDataBigMemory                 import preprocessRawDataForSpeciesBigMemory
+from preprocessRawDataBigMemory                 import preprocessRawDataForAllSpeciesBigMemory
 
 from ..utils.configuration.defaultConfiguration import DefaultConfiguration
 
@@ -34,58 +34,46 @@ class PreprocessConfiguration(DefaultConfiguration):
     #_________________________
 
     def runAll(self):
-        if self.bigMemory == 1:
-            preprocessRawDataForAllSpeciesBigMemory(self.outputDir,
-                                                    self.sessionName,
-                                                    self.xTSelect,
-                                                    self.analyseShape,
-                                                    self.nLevelsAnalyse,
-                                                    self.printIO)
+        if self.bigMemory:
+            preprocessRawDataForAllSpeciesBigMemory(self)
         else:
-            preprocessRawDataForAllSpecies(self.outputDir,
-                                           self.sessionName,
-                                           self.xTSelect,
-                                           self.analyseShape,
-                                           self.nLevelsAnalyse,
-                                           self.printIO)
+            preprocessRawDataForAllSpecies(self)
                         
     #_________________________
 
     def runOne(self, AOG, GOR, species):
         if self.bigMemory == 1:
-            preprocessRawDataForSpeciesBigMemory(self.outputDir,
-                                                 self.sessionName,
-                                                 self.xTSelect,
-                                                 self.analyseShape,
-                                                 self.nLevelsAnalyse,
+            preprocessRawDataForSpeciesBigMemory(self,
                                                  AOG,
                                                  GOR,
-                                                 species,
-                                                 self.printIO)
+                                                 species)
         else:
-            preprocessRawDataForSpecies(self.outputDir,
-                                        self.sessionName,
-                                        self.xTSelect,
-                                        self.analyseShape,
-                                        self.nLevelsAnalyse,
+            preprocessRawDataForSpecies(self,
                                         AOG,
                                         GOR,
-                                        species,
-                                        self.printIO)
+                                        species)
 
     #_________________________
 
     def writeConfig(self, fileName):
-        f = open(fileName, 'w')
-        f.write('outputDir      = '+self.outputDir+'\n')
-        f.write('sessionName    = '+self.sessionName+'\n')
-        f.write('xTSelect       = '+str(self.xTSelect)+'\n')
-        for shape in self.analyseShape:
-            f.write('analyseShape   = int : '+str(shape)+'\n')
-        f.write('nLevelsAnalyse = '+str(self.nLevelsAnalyse)+'\n')
-        f.write('printIO        = '+str(self.printIO)+'\n')
-        f.write('bigMemory      = '+str(self.bigMemory)+'\n')
-        f.close()
+        try:
+            f = open(fileName, 'w')
+            f.write('outputDir      = '+self.outputDir+'\n')
+            f.write('sessionName    = '+self.sessionName+'\n')
+            f.write('workName       = '+self.workName+'\n')
+            f.write('\n')
+            f.write('xTSelect       = '+str(self.xTSelect)+'\n')
+            f.write('\n')
+            for shape in self.analyseShape:
+                f.write('analyseShape   = int : '+str(shape)+'\n')
+            f.write('\n')
+            f.write('nLevelsAnalyse = '+str(self.nLevelsAnalyse)+'\n')
+            f.write('printIO        = '+str(self.printIO)+'\n')
+            f.write('bigMemory      = '+str(self.bigMemory)+'\n')
+            f.write('\n')
+            f.close()
+        except:
+            print('Could not write file :'+fileName)
 
     #_________________________
 

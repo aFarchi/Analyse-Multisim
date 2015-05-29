@@ -2,12 +2,22 @@
 # simulationsOutput.py
 #_____________________
 
-from ...path.modulePath       import ModulePath
-from ..io.readLists           import readFileProcesses
-from ..io.readLists           import readFileMinValues
-from ..io.readLists           import readFileLevels
-from ..fields.defineFields    import defineFields
-from simulationsConfiguration import SimulationsConfiguration
+from ...path.modulePath             import ModulePath
+from ..io.readLists                 import readFileProcesses
+from ..io.readLists                 import readFileMinValues
+from ..io.readLists                 import readFileLevels
+from ..fields.defineFields          import defineFields
+from simulationsConfiguration       import SimulationsConfiguration
+from ..timeSelection.defaultTSelect import makeSelectXtimesNt
+
+#__________________________________________________
+
+def buildSimulationsOutput(preprocessConfig):
+    funTSelect = makeSelectXtimesNt(preprocessConfig.xTSelect)
+    return SimulationsOutput(preprocessConfig.outputDir,
+                             preprocessConfig.sessionName,
+                             preprocessConfig.workName,
+                             funTSelect)
 
 #__________________________________________________
 
@@ -15,10 +25,10 @@ class SimulationsOutput:
 
     def __init__(self, outputDir, sessionName, workName, funTSelect=None):
 
-        self.modulePath  = ModulePath()
-        self.outputDir   = outputDir
-        self.sessionName = sessionName
-        self.workName    = workName
+        self.modulePath    = ModulePath()
+        self.outputDir     = outputDir
+        self.sessionName   = sessionName
+        self.workName      = workName
 
         #_________________________
 
@@ -32,7 +42,7 @@ class SimulationsOutput:
         self.workingDir    = self.outputDir + self.sessionName + self.workName
         self.statDir       = self.workingDir + 'statistics/'
         self.scalingDir    = self.workingDir + 'scaling/'
-
+        self.launcherDir   = self.workingDir + 'launchers/'
         #_________________________
 
         self.simConfig     = SimulationsConfiguration(self.configDir)
@@ -41,6 +51,16 @@ class SimulationsOutput:
         self.levels        = readFileLevels(self.fileLevels)
         
         self.fieldList     = defineFields(self)
+
+        #_________________________
+
+        self.launcherPreprocessRawDataDir    = self.launcherDir + 'preprocessRawData/'
+        self.pythonLauncherPreprocessRawData = self.launcherPreprocessRawDataDir + 'preprocessRawData.py'
+        self.bashLauncherPreprocessRawData   = self.launcherPreprocessRawDataDir + 'preprocessRawData.sh'
+        self.fileProcessesPreprocessRawData  = self.launcherPreprocessRawDataDir + 'processesPreprocessRawData.data'
+        self.configFilePreprocessRawData     = self.launcherPreprocessRawDataDir + 'preprocessRawData.cfg'
+        self.fileLogPreprocessRawData        = self.launcherPreprocessRawDataDir + 'logPreprocessRawData'
+        self.fileNodesPreprocessRawData      = self.launcherPreprocessRawDataDir + 'nodesPreprocessRawData.dat'
 
     #_________________________
 
@@ -69,42 +89,14 @@ class SimulationsOutput:
     def procPreprocessedFieldDir(self, proc, AOG, field, lol):
         return ( self.procPreprocessedDataDir(proc) + AOG + field.name + '/' + lol + '/' )
 
+    def fileProcPreprocessedField(self, proc, AOG, field, lol, species):
+        return ( self.procPreprocessedFieldDir(proc, AOG, field, lol) + species + '.npy' )
+
+    def fileProcPreprocessedFieldGS(self, proc, AOG, field, lol, species, TS):
+        return ( self.procPreprocessedFieldDir(proc, AOG, field, lol) + species + 'grayScale' + TS + '.npy' )
+
 #__________________________________________________
 '''
-
-
-#def fileToAnalyse(proc, AOG, fieldName, lol, species):
-#    return toAnalyseDir(proc, AOG, fieldName, lol) + species + '.npy'
-
-#def fileGSToAnalyse(proc, AOG, fieldName, lol, species, TS):
-#    return toAnalyseDir(proc, AOG, fieldName, lol) + species + '_greyScale' + TS + '.npy'
-
-
-    
-
-def launcherDir(outputDir, sessionName, workSession):
-    return workingDir(outputDir, sessionName, workSession) + 'launchers/'
-
-def launcherPreprocessRDDir(outputDir, sessionName, workSession):
-    return launcherDir(outputDir, sessionName, workSession) + 'preprocessRawData/'
-
-def pythonLauncherPreprocessRD(outputDir, sessionName, workSession):
-    return launcherPreprocessRDDir(outputDir, sessionName, workSession) + 'preprocessRawData.py'
-
-def bashLauncherPreprocessRD(outputDir, sessionName, workSession):
-    return launcherPreprocessRDDir(outputDir, sessionName, workSession) + 'preprocessRawData.sh'
-
-def fileProcessesPreprocessRD(outputDir, sessionName, workSession):
-    return launcherPreprocessRDDir(outputDir, sessionName, workSession) + 'processesPreprocessRawData.sh'
-
-def configFilePreprocessRD(outputDir, sessionName, workSession):
-    return launcherPreprocessRDDir(outputDir, sessionName, workSession) + 'preprocessRawData.cfg'
-
-def fileLogPreprocessRD(outputDir, sessionName, workSession):
-    return launcherPreprocessRDDir(outputDir, sessionName) + 'logPreprocessRawData'
-
-def fileNodesPreprocessRD(outputDir, sessionName, workSession):
-    return launcherPreprocessRDDir(outputDir, sessionName, workSession) + 'nodesPreprocessRawData.dat'
 
 def figDir(outputDir, sessionName, workSession):
     return workingDir(outputDir, sessionName, workSession) + 'figures/'
