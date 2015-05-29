@@ -4,6 +4,8 @@
 
 import sys
 
+#__________________________________________________
+
 def extractArgv():
     sys.argv.pop(0)
     arguments = {}
@@ -12,3 +14,5 @@ def extractArgv():
         arguments[members[0]] = members[1]
 
     return arguments
+
+#__________________________________________________

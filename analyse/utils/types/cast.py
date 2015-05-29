@@ -2,6 +2,8 @@
 # cast.py
 #________
 
+#__________________________________________________
+
 def castString(toType, s):
     if toType == 'str':
         return s
@@ -11,3 +13,5 @@ def castString(toType, s):
         return int(s)
     elif toType == 'bool':
         return ( s == 'True' )
+
+#__________________________________________________

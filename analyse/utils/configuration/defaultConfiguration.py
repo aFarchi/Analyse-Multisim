@@ -6,6 +6,8 @@ from ..io.read      import readLines
 from ..types.cast   import castString
 from ..types.string import catListOfString
 
+#__________________________________________________
+
 class DefaultConfiguration(object):
 
     def __init__(self, configFile=None):
@@ -14,8 +16,12 @@ class DefaultConfiguration(object):
         self.fromfile(configFile)
         self.checkAttributes()
 
+    #_________________________
+
     def __repr__(self):
         return 'DefaultConfiguration class'
+        
+    #_________________________
 
     def replaceByDefaultValue(self, attr):
         self.__setattr__(attr, self.defaultValues[attr])
@@ -23,6 +29,8 @@ class DefaultConfiguration(object):
             print('No valid element found for '+attr)
             print('Replaced by default value : ')
             print(self.defaultValues[attr])
+
+    #_________________________
 
     def checkAttribute(self, attr):
         if self.attributeType[attr] == 'dict':
@@ -34,6 +42,8 @@ class DefaultConfiguration(object):
         else:
             if not self.__dict__.has_key(attr):
                 self.replaceByDefaultValue(attr)
+    
+    #_________________________
 
     def checkAttributes(self):
         for attr in self.attributes:
@@ -49,6 +59,8 @@ class DefaultConfiguration(object):
                         break
                 if parentAttributesCompatible:
                     self.checkAttribute(attr)
+
+    #_________________________
 
     def fromfile(self, fileName):
         lines = readLines(fileName, strip=True, removeBlancks=True, commentChar='#', includeEmptyLines=False)
@@ -79,12 +91,16 @@ class DefaultConfiguration(object):
             except:
                 print('Could not read line :'+line)
 
+    #_________________________
+
     def initListsAndDicts(self):
         for attr in self.attributes:
             if self.attributeType[attr] == 'list':                
                 self.__setattr__(attr, [])
             elif self.attributeType[attr] == 'dict':
                 self.__setattr__(attr, {})
+
+    #_________________________
 
     def defaultAttributes(self):
         self.attributes     = []
@@ -93,9 +109,13 @@ class DefaultConfiguration(object):
         self.attributeType  = {}
         self.printWarning   = {}
 
+    #_________________________
+
     def addAttribute(self, attrName, defaultVal, isSubAttr, attrType, printWarning):
         self.attributes.append(attrName)
         self.defaultValues[attrName]  = defaultVal
         self.isSubAttribute[attrName] = isSubAttr
         self.attributeType[attrName]  = attrType
         self.printWarning[attrName]   = printWarning
+
+#__________________________________________________

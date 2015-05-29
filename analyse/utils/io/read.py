@@ -6,6 +6,8 @@ import numpy as np
 
 from files import extensionOfFile
 
+#__________________________________________________
+
 def arrayFromFile(fileName):
     if fileName is None or fileName == '':
         return None
@@ -19,6 +21,8 @@ def arrayFromFile(fileName):
             return np.fromfile(fileName)
     except:
         return None
+
+#__________________________________________________
 
 def readLines(fileName, strip=True, removeBlancks=True, commentChar='#', includeEmptyLines=False):
     f     = open(fileName, 'r')
@@ -41,3 +45,6 @@ def readLines(fileName, strip=True, removeBlancks=True, commentChar='#', include
             filteredLines.append(l)
 
     return filteredLines
+
+#__________________________________________________
+
