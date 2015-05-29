@@ -15,3 +15,8 @@ def runCommand(command, printIO):
         sys.exit(status)
 
 #__________________________________________________
+
+def makeExe(fileName, printIO=False):
+    runCommand('chmod +x '+fileName, printIO)
+
+#__________________________________________________

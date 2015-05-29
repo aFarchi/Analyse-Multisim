@@ -4,10 +4,10 @@
 
 import numpy as np
 
-from ..io.files          import fileNameSuffix 
-from ..io.files          import fileNameSuffixOfShifts
-from ..io.read           import readLines
-from ..path.absolutePath import *
+from ..io.files           import fileNameSuffix 
+from ..io.files           import fileNameSuffixOfShifts
+from ..io.read            import readLines
+from ...path.absolutePath import *
 
 #__________________________________________________
 

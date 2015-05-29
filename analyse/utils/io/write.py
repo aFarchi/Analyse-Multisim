@@ -9,6 +9,16 @@ from ..sys.run    import runCommand
 
 #__________________________________________________
 
+def writeLinesFillingWithArgs(lines, fileName, args):
+    f = open(fileName, 'w')
+    for line in lines:
+        for arg in args:
+            line = line.replace(arg, args[arg])
+        f.write(line)
+    f.close()
+
+#__________________________________________________
+
 def createDirectories(dirList, printIO=False):
     for d in dirList:
         runCommand('mkdir -p '+d, printIO)

@@ -17,21 +17,23 @@ def moduleLauncherPlotting():
 def OTmodulePath():
     return '/profils_cerea/farchia/OT/Optimal-Transport/'
 
+#________________
+
 def submoduleLauncherPath():
     return modulePath() + 'utils/launchers/'
 
-#________________
+def defaultFilesPath():
+    return submoduleLauncherPath() + 'defaultFiles/'
 
 def defaultPythonLauncher():
-    return submoduleLauncherPath() + 'defaultLauncher.py'
+    return defaultFilesPath() + 'defaultLauncher.py'
 
 def defaultBashLauncher():
-    return submoduleLauncherPath() + 'defaultLauncher.sh'
+    return defaultFilesPath() + 'defaultLauncher.sh'
 
 def defaultNodesFile():
-    return submoduleLauncherPath() + 'defaultNodes.dat'
+    return defaultFilesPath() + 'defaultNodes.dat'
     
-
 #________________
 
 def configDir(outputDir, sessionName):
