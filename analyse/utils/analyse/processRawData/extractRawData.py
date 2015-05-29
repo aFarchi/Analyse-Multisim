@@ -4,51 +4,47 @@
 
 import numpy as np
 
-#__________________________________________________
-
-def extractRawData(procName, AOG, GOR, species, speciesBin, rawShape, deltaT=None, printIO=False):
-
-    if AOG == 'air/':
-        for speBin in speciesBin[species]:
-            fileName = procName + speBin + '.bin'
-            if printIO:
-                print ('Reading '+fileName+'...')
-            try:
-                rawData += np.fromfile(fileName, 'f')
-            except:
-                rawData  = np.fromfile(fileName, 'f')
-        return rawData.reshape(rawShape)
-
-    elif AOG == 'ground/':
-
-        dow = ['dry/','wet/']
-        iob = {}
-        iob['dry/'] = ['']
-        if GOR == 'gaz':
-            iob['wet/'] = ['']
-        elif GOR == 'radios':
-            iob['wet/'] = ['InCloud/', 'BelowCloud/']
-        
-        for speBin in speciesBin[species]:
-            for DOW in dow:
-                for IOB in iob[DOW]:
-                    fileName = procName + DOW + IOB + speBin + '.bin'
-                    if printIO:
-                        print ('Reading '+fileName+'...')
-                    try:
-                        rawData += np.fromfile(fileName, 'f')
-                    except:
-                        rawData  = np.fromfile(fileName, 'f')
-        rawData = rawData.reshape(rawShape)[:,0,:,:]
-        return rawData.cumsum(axis=0)*deltaT
+from ..io.navigate import *
 
 #__________________________________________________
 
-def extractRawDataMultiProc(procList, AOG, GOR, species, speciesBinList, rawShape, deltaT, printIO):
+def extractRawData(simOutput, proc, AOG, GOR, species, printIO=False):
+
+    speciesBinList = simOutput.simConfig.speciesBinList[GOR][species]
+    rawShape       = simOutput.simConfig.rawShapes[GOR][AOG]
+    deltaT         = simOutput.simConfig.deltaT
+
+    rawSize        = 1
+    for dim in len(rawShape):
+        rawSize   *= rawShape[dim]
+
+    rawData        = np.zeros(rawSize)
+
+    for speBin in speciesBinList:
+        for DOW in DryOrWet(AOG):
+            for IOB in InCloudOrBelowCould(AOG, GOR)[DOW]:
+                fileName = simOutput.fileSpeciesBin(proc, DOW, IOB, speciesBin)
+                if printIO:
+                    print ('Reading '+fileName+' ...')
+                try:
+                    rawData += np.fromfile(fileName, 'f') 
+                except:
+                    print('Could not read file : '+fileName)
+
+    rawData = rawData.reshape(rawShape)
+    if 'air' in AOG:
+        return rawData
+    elif 'ground' in AOG:
+        return rawData[:,0,:,:].cumsum(axis=0)*deltaT
+
+#__________________________________________________
+
+def extractRawDataMultiProc(simOutput, AOG, GOR, species, printIO):
     rawData = {}
-    for proc in procList:
-        rawData[proc] = extractRawData(proc, AOG, GOR, species, speciesBinList, rawShape, deltaT, printIO)
+    for proc in simOutput.procList:
+        rawData[proc] = extractRawData(simOutput, proc, AOG, GOR, species, printIO)
 
     return rawData
 
-#__________________________________________________                    
+#__________________________________________________
+

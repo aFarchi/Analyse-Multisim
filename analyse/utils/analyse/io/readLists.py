@@ -7,22 +7,6 @@ import numpy as np
 from ..io.files           import fileNameSuffix 
 from ..io.files           import fileNameSuffixOfShifts
 from ..io.read            import readLines
-from ...path.absolutePath import *
-
-#__________________________________________________
-
-def catchListOfProcessesFromFile(outputDir, sessionName):
-    return readFileProcesses(fileProcesses(outputDir, sessionName), outputDir+sessionName, '/')
-
-#__________________________________________________
-
-def catchMinValuesFromFile(outputDir, sessionName):
-    return readFileMinValues(fileMinValues(outputDir, sessionName))
-
-#__________________________________________________
-    
-def catchLevelsFromFile(outputDir, sessionName):
-    return readFileLevels(fileLevels(outputDir, sessionName))
 
 #__________________________________________________    
                                                 

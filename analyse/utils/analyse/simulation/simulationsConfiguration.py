@@ -8,11 +8,6 @@ from ...path.absolutePath import *
 
 #__________________________________________________
 
-def catchSimConfig(outputDir, sessionName):
-    return SimulationsConfiguration(configDir(outputDir, sessionName))
-
-#__________________________________________________
-
 class SimulationsConfiguration:
 
     def __init__(self, configDir=None):
@@ -59,16 +54,7 @@ class SimulationsConfiguration:
         
         self.deltaT                            = 3600.
 
-        self.xmin                              = 137.53
-        self.xmax                              = 143.53
+        self.axMinis                           = [datetime(2011, 03, 11, 0), 0.0, 34.72, 137.53]
+        self.axMaxis                           = [self.minDim[0] + timedelta(seconds=3000*600), 8073.0, 40.72, 143.53]
 
-        self.ymin                              = 34.72
-        self.ymax                              = 40.72
-
-        self.zmin                              = 34.72
-        self.zmax                              = 40.72
-
-        self.tmin                              = datetime(2011, 03, 11, 0)
-        self.tmax                              = self.tmin + timedelta(seconds=3000*600)
-                        
 #__________________________________________________

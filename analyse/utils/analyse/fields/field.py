@@ -12,13 +12,14 @@ from ..timeSelection.defaultTSelect         import selectLastT
 
 class Field:
 
-    def __init__(self, name, axes, labels, minValue, funTSelect=None):
-        self.name     = name
-        self.axes     = axes
-        self.labels   = labels
-        self.minValue = minValue
+    def __init__(self, name, axes, labels, simOutput):#minValue, funTSelect=None):
+        self.name      = name
+        self.axes      = axes
+        self.labels    = labels
+        self.simOutput = simOutput
+        self.minValue  = self.minValues[self.name]
 
-        if funTSelect is None:
+        if simOutput.funTSelect is None:
             self.funTSelect = selectLastT
         else:
             self.funTSelect = funTSelect
@@ -60,5 +61,17 @@ class Field:
 
     def interpolate(self, extractedData, analyseShape):
         return interpolateRawData(extractedData, self.fieldShape(analyseShape))            
+
+    #_________________________
+
+    def axMini(self, ax):
+        dim = self.axes[ax]
+        return self.simOutput.simConfig.axMinis[dim]
+
+    #_________________________
+
+    def axMaxi(self, ax):
+        dim = self.axes[ax]
+        return self.simOutput.simConfig.axMaxis[dim]
 
 #__________________________________________________

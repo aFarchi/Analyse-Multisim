@@ -2,12 +2,11 @@
 # writeLaunchers.py
 #__________________
 
-from ..sys.run             import makeExe
-from ..path.absolutePath   import *
-from ..io.readDefaultFiles import readDefaultPythonLauncher
-from ..io.readDefaultFiles import readDefaultBashLauncher
-from ..io.readDefaultFiles import readDefaultNodesFile
-from ..io.write            import writeLinesFillingWithArgs
+from ..sys.run           import makeExe
+from readDefaultFiles    import readDefaultPythonLauncher
+from readDefaultFiles    import readDefaultBashLauncher
+from readDefaultFiles    import readDefaultNodesFile
+from write               import writeLinesFillingWithArgs
 #__________________________________________________
 
 def writeDefaultPythonLauncher(fileName, args, makeExe=True, printIO=False):

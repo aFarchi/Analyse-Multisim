@@ -9,13 +9,8 @@ from ...filters.zeroFilterLog10 import zeroFilterLog10Coarsed
 
 class AirGroundLevel(Field):
 
-    def __init__(self, minValues=None, funTSelect=None):
-        if minValues is None:
-            minValue = 1.e-3
-        else:
-            minValue = minValues['airGroundLevel']
-                                        
-        Field.__init__(self, 'airGroundLevel', [3,2], ['longitude','latitude'], minValue, funTSelect)
+    def __init__(self, simOutput):
+        Field.__init__(self, 'airGroundLevel', [3,2], ['longitude','latitude'], simOutput)
 
     #_________________________
 
@@ -28,25 +23,5 @@ class AirGroundLevel(Field):
     def coarsedExtraction(self, rawData, lol, coarseFactor):
         data = zeroFilterLog10Coarsed(rawData, self.minValue, lol, coarseFactor)
         return data[:,0,:,:].transpose((0,2,1))
-
-    #_________________________
-
-    def xmin(self, lists):
-        return lists.xmin
-
-    #_________________________
-
-    def xmax(self, lists):
-        return lists.xmax
-
-    #_________________________
-
-    def ymin(self, lists):
-        return lists.ymin
-
-    #_________________________
-
-    def ymax(self, lists):
-        return lists.ymax
 
 #__________________________________________________

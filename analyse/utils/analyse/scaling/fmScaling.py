@@ -3,9 +3,8 @@
 #_____________
 
 import numpy as np
-from itertools            import product
-
-from ...path.absolutePath import *
+from itertools     import product
+from ..io.navigate import * 
 
 #__________________________________________________
 
@@ -23,37 +22,35 @@ def computeFMScaling(matrix, levels=None, mini=None, maxi=None, nLevels=32):
 
 #__________________________________________________
 
-def mergeFMScalings(scalingFM, fieldList, procList):
+def mergeFMScalings(simOutput, scalingFM):
     mergedScalings = {}
 
-    for field in fieldList:
+    for field in simOutput.fieldList:
         mergedScalings[field] = {}
-
-        for lol in ['lin','log']:
+        for lol in LinOrLog():
             mean = 0.0
-
-            for proc in procList:
+            for proc in simOutput.procList:
                 mean += scalingFM[lol][field][proc]
-            mergedScalings[field][lol] = mean / len(procList)
+            mergedScalings[field][lol] = mean / len(simOutput.procList)
 
     return mergedScalings
 
 #__________________________________________________
 
-def initScalingFM(fieldList):
+def initScalingFM(simOutput):
     scalingFM = {}
-    for lol in ['lin','log']:
+    for lol in LinOrLog():
         scalingFM[lol] = {}
-        for field in fieldList:
+        for field in simOutput.fieldList:
             scalingFM[lol][field] = {}
     return scalingFM
 
 #__________________________________________________
 
-def writeFMScaling(scalingFM, species, AOG, fieldList, outputDir, sessionName, printIO=False):
+def writeFMScaling(simOutput, scalingFM, species, AOG, printIO=False):
 
-    for (field, lol) in product(fieldList, ['lin','log']):
-        fn = fileFMScaling(outputDir, sessionName, AOG, field.name, lol, species)
+    for (field, lol) in product(simOutput.fieldList, LinOrLog()):
+        fn = simOutput.fileFMScalingFieldSpecies(AOG, field, lol, species)
         if printIO:
             print ('Writing '+fn+' ...')
         np.save(fn, scalingFM[field][lol])

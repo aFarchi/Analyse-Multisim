@@ -3,9 +3,8 @@
 #___________
 
 import numpy as np
-from itertools            import product
-
-from ...path.absolutePath import *
+from itertools     import product
+from ..io.navigate import *
 
 #__________________________________________________
 
@@ -62,22 +61,22 @@ def computeScaling(matrix):
 
 #__________________________________________________
 
-def mergeScalings(scalings, maximums, fieldList, procList):
+def mergeScalings(simOutput, scalings, maximums):
 
     mergedScalings = {}
 
-    for field in fieldList:    
+    for field in simOutput.fieldList:    
         mergedScalings[field] = {}
     
-        for lol in ['lin','log']:
+        for lol in LinOrLog():
             meanMeans     = 0.
             geomMeanMeans = 1.
             meanVars      = 0.
 
-            mini = scalings[lol][field][procList[0]].mini
-            maxi = scalings[lol][field][procList[0]].maxi
+            mini = scalings[lol][field][simOutput.procList[0]].mini
+            maxi = scalings[lol][field][simOutput.procList[0]].maxi
             
-            for proc in procList:
+            for proc in simOutput.procList:
                 meanMeans     += scalings[lol][field][proc].mean
                 geomMeanMeans *= scalings[lol][field][proc].mean
                 meanVars      += scalings[lol][field][proc].var
@@ -85,9 +84,9 @@ def mergeScalings(scalings, maximums, fieldList, procList):
                 mini = min( mini , scalings[lol][field][proc].mini )
                 maxi = max( maxi , scalings[lol][field][proc].maxi )
                 
-            meanMeans    /= len(procList)
-            geomMeanMeans = np.power(max(geomMeanMeans, 0.0), 1./len(procList))
-            meanVars     /= len(procList)
+            meanMeans    /= len(simOutput.procList)
+            geomMeanMeans = np.power(max(geomMeanMeans, 0.0), 1./len(simOutput.procList))
+            meanVars     /= len(simOutput.procList)
 
             scale                      = Scaling()
             scale.mini                 = mini
@@ -102,22 +101,22 @@ def mergeScalings(scalings, maximums, fieldList, procList):
 
 #__________________________________________________
 
-def initScalingMaximum(fieldList):
+def initScalingMaximum(simOutput):
     scaling = {}
     maximum = {}
-    for lol in ['lin','log']:
+    for lol in LinOrLog():
         scaling[lol] = {}
         maximum[lol] = {}
-        for field in fieldList:
+        for field in simOutput.fieldList:
             scaling[lol][field] = {}
     return (scaling, maximum)
 
 #__________________________________________________
 
-def writeScaling(scaling, species, AOG, fieldList, outputDir, sessionName, printIO=False):
+def writeScaling(simOutput, scaling, species, AOG, printIO=False):
 
-    for (field, lol) in product(fieldList, ['lin','log']):
-        fn    = fileScaling(outputDir, sessionName, AOG, field.name, lol, species)
+    for (field, lol) in product(simOutput.fieldList, LinOrLog()):
+        fn    = simOutput.fileScalingFieldSpecies(AOG, field, lol, species)
         array = scalingToArray(scaling[field][lol])
         if printIO:
             print ('Writing '+fn+' ...')
