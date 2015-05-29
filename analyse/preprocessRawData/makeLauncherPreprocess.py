@@ -11,6 +11,7 @@ from ..utils.io.writeLaunchers          import writeDefaultNodesFile
 from ..utils.analyse.simulationsOutput  import buildSimulationsOutput
 from createDirectoriesPreprocessRawData import createDirectoriesPreprocessRawData
 from preprocessConfiguration            import PreprocessConfiguration
+from ..utils.analyse.io.navigate        import *
 
 #__________________________________________________
 
@@ -44,7 +45,7 @@ def makeLauncherPreprocessRawDataForAllSpecies(configFile):
             'GOR'         + '\t' +
             'SPECIES'     + '\n' )
 
-    for (AOG, GOR) in product(AirOrGround, GazOrRadios):
+    for (AOG, GOR) in product(AirOrGround(), GazOrRadios()):
         for species in simOutput.simConfig.speciesList[GOR]:
             f.write('preprocessRawData'                      + '\t' +
                     simOutput.fileProcessesPreprocessRawData + '\t' +
