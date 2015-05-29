@@ -111,7 +111,7 @@ class DefaultConfiguration(object):
 
     #_________________________
 
-    def addAttribute(self, attrName, defaultVal, isSubAttr, attrType, printWarning):
+    def addAttribute(self, attrName, defaultVal=None, isSubAttr=[], attrType='str', printWarning=True):
         self.attributes.append(attrName)
         self.defaultValues[attrName]  = defaultVal
         self.isSubAttribute[attrName] = isSubAttr

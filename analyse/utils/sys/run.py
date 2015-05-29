@@ -12,6 +12,7 @@ def runCommand(command, printIO):
     if printIO:
         print(command)
     if status != 0:
+        print('Could not run command :'+command)
         sys.exit(status)
 
 #__________________________________________________

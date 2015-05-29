@@ -10,12 +10,15 @@ from ..sys.run    import runCommand
 #__________________________________________________
 
 def writeLinesFillingWithArgs(lines, fileName, args):
-    f = open(fileName, 'w')
-    for line in lines:
-        for arg in args:
-            line = line.replace(arg, args[arg])
-        f.write(line)
-    f.close()
+    try:
+        f = open(fileName, 'w')
+        for line in lines:
+            for arg in args:
+                line = line.replace(arg, args[arg])
+            f.write(line)
+        f.close()
+    except:
+        print('Could not write file : '+fileName)
 
 #__________________________________________________
 
@@ -36,8 +39,11 @@ def saveSymMatrixEig(prefixFileName, matrix):
     sortedEigVals      = eigVals[indexes[n-1-i]]
     sortedEigVects     = eigVects[:, indexes[n-1-i]]
 
-    np.save(prefixFileName+'.npy', matrix)
-    np.save(prefixFileName+'_eigVals.npy', sortedEigVals)
-    np.save(prefixFileName+'_eigVects.npy', sortedEigVects)
+    try:
+        np.save(prefixFileName+'.npy', matrix)
+        np.save(prefixFileName+'_eigVals.npy', sortedEigVals)
+        np.save(prefixFileName+'_eigVects.npy', sortedEigVects)
+    except:
+        print('Could not save symmetric matrix in files : '+prefixFileName+'*.npy')
 
 #__________________________________________________

@@ -7,10 +7,14 @@ from ..path.absolutePath import *
 #__________________________________________________
 
 def readLines(fileName, 'r'):
-    f = open(fileName)
-    l = f.readlines()
-    f.close()
-    return l
+    try:
+        f = open(fileName)
+        l = f.readlines()
+        f.close()
+        return l
+    except:
+        print('Could not read file : '+fileName)
+        return []
 
 #__________________________________________________
 

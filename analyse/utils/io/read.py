@@ -25,9 +25,13 @@ def arrayFromFile(fileName):
 #__________________________________________________
 
 def readLines(fileName, strip=True, removeBlancks=True, commentChar='#', includeEmptyLines=False):
-    f     = open(fileName, 'r')
-    lines = f.readlines()
-    f.close()
+    try:
+        f     = open(fileName, 'r')
+        lines = f.readlines()
+        f.close()
+    except:
+        print('Could not read file : '+fileName)
+        return []
 
     filteredLines = []
 
