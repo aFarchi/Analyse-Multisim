@@ -12,12 +12,12 @@ from ..timeSelection.defaultTSelect         import selectLastT
 
 class Field:
 
-    def __init__(self, name, axes, labels, simOutput):#minValue, funTSelect=None):
+    def __init__(self, name, axes, labels, simOutput):
         self.name      = name
         self.axes      = axes
         self.labels    = labels
         self.simOutput = simOutput
-        self.minValue  = self.minValues[self.name]
+        self.minValue  = simOutput.minValues[self.name]
 
         if simOutput.funTSelect is None:
             self.funTSelect = selectLastT

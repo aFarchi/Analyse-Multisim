@@ -4,9 +4,14 @@
 
 import numpy as np
 
-from ..io.files           import fileNameSuffix 
-from ..io.files           import fileNameSuffixOfShifts
-from ..io.read            import readLines
+from ...io.files           import fileNameSuffix 
+from ...io.files           import fileNameSuffixOfShifts
+from ...io.read            import readLines
+
+#__________________________________________________
+
+def readFileLabels(fileName):
+    return readLines(fileName) 
 
 #__________________________________________________    
                                                 
@@ -84,7 +89,7 @@ def readFileProcesses(fileName, prefixProcName=None, suffixProcName=None):
         dz         = parameters[DZ_num]
         dt         = parameters[DT_num]
 
-        suffix     = suffixOfShifts(dx,dy,dz,dt)
+        suffix     = fileNameSuffixOfShifts(dx,dy,dz,dt)
         names.append( Reso   + '-' +
                       Source + '_' + PSD_Source + '-' +
                       Met    + '-' +

@@ -1,0 +1,42 @@
+#__________________________________________________
+# Example of configuration file
+
+#__________________________________________________
+# General parameters
+ 
+outputDir      = /cerea_raid/users/farchia/Fukushima-multisim/output/
+sessionName    = sim-test-3/
+workName       = analyse/
+printIO        = True
+EPSILON        = 1.e-8
+
+extensions     = str : .pdf
+extensions     = str : .eps
+
+#__________________________________________________
+# Plot simulations output
+
+plotSimulationsField = True
+
+plotSimulationsField_xLabel          = True
+plotSimulationsField_yLabel          = True
+plotSimulationsField_cLabel          = True
+plotSimulationsField_simLabels       = True
+plotSimulationsField_timeTextPBar    = True
+plotSimulationsField_colorBar        = True
+plotSimulationsField_cmapName        = jet
+
+plotSimulationsField_extendX         = 0.0
+plotSimulationsField_extendY         = 0.0
+plotSimulationsField_nbrXTicks       = 2
+plotSimulationsField_nbrYTicks       = 2
+plotSimulationsField_nbrCTicks       = 5
+plotSimulationsField_xTicksDecimals  = 2
+plotSimulationsField_yTicksDecimals  = 2
+plotSimulationsField_cTicksDecimals  = 2
+
+plotSimulationsField_plotter         = imshow
+plotSimulationsField_plotterArgs     = interpolation : str : nearest
+
+plotSimulationsField_order           = horizontalFirst
+plotSimulationsField_extendDirection = vertical

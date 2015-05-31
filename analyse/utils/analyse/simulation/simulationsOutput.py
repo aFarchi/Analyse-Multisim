@@ -6,17 +6,21 @@ from ...path.modulePath             import ModulePath
 from ..io.readLists                 import readFileProcesses
 from ..io.readLists                 import readFileMinValues
 from ..io.readLists                 import readFileLevels
+from ..io.readLists                 import readFileLabels
 from ..fields.defineFields          import defineFields
-from simulationsConfiguration       import SimulationsConfiguration
 from ..timeSelection.defaultTSelect import makeSelectXtimesNt
-
+from simulationsConfiguration       import SimulationsConfiguration
 #__________________________________________________
 
-def buildSimulationsOutput(preprocessConfig):
-    funTSelect = makeSelectXtimesNt(preprocessConfig.xTSelect)
-    return SimulationsOutput(preprocessConfig.outputDir,
-                             preprocessConfig.sessionName,
-                             preprocessConfig.workName,
+def buildSimulationsOutput(config):
+    try:
+        funTSelect = makeSelectXtimesNt(config.xTSelect)
+    except:
+        funTSelect = None
+
+    return SimulationsOutput(config.outputDir,
+                             config.sessionName,
+                             config.workName,
                              funTSelect)
 
 #__________________________________________________
@@ -36,6 +40,7 @@ class SimulationsOutput:
         self.fileMinValues = self.configDir + 'min_values.dat'
         self.fileProcesses = self.outputDir + self.sessionName + 'list_processes.dat'
         self.fileLevels    = self.configDir + 'levels.dat'
+        self.fileLabels    = self.outputDir + self.sessionName + 'list_labels.dat'
 
         #_________________________
 
@@ -43,13 +48,17 @@ class SimulationsOutput:
         self.statDir       = self.workingDir + 'statistics/'
         self.scalingDir    = self.workingDir + 'scaling/'
         self.launcherDir   = self.workingDir + 'launchers/'
+        self.figDir        = self.workingDir + 'figures/'
+
         #_________________________
 
         self.simConfig     = SimulationsConfiguration(self.configDir)
-        self.procList      = readFileProcesses(self.fileProcesses, prefix, suffix)
+        self.procList      = readFileProcesses(self.fileProcesses)
         self.minValues     = readFileMinValues(self.fileMinValues)
         self.levels        = readFileLevels(self.fileLevels)
-        
+        self.labelList     = readFileLabels(self.fileLabels)
+        self.funTSelect    = funTSelect
+
         self.fieldList     = defineFields(self)
 
         #_________________________
@@ -61,6 +70,10 @@ class SimulationsOutput:
         self.configFilePreprocessRawData     = self.launcherPreprocessRawDataDir + 'preprocessRawData.cfg'
         self.fileLogPreprocessRawData        = self.launcherPreprocessRawDataDir + 'logPreprocessRawData'
         self.fileNodesPreprocessRawData      = self.launcherPreprocessRawDataDir + 'nodesPreprocessRawData.dat'
+
+        #_________________________
+
+        self.simulationfigDir = self.figDir + 'simulation/'
 
     #_________________________
 
@@ -94,6 +107,11 @@ class SimulationsOutput:
 
     def fileProcPreprocessedFieldGS(self, proc, AOG, field, lol, species, TS):
         return ( self.procPreprocessedFieldDir(proc, AOG, field, lol) + species + 'grayScale' + TS + '.npy' )
+
+    #_________________________
+
+    def simOutputFieldFigDir(self, AOG, field, lol, species):
+        return ( self.simulationfigDir + AOG + field.name + '/' + lol + '/' + species + '/' )
 
 #__________________________________________________
 '''

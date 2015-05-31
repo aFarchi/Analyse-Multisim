@@ -54,6 +54,6 @@ class SimulationsConfiguration:
         self.deltaT                            = 3600.
 
         self.axMinis                           = [datetime(2011, 03, 11, 0), 0.0, 34.72, 137.53]
-        self.axMaxis                           = [self.minDim[0] + timedelta(seconds=3000*600), 8073.0, 40.72, 143.53]
+        self.axMaxis                           = [self.axMinis[0] + timedelta(seconds=3000*600), 8073.0, 40.72, 143.53]
 
 #__________________________________________________

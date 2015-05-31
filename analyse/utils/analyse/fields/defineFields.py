@@ -15,13 +15,13 @@ def defineAirFields(simOutput):
 
 #__________________________________________________
 
-def defineGroundFields(simOutput)
+def defineGroundFields(simOutput):
     totalDep = TotalDeposition(simOutput)
     return [totalDep]
 
 #__________________________________________________
 
-def defineFields(simOutput)
+def defineFields(simOutput):
     fieldList            = {}
     fieldList['air/']    = defineAirFields(simOutput)
     fieldList['ground/'] = defineGroundFields(simOutput)

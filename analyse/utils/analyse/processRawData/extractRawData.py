@@ -15,12 +15,12 @@ def extractRawData(simOutput, proc, AOG, GOR, species, printIO=False):
     deltaT         = simOutput.simConfig.deltaT
 
     rawSize        = 1
-    for dim in len(rawShape):
+    for dim in xrange(len(rawShape)):
         rawSize   *= rawShape[dim]
 
     rawData        = np.zeros(rawSize)
 
-    for speBin in speciesBinList:
+    for speciesBin in speciesBinList:
         for DOW in DryOrWet(AOG):
             for IOB in InCloudOrBelowCould(AOG, GOR)[DOW]:
                 fileName = simOutput.fileSpeciesBinProc(proc, DOW, IOB, speciesBin)
@@ -48,3 +48,19 @@ def extractRawDataMultiProc(simOutput, AOG, GOR, species, printIO):
 
 #__________________________________________________
 
+def extractFieldAllIterations(rawData, simOutput, field, lol):
+    data  = {}
+    minis = []
+    maxis = []
+    for proc in simOutput.procList:
+        data[proc] = field.extractAllIterations(rawData[proc], lol)
+        minis.append(data[proc].min())
+        maxis.append(data[proc].max())
+        tmax       = data[proc].shape[0]
+        
+    mini  = np.min(minis)
+    maxi  = np.min(maxis)
+
+    return (data, mini, maxi, tmax)
+
+#__________________________________________________
