@@ -48,11 +48,11 @@ def extractRawDataMultiProc(simOutput, AOG, GOR, species, printIO):
 
 #__________________________________________________
 
-def extractFieldAllIterations(rawData, simOutput, field, lol):
+def extractFieldAllIterations(rawData, procList, field, lol):
     data  = {}
     minis = []
     maxis = []
-    for proc in simOutput.procList:
+    for proc in procList:
         data[proc] = field.extractAllIterations(rawData[proc], lol)
         minis.append(data[proc].min())
         maxis.append(data[proc].max())

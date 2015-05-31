@@ -118,4 +118,43 @@ class DefaultConfiguration(object):
         self.attributeType[attrName]  = attrType
         self.printWarning[attrName]   = printWarning
 
+    #_________________________
+
+    def writeConfig(self, fileName):
+        def writeElement(f, e):
+            if isinstance(e, str):
+                f.write(' str : '+e+'\n')
+            elif isinstance(e, int):
+                f.write(' int : '+str(e)+'\n')
+            elif isinstance(e, float):
+                f.write(' float : '+str(e)+'\n')
+            elif isinstance(e, bool):
+                f.write(' bool : '+str(e)+'\n')
+
+        f = open(fileName, 'w')
+        f.write('#'+self.__repr__()+'\n')
+
+        for attr in self.attributes:
+            attrType = self.attributeType[attr]
+
+            if attrType == 'list':
+                l = self.__getattribute__(attr)
+
+                for e in l:
+                    f.write(attr+' =')
+                    writeElement(f, e)
+
+            elif attrType == 'dict':
+                d = self.__getattribute__(attr)
+
+                for key in d:
+                    e = d[key]
+                    f.write(attr+' = '+key+' :')
+                    writeElement(f, e)
+
+            else:
+                f.write(attr+' = '+str(self.__getattribute__(attr))+'\n')
+
+        f.close()
+
 #__________________________________________________

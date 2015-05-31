@@ -2,13 +2,13 @@
 # readDefaultFiles.py
 #____________________
 
-from ..path.absolutePath import *
+from ..path.modulePath import ModulePath
 
 #__________________________________________________
 
-def readLines(fileName, 'r'):
+def readLines(fileName):
     try:
-        f = open(fileName)
+        f = open(fileName, 'r')
         l = f.readlines()
         f.close()
         return l
@@ -19,16 +19,19 @@ def readLines(fileName, 'r'):
 #__________________________________________________
 
 def readDefaultPythonLauncher():
-    return readLines(defaultPythonLauncher())
+    mp = ModulePath()
+    return readLines(mp.defaultPythonLauncher)
 
 #__________________________________________________
 
 def readDefaultBashLauncher():
-    return readLines(defaultBashLauncher())
+    mp = ModulePath()
+    return readLines(mp.defaultBashLauncher)
 
 #__________________________________________________
 
 def readDefaultNodesFile():
-    return readLines(defaultNodesFile())
+    mp = ModulePath()
+    return readLines(mp.defaultNodesFile)
 
 #__________________________________________________

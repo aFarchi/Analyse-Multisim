@@ -17,6 +17,8 @@ extensions     = str : .eps
 # Plot simulations output
 
 plotSimulationsField = True
+plotSimulationsField_AOO             = all
+plotSimulationsField_parallelize     = less
 
 plotSimulationsField_xLabel          = True
 plotSimulationsField_yLabel          = True
@@ -40,3 +42,5 @@ plotSimulationsField_plotterArgs     = interpolation : str : nearest
 
 plotSimulationsField_order           = horizontalFirst
 plotSimulationsField_extendDirection = vertical
+
+#__________________________________________________

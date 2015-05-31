@@ -2,7 +2,6 @@
 # plotSimulationsFields.py
 #_________________________
 
-#import numpy as np
 from matplotlib import pyplot as plt
 
 from itertools                                       import product
@@ -13,38 +12,46 @@ from ....utils.plotting.plotting                     import adaptAxesExtent
 from ....utils.plotting.plotting                     import addTitleLabelsGrid
 from ....utils.plotting.plotMatrix                   import addColorBar
 from ....utils.plotting.plotting                     import addTimeTextPBar
+from ....utils.plotting.saveFig                      import saveFig
+from ....utils.plotting.positions                    import figureRect
+from ....utils.io.files                              import fileNameSuffix
 
 #__________________________________________________
 
-def plotFieldAllSim(rawData, 
-                    simOutput, 
-                    AOG, 
-                    field, 
-                    LOL, 
-                    species,
-                    xLabel,
-                    yLabel,
-                    cLabel,
-                    order,
-                    extendDirection,
-                    plotter,
-                    plotterArgs,
-                    extendX,
-                    extendY,
-                    nbrXTicks,
-                    nbrYTicks,
-                    nbrCTicks,
-                    xTicksDecimals,
-                    yTicksDecimals,
-                    cticksDecimals,
-                    colorBar,
-                    cmapName,
-                    timeTextPBar,
-                    extensionsList,
-                    EPSILON): 
+def plotProcField(rawData, 
+                  simOutput, 
 
-    (data, mini, maxi, tmax) = extractFieldAllIterations(rawData, simOutput, field, LOL)
-    
+                  procList,
+                  labelList,
+                  suffixFigName,
+
+                  AOG, 
+                  field, 
+                  LOL, 
+                  species,
+                  xLabel,
+                  yLabel,
+                  cLabel,
+                  order,
+                  extendDirection,
+                  plotter,
+                  plotterArgs,
+                  extendX,
+                  extendY,
+                  nbrXTicks,
+                  nbrYTicks,
+                  nbrCTicks,
+                  xTicksDecimals,
+                  yTicksDecimals,
+                  cticksDecimals,
+                  colorBar,
+                  cmapName,
+                  timeTextPBar,
+                  extensionsList,
+                  EPSILON): 
+
+    (data, mini, maxi, tmax) = extractFieldAllIterations(rawData, procList, field, LOL)
+
     xmin  = field.axMini(0)
     ymin  = field.axMini(1)
     xmax  = field.axMaxi(0)
@@ -71,11 +78,11 @@ def plotFieldAllSim(rawData,
         plt.clf()
 
         (gs, axes) = makeAxesGrid(plt,
-                                  len(simOutput.procList),
+                                  len(procList),
                                   order=order,
                                   extendDirection=extendDirection)
 
-        for (proc, label, ax) in zip(simOutput.procList, simOutput.labelList, axes):
+        for (proc, label, ax) in zip(procList, labelList, axes):
             plotMatrix(ax, 
                        data[proc][t,:,:],
                        plotter=plotter,
@@ -121,9 +128,9 @@ def plotFieldAllSim(rawData,
         if timeTextPBar:
             addTimeTextPBar(plt,
                             t,
-                            tmax-1)
+                            tmax)
 
-        figName = simOutput.simOutputFieldFigDir(AOG, field, LOL, species) + species + '_allSim_' + fileNameSuffix(t, tmax)
+        figName = simOutput.simOutputFieldFigDir(AOG, field, LOL, species) + species + '_' + suffixFigName + '_' + fileNameSuffix(t, tmax)
         saveFig(plt, figName, extensionsList)
         plt.close()
 

@@ -61,63 +61,63 @@ def computeScaling(matrix):
 
 #__________________________________________________
 
-def mergeScalings(simOutput, scalings, maximums):
+def mergeScalings(simOutput, scalings, maximums, AOG):
 
     mergedScalings = {}
 
-    for field in simOutput.fieldList:    
-        mergedScalings[field] = {}
+    for field in simOutput.fieldList[AOG]:
+        mergedScalings[field.name] = {}
     
         for lol in LinOrLog():
             meanMeans     = 0.
             geomMeanMeans = 1.
             meanVars      = 0.
 
-            mini = scalings[lol][field][simOutput.procList[0]].mini
-            maxi = scalings[lol][field][simOutput.procList[0]].maxi
+            mini = scalings[lol][field.name][simOutput.procList[0]].mini
+            maxi = scalings[lol][field.name][simOutput.procList[0]].maxi
             
             for proc in simOutput.procList:
-                meanMeans     += scalings[lol][field][proc].mean
-                geomMeanMeans *= scalings[lol][field][proc].mean
-                meanVars      += scalings[lol][field][proc].var
+                meanMeans     += scalings[lol][field.name][proc].mean
+                geomMeanMeans *= scalings[lol][field.name][proc].mean
+                meanVars      += scalings[lol][field.name][proc].var
 
-                mini = min( mini , scalings[lol][field][proc].mini )
-                maxi = max( maxi , scalings[lol][field][proc].maxi )
+                mini = min( mini , scalings[lol][field.name][proc].mini )
+                maxi = max( maxi , scalings[lol][field.name][proc].maxi )
                 
             meanMeans    /= len(simOutput.procList)
             geomMeanMeans = np.power(max(geomMeanMeans, 0.0), 1./len(simOutput.procList))
             meanVars     /= len(simOutput.procList)
 
-            scale                      = Scaling()
-            scale.mini                 = mini
-            scale.maxi                 = maxi
-            scale.meanMeans            = meanMeans
-            scale.geomMeanMeans        = geomMeanMeans
-            scale.meanVars             = meanVars
-            scale.sumMaximum           = maximums[lol][field].sum()
-            mergedScalings[field][lol] = scale
+            scale                           = Scaling()
+            scale.mini                      = mini
+            scale.maxi                      = maxi
+            scale.meanMeans                 = meanMeans
+            scale.geomMeanMeans             = geomMeanMeans
+            scale.meanVars                  = meanVars
+            scale.sumMaximum                = maximums[lol][field.name].sum()
+            mergedScalings[field.name][lol] = scale
 
     return mergedScalings
 
 #__________________________________________________
 
-def initScalingMaximum(simOutput):
+def initScalingMaximum(simOutput, AOG):
     scaling = {}
     maximum = {}
     for lol in LinOrLog():
         scaling[lol] = {}
         maximum[lol] = {}
-        for field in simOutput.fieldList:
-            scaling[lol][field] = {}
+        for field in simOutput.fieldList[AOG]:
+            scaling[lol][field.name] = {}
     return (scaling, maximum)
 
 #__________________________________________________
 
 def writeScaling(simOutput, scaling, species, AOG, printIO=False):
 
-    for (field, lol) in product(simOutput.fieldList, LinOrLog()):
+    for (field, lol) in product(simOutput.fieldList[AOG], LinOrLog()):
         fn    = simOutput.fileScalingFieldSpecies(AOG, field, lol, species)
-        array = scalingToArray(scaling[field][lol])
+        array = scalingToArray(scaling[field.name][lol])
         if printIO:
             print ('Writing '+fn+' ...')
         np.save(fn, array)

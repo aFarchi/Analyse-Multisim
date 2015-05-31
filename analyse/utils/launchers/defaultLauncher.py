@@ -3,7 +3,7 @@ import os
 import sys
 
 fileProcesses = '$fileProcesses$'
-nProcessors   = 4
+nProcessors   = $nProcessors$
 launcher      = '$launcher$'
 interpretor   = '$interpretor$'
 
@@ -32,6 +32,8 @@ for line in lines:
         command = interpretor + ' ' + launcher
         for (argName, arg) in zip(argsNames, args):
             command += ' ' + argName + '=' + arg
+
+        command += ' > $logFile$'+str(currentNTask) 
 
         print command
         sys.exit(os.system(command))

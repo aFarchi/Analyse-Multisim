@@ -20,7 +20,7 @@ class AirGroundLevel(Field):
 
     #_________________________
 
-    def coarsedExtraction(self, rawData, lol, coarseFactor):
+    def coarsedExtractionAllIterations(self, rawData, lol, coarseFactor):
         data = zeroFilterLog10Coarsed(rawData, self.minValue, lol, coarseFactor)
         return data[:,0,:,:].transpose((0,2,1))
 

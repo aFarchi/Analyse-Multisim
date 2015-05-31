@@ -11,7 +11,7 @@ from ...io.read            import readLines
 #__________________________________________________
 
 def readFileLabels(fileName):
-    return readLines(fileName) 
+    return readLines(fileName, removeBlancks=False) 
 
 #__________________________________________________    
                                                 

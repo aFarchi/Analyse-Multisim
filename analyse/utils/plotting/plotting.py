@@ -9,6 +9,7 @@ from matplotlib              import gridspec
 from ..io.files              import fileNameSuffix
 from positions               import timeTextPBarRect
 from positions               import positionsTimeTxtPbar
+from plot                    import plot
 
 #____________________________________________________________
 

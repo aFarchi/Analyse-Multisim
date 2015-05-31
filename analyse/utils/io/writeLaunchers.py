@@ -9,16 +9,16 @@ from readDefaultFiles    import readDefaultNodesFile
 from write               import writeLinesFillingWithArgs
 #__________________________________________________
 
-def writeDefaultPythonLauncher(fileName, args, makeExe=True, printIO=False):
+def writeDefaultPythonLauncher(fileName, args, makeExecutable=True, printIO=False):
     writeLinesFillingWithArgs(readDefaultPythonLauncher(), fileName, args)
-    if makeExe:
+    if makeExecutable:
         makeExe(fileName, printIO)
 
 #__________________________________________________
 
-def writeDefaultBashLauncher(fileName, args, makeExe=True, printIO=False):
+def writeDefaultBashLauncher(fileName, args, makeExecutable=True, printIO=False):
     writeLinesFillingWithArgs(readDefaultBashLauncher(), fileName, args)
-    if makeExe:
+    if makeExecutable:
         makeExe(fileName, printIO)
 
 #__________________________________________________

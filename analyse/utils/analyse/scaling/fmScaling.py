@@ -22,37 +22,37 @@ def computeFMScaling(matrix, levels=None, mini=None, maxi=None, nLevels=32):
 
 #__________________________________________________
 
-def mergeFMScalings(simOutput, scalingFM):
+def mergeFMScalings(simOutput, scalingFM, AOG):
     mergedScalings = {}
 
-    for field in simOutput.fieldList:
-        mergedScalings[field] = {}
+    for field in simOutput.fieldList[AOG]:
+        mergedScalings[field.name] = {}
         for lol in LinOrLog():
             mean = 0.0
             for proc in simOutput.procList:
-                mean += scalingFM[lol][field][proc]
-            mergedScalings[field][lol] = mean / len(simOutput.procList)
+                mean += scalingFM[lol][field.name][proc]
+            mergedScalings[field.name][lol] = mean / len(simOutput.procList)
 
     return mergedScalings
 
 #__________________________________________________
 
-def initScalingFM(simOutput):
+def initScalingFM(simOutput, AOG):
     scalingFM = {}
     for lol in LinOrLog():
         scalingFM[lol] = {}
-        for field in simOutput.fieldList:
-            scalingFM[lol][field] = {}
+        for field in simOutput.fieldList[AOG]:
+            scalingFM[lol][field.name] = {}
     return scalingFM
 
 #__________________________________________________
 
 def writeFMScaling(simOutput, scalingFM, species, AOG, printIO=False):
 
-    for (field, lol) in product(simOutput.fieldList, LinOrLog()):
+    for (field, lol) in product(simOutput.fieldList[AOG], LinOrLog()):
         fn = simOutput.fileFMScalingFieldSpecies(AOG, field, lol, species)
         if printIO:
             print ('Writing '+fn+' ...')
-        np.save(fn, scalingFM[field][lol])
+        np.save(fn, scalingFM[field.name][lol])
 
 #__________________________________________________

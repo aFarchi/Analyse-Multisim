@@ -66,10 +66,21 @@ class SimulationsOutput:
         self.launcherPreprocessRawDataDir    = self.launcherDir + 'preprocessRawData/'
         self.pythonLauncherPreprocessRawData = self.launcherPreprocessRawDataDir + 'preprocessRawData.py'
         self.bashLauncherPreprocessRawData   = self.launcherPreprocessRawDataDir + 'preprocessRawData.sh'
-        self.fileProcessesPreprocessRawData  = self.launcherPreprocessRawDataDir + 'processesPreprocessRawData.data'
+        self.fileProcessesPreprocessRawData  = self.launcherPreprocessRawDataDir + 'processesPreprocessRawData.dat'
         self.configFilePreprocessRawData     = self.launcherPreprocessRawDataDir + 'preprocessRawData.cfg'
         self.fileLogPreprocessRawData        = self.launcherPreprocessRawDataDir + 'logPreprocessRawData'
         self.fileNodesPreprocessRawData      = self.launcherPreprocessRawDataDir + 'nodesPreprocessRawData.dat'
+
+
+        #_________________________
+
+        self.launcherPlotSimulationDir    = self.launcherDir + 'plotting/simulation/'
+        self.pythonLauncherPlotSimulation = self.launcherPlotSimulationDir + 'plotSimulation.py'
+        self.bashLauncherPlotSimulation   = self.launcherPlotSimulationDir + 'plotSimulation.sh'
+        self.fileProcessesPlotSimulation  = self.launcherPlotSimulationDir + 'processesPlotSimulation.dat'
+        self.configFilePlotSimulation     = self.launcherPlotSimulationDir + 'plotSimulation.cfg'
+        self.fileLogPlotSimulation        = self.launcherPlotSimulationDir + 'logPlotSimulation'
+        self.fileNodesPlotSimulation      = self.launcherPlotSimulationDir + 'nodesPlotSimulation.dat'
 
         #_________________________
 

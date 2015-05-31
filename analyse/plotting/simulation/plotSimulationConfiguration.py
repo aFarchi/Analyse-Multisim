@@ -24,11 +24,6 @@ class PlotSimulationConfiguration(DefaultConfiguration):
 
     #_________________________
 
-    def writeConfig(self, fileName):
-        pass
-
-    #_________________________
-
     def defaultAttributes(self):
         DefaultConfiguration.defaultAttributes(self)
 
@@ -56,6 +51,12 @@ class PlotSimulationConfiguration(DefaultConfiguration):
         self.addAttribute('plotSimulationsField',
                           defaultVal=True,
                           attrType='bool')
+
+        self.addAttribute('plotSimulationsField_AOO',
+                          defaultVal='all')
+
+        self.addAttribute('plotSimulationsField_parallelize',
+                          defaultVal='less')
 
         self.addAttribute('plotSimulationsField_xLabel',
                           defaultVal=True,
