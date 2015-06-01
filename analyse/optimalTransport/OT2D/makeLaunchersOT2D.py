@@ -4,7 +4,7 @@
 
 from itertools                                            import product
 
-from prepareOT2DConfiguration                             import PrepareOT2DConfiguration
+from OT2DConfiguration                                    import OT2DConfiguration
 from ...utils.analyse.io.navigate                         import *
 from ...utils.analyse.simulation.simulationsOutput        import buildSimulationsOutput
 from ...utils.io.write                                    import createDirectories
@@ -12,6 +12,7 @@ from ...utils.io.writeLaunchers                           import writeDefaultPyt
 from ...utils.io.writeLaunchers                           import writeDefaultBashLauncher
 from ...utils.io.writeLaunchers                           import writeDefaultNodesFile
 from ...utils.io.writeOTConfig                            import writeDefaultConfigOT2D
+from ...utils.io.writeOTConfig                            import writeDefaultPlottingConfigOT2D
 from ...utils.analyse.timeSelection.defaultTimeResolution import minTimeRes
 from ...utils.analyse.timeSelection.defaultTimeResolution import maxTimeRes
 
@@ -19,7 +20,7 @@ from ...utils.analyse.timeSelection.defaultTimeResolution import maxTimeRes
 
 def makeLauncherPerformOT2D(configFile):
 
-    config    = PrepareOT2DConfiguration(configFile)
+    config    = OT2DConfiguration(configFile)
     simOutput = buildSimulationsOutput(config)
 
     if config.OT2D_timeResFunction == 'min':
@@ -33,7 +34,7 @@ def makeLauncherPerformOT2D(configFile):
 
         args                    = {}
         args['$fileProcesses$'] = simOutput.fileProcessesPerformOT2D(algoName)
-        args['$launcher$']      = simOutput.modulePath.oT2DLauncher
+        args['$launcher$']      = simOutput.modulePath.OT2DLauncher
         args['$interpretor$']   = 'python'
         args['$startString$']   = 'Starting OT2D ...'
         
@@ -100,6 +101,67 @@ def makeLauncherPerformOT2D(configFile):
         print('Written '+simOutput.bashLauncherPerformOT2D(algoName)+' ...')
         print('Written '+simOutput.fileProcessesPerformOT2D(algoName)+' ...')
         print('Written '+simOutput.fileNodesPerformOT2D(algoName)+' ...')
+
+        print('Do not forget to specify nodes / log files and number of processes.')
+
+#__________________________________________________
+
+def makeLauncherPlotOT2D(configFile):
+
+    config    = OT2DConfiguration(configFile)
+    simOutput = buildSimulationsOutput(config)
+
+    for algoName in config.OT2D_algoNames:
+
+        createDirectories([simOutput.launcherPlotOT2DDir(algoName)], config.printIO)
+
+        args                    = {}
+        args['$fileProcesses$'] = simOutput.fileProcessesPlotOT2D(algoName)
+        args['$launcher$']      = simOutput.modulePath.OT2DLauncherPlotting
+        args['$interpretor$']   = 'python'
+        args['$startString$']   = 'Plotting OT2D ...'
+        
+        args['$logFile$']       = simOutput.fileLogPlotOT2D(algoName)
+        args['$nodesFile$']     = simOutput.fileNodesPlotOT2D(algoName)
+
+        writeDefaultPythonLauncher(simOutput.pythonLauncherPlotOT2D(algoName), args, makeExecutable=True, printIO=config.printIO)
+        writeDefaultBashLauncher(simOutput.bashLauncherPlotOT2D(algoName), args, makeExecutable=True, printIO=config.printIO)
+        writeDefaultNodesFile(simOutput.fileNodesPlotOT2D(algoName))
+        
+        args = {}
+        args['$EPSILON$']    = str(config.EPSILON)
+
+        f = open(simOutput.fileProcessesPlotOT2D(algoName), 'w')
+        f.write('CONFIG_FILE' + '\t' +
+                'PRINT_IO'    + '\n' )
+
+        for (AOG, GOR) in product(AirOrGround(), GazOrRadios()):
+            for (species, field, LOL) in product(simOutput.simConfig.speciesList[GOR], simOutput.fieldList[AOG], LinOrLog()):
+
+                for p1 in xrange(len(simOutput.procList)):
+                    for p0 in xrange(p1):
+
+                        outputDir = simOutput.performOT2DP0P1FieldSpeciesDir(algoName, p0, p1, AOG, field, LOL, species)
+                        figDir    = simOutput.plotOT2DP0P1FieldSpeciesDir(algoName, p0, p1, AOG, field, LOL, species)
+                        label     = str(p0) + '-' + str(p1) + ', ' + algoName
+
+                        createDirectories([figDir], config.printIO)
+                        args['$figDir$']    = figDir 
+                        args['$outputDir$'] = outputDir
+                        args['$label$']     = label
+
+                        writeDefaultPlottingConfigOT2D(simOutput.configFilePlotOT2DP0P1FieldSpecies(algoName, p0, p1, AOG, field, LOL, species), 
+                                                       args, config.OT2D_plottingParametersFile)
+
+                        f.write(simOutput.configFilePlotOT2DP0P1FieldSpecies(algoName, p0, p1, AOG, field, LOL, species)+'\t')
+                        f.write(str(config.printIO)+'\n')
+
+        f.close()
+
+        print('Written '+simOutput.pythonLauncherPlotOT2D(algoName)+' ...')
+        print('Written '+simOutput.bashLauncherPlotOT2D(algoName)+' ...')
+        print('Written '+simOutput.fileProcessesPlotOT2D(algoName)+' ...')
+        print('Written '+simOutput.fileNodesPlotOT2D(algoName)+' ...')
 
         print('Do not forget to specify nodes / log files and number of processes.')
 

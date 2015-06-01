@@ -13,9 +13,9 @@ class ModulePath:
         self.moduleLauncher          = self.moduleUpperPath + 'launcher.py'
         self.moduleLauncherPlotting  = self.moduleUpperPath + 'launcherPlotting.py'
         self.moduleLauncherAnimating = self.moduleUpperPath + 'launcherAnimating.py'
-        self.oTModulePath            = '/Users/Alban/Desktop/Optimal-Transport/'
-        self.oT2DLauncher            = self.oTModulePath + 'launchSimulation2D.py'
-        #self.oT2DLauncherPlotting    = self.oTModulePath + 'plotSimulation2D.py'
+        self.OTModulePath            = '/Users/Alban/Desktop/Optimal-Transport/'
+        self.OT2DLauncher            = self.OTModulePath + 'launchSimulation2D.py'
+        self.OT2DLauncherPlotting    = self.OTModulePath + 'plotSimulation2D.py'
 
         #_________________________
 
@@ -26,7 +26,8 @@ class ModulePath:
 
         #_________________________
 
-        self.defaultFilesOTConfigPath = self.modulePath + 'utils/oTConfig/'
+        self.defaultFilesOTConfigPath = self.modulePath + 'utils/OTConfig/'
         self.defaultConfigOT2D        = self.defaultFilesOTConfigPath + 'defaultOT2D.cfg'
+        self.defaultConfigPlotOT2D    = self.defaultFilesOTConfigPath + 'defaultPlotOT2D.cfg'
 
 #__________________________________________________

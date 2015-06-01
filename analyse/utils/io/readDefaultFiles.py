@@ -31,3 +31,9 @@ def readDefaultConfigOT2D():
 
 #__________________________________________________
 
+def readDefaultConfigPlotOT2D():
+    mp = ModulePath()
+    return readLinesNoFilter(mp.defaultConfigPlotOT2D)
+
+#__________________________________________________
+

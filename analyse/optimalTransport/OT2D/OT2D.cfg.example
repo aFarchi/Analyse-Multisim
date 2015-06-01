@@ -19,7 +19,7 @@ preprocessRawData_analyseShape   = int : 32
 preprocessRawData_analyseShape   = int : 32
 
 #__________________________________________________
-# OT2D parameters
+# OT2D run parameters
 
 OT2D_timeResFunction = min
 OT2D_algoNames       = str : adr3 
@@ -42,3 +42,8 @@ OT2D_alpha3          = 1.998
 OT2D_omega1          = 0.33
 OT2D_omega2          = 0.33
 OT2D_omega3          = 0.34
+
+#__________________________________________________
+# OT2D plotting parameters
+
+OT2D_plottingParametersFile = OT2DPlottingParameters.cfg

@@ -135,25 +135,29 @@ class DefaultConfiguration(object):
         f.write('#'+self.__repr__()+'\n')
 
         for attr in self.attributes:
-            attrType = self.attributeType[attr]
+            try:
+                attrType = self.attributeType[attr]
 
-            if attrType == 'list':
-                l = self.__getattribute__(attr)
+                if attrType == 'list':
+                    l = self.__getattribute__(attr)
 
-                for e in l:
-                    f.write(attr+' =')
-                    writeElement(f, e)
+                    for e in l:
+                        f.write(attr+' =')
+                        writeElement(f, e)
 
-            elif attrType == 'dict':
-                d = self.__getattribute__(attr)
+                elif attrType == 'dict':
+                    d = self.__getattribute__(attr)
 
-                for key in d:
-                    e = d[key]
-                    f.write(attr+' = '+key+' :')
-                    writeElement(f, e)
+                    for key in d:
+                        e = d[key]
+                        f.write(attr+' = '+key+' :')
+                        writeElement(f, e)
 
-            else:
-                f.write(attr+' = '+str(self.__getattribute__(attr))+'\n')
+                else:
+                    f.write(attr+' = '+str(self.__getattribute__(attr))+'\n')
+
+            except:
+                pass
 
         f.close()
 

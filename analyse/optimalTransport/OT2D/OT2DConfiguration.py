@@ -1,12 +1,12 @@
-#____________________________
-# prepareOT2DConfiguration.py
-#____________________________
+#_____________________
+# OT2DConfiguration.py
+#_____________________
 
 from ...utils.configuration.defaultConfiguration import DefaultConfiguration
 
 #__________________________________________________
 
-class PrepareOT2DConfiguration(DefaultConfiguration):
+class OT2DConfiguration(DefaultConfiguration):
 
     def __init__(self, configFile=None):
         DefaultConfiguration.__init__(self, configFile)
@@ -116,5 +116,8 @@ class PrepareOT2DConfiguration(DefaultConfiguration):
 
         self.addAttribute('OT2D_omega3', 
                           defaultVal='0.34')
+
+        self.addAttribute('OT2D_plottingParametersFile',
+                          defaultVal='OT2DPlottingParameters.cfg')
 
 #__________________________________________________
