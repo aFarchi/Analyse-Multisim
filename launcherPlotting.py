@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 #____________________
 # launcherPlotting.py
 #____________________
@@ -8,6 +10,8 @@ from analyse.plotting.simulation.plotSimulationConfiguration import PlotSimulati
 #__________________________________________________
 
 arguments = extractArgv()
+
+#__________________________________________________
 
 if arguments['FUNCTION'] == 'plotSimulation':
 
