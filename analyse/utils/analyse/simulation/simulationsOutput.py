@@ -10,6 +10,7 @@ from ..io.readLists                 import readFileLabels
 from ..fields.defineFields          import defineFields
 from ..timeSelection.defaultTSelect import makeSelectXtimesNt
 from simulationsConfiguration       import SimulationsConfiguration
+
 #__________________________________________________
 
 def buildSimulationsOutput(config):
@@ -49,6 +50,8 @@ class SimulationsOutput:
         self.scalingDir    = self.workingDir + 'scaling/'
         self.launcherDir   = self.workingDir + 'launchers/'
         self.figDir        = self.workingDir + 'figures/'
+        self.oTDir         = self.workingDir + 'optimalTransport/'
+        self.oT2DDir       = self.oTDir + 'OT2D/'
 
         #_________________________
 
@@ -71,6 +74,10 @@ class SimulationsOutput:
         self.fileLogPreprocessRawData        = self.launcherPreprocessRawDataDir + 'logPreprocessRawData'
         self.fileNodesPreprocessRawData      = self.launcherPreprocessRawDataDir + 'nodesPreprocessRawData.dat'
 
+        #_________________________
+
+        self.launcherOTDir   = self.launcherDir + 'optimalTransport'
+        self.launcherOT2DDir = self.launcherOTDir + '2D/'
 
         #_________________________
 
@@ -124,15 +131,33 @@ class SimulationsOutput:
     def simOutputFieldFigDir(self, AOG, field, lol, species):
         return ( self.simulationfigDir + AOG + field.name + '/' + lol + '/' + species + '/' )
 
+    #_________________________
+    
+    def launcherPerformOT2DDir(self, algoName):
+        return ( self.launcherOT2DDir + algoName + '/performOT/' )
+
+    def fileProcessesPerformOT2D(self, algoName):
+        return ( self.launcherPerformOT2DDir(algoName) + 'processesPerformOT2D.dat' )
+
+    def fileLogPerformOT2D(self, algoName):
+        return ( self.launcherPerformOT2DDir(algoName) + 'logPerformOT2D' )
+
+    def fileNodesPerformOT2D(self, algoName):
+        return ( self.launcherPerformOT2DDir(algoName) + 'nodesPerformOT2D.dat' )
+
+    def pythonLauncherPerformOT2D(self, algoName):
+        return ( self.launcherPerformOT2DDir(algoName) + 'performOT2D.py' )
+
+    def bashLauncherPerformOT2D(self, algoName):
+        return ( self.launcherPerformOT2DDir(algoName) + 'performOT2D.sh' )
+
+    def performOT2DFieldSpeciesDir(self, AOG, field, LOL, species):
+        return ( self.oT2DDir + AOG + field.name + '/' + LOL + '/' + species + '/' ) 
+
+    def performOT2DP0P1FieldSpeciesDir(self, algoName, p0, p1, AOG, field, LOL, species):
+        return ( self.performOT2DFieldSpeciesDir(AOG, field, LOL, species) + str(p0) + '-' + str(p1) + '/' + algoName + '/' )
+
+    def configFilePerformOT2DP0P1FieldSpecies(self, algoName, p0, p1, AOG, field, LOL, species):
+        return ( self.performOT2DP0P1FieldSpeciesDir(algoName, p0, p1, AOG, field, LOL, species) + algoName + '.cfg' )
+
 #__________________________________________________
-'''
-
-def figDir(outputDir, sessionName, workSession):
-    return workingDir(outputDir, sessionName, workSession) + 'figures/'
-
-def figSimulationOutputDir(outputDir, sessionName, workSession, AOG, fieldName, lol, species):
-    return figDir(outputDir, sessionName, workSession) + 'simulationOutput/' + AOG + fieldName + '/' + lol + '/' + species + '/'
-
-def figNameSimulationOutputAllSim(outputDir, sessionName, workSession, AOG, fieldName, lol, species):
-    return figSimulationOutputDir(outputDir, sessionName, workSession, AOG, fieldName, lol, species) + 'allSim'
-'''

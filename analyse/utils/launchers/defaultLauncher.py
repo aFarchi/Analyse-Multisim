@@ -33,7 +33,7 @@ for line in lines:
         for (argName, arg) in zip(argsNames, args):
             command += ' ' + argName + '=' + arg
 
-        command += ' > $logFile$'+str(currentNTask) 
+        command += ' >> $logFile$'+str(currentNTask) 
 
         print command
         sys.exit(os.system(command))

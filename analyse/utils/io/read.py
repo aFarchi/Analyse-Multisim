@@ -25,14 +25,7 @@ def arrayFromFile(fileName):
 #__________________________________________________
 
 def readLines(fileName, strip=True, removeBlancks=True, commentChar='#', includeEmptyLines=False):
-    try:
-        f     = open(fileName, 'r')
-        lines = f.readlines()
-        f.close()
-    except:
-        print('Could not read file : '+fileName)
-        return []
-
+    lines         = readLinesNoFilter(fileName)
     filteredLines = []
 
     for line in lines:
@@ -52,3 +45,14 @@ def readLines(fileName, strip=True, removeBlancks=True, commentChar='#', include
 
 #__________________________________________________
 
+def readLinesNoFilter(fileName):
+    try:
+        f = open(fileName, 'r')
+        l = f.readlines()
+        f.close()
+        return l
+    except:
+        print('Could not read file : '+fileName)
+        return []
+
+#__________________________________________________

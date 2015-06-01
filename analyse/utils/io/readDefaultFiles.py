@@ -3,35 +3,31 @@
 #____________________
 
 from ..path.modulePath import ModulePath
-
-#__________________________________________________
-
-def readLines(fileName):
-    try:
-        f = open(fileName, 'r')
-        l = f.readlines()
-        f.close()
-        return l
-    except:
-        print('Could not read file : '+fileName)
-        return []
+from read              import readLinesNoFilter
 
 #__________________________________________________
 
 def readDefaultPythonLauncher():
     mp = ModulePath()
-    return readLines(mp.defaultPythonLauncher)
+    return readLinesNoFilter(mp.defaultPythonLauncher)
 
 #__________________________________________________
 
 def readDefaultBashLauncher():
     mp = ModulePath()
-    return readLines(mp.defaultBashLauncher)
+    return readLinesNoFilter(mp.defaultBashLauncher)
 
 #__________________________________________________
 
 def readDefaultNodesFile():
     mp = ModulePath()
-    return readLines(mp.defaultNodesFile)
+    return readLinesNoFilter(mp.defaultNodesFile)
 
 #__________________________________________________
+
+def readDefaultConfigOT2D():
+    mp = ModulePath()
+    return readLinesNoFilter(mp.defaultConfigOT2D)
+
+#__________________________________________________
+
