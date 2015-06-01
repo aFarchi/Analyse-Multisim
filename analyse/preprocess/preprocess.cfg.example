@@ -1,0 +1,26 @@
+#__________________________________________________
+# Example of configuration file
+
+#__________________________________________________
+# General parameters
+
+outputDir      = /cerea_raid/users/farchia/Fukushima-multisim/output/
+sessionName    = sim-test-3/
+workName       = analyse/
+printIO        = True
+EPSILON        = 1.e-8
+
+#__________________________________________________
+# Preprocess raw data
+
+preprocessRawData = True
+
+preprocessRawData_bigMemory      = True
+preprocessRawData_xTSelect       = 0.5
+preprocessRawData_analyseShape   = int : 1
+preprocessRawData_analyseShape   = int : 1
+preprocessRawData_analyseShape   = int : 32
+preprocessRawData_analyseShape   = int : 32
+preprocessRawData_nLevelsAnalyse = 30
+
+#__________________________________________________
