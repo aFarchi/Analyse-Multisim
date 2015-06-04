@@ -24,7 +24,7 @@ OT2D_interpolateIntoOT2DResolution = True
 #__________________________________________________
 # List of possible configurations
 # with the corresponding algo and plotting parameters files
-OT2D_configurationNames = str  : adr3
+OT2D_configurationNames = str : adr3
 
 #__________________________________________________
 # OT2D algorithm parameters

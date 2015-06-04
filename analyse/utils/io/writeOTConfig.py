@@ -23,6 +23,7 @@ def writeDefaultPlottingConfigOT2D(fileName, args, plottingParametersFile):
 
 def writeDefaultPlottingConfigOT2DAllConfig(fileName, args, outputDirList, labelList, plottingParametersFile):
     try:
+        lines = readDefaultConfigPlotOT2D()
         f = open(fileName, 'w')
         for line in lines:
             if '$outputDir$' in line:
@@ -35,7 +36,7 @@ def writeDefaultPlottingConfigOT2DAllConfig(fileName, args, outputDirList, label
                 for arg in args:
                     line = line.replace(arg, args[arg])
                 f.write(line)
-            f.close()
+        f.close()
     except:
         print('Could not write file : '+fileName)
 

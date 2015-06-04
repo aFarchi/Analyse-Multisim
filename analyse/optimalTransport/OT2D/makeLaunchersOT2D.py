@@ -83,7 +83,7 @@ def makeLauncherPerformOT2D(configFile):
     elif config.OT2D_timeResFunction == 'max':
         timeResFunction = maxTimeRes
 
-    for configName in config.OT2D_configurationName:
+    for configName in config.OT2D_configurationNames:
 
         createDirectories([simOutput.launcherPerformOT2DDir(configName)], config.printIO)
 
@@ -149,7 +149,7 @@ def makeLauncherPlotOT2DSingleConfig(configFile):
     config    = OT2DConfiguration(configFile)
     simOutput = buildSimulationsOutput(config)
 
-    for configName in config.OT2D_configurationName:
+    for configName in config.OT2D_configurationNames:
 
         createDirectories([simOutput.launcherPlotOT2DDir(configName)], config.printIO)
 
@@ -243,7 +243,7 @@ def makeLauncherPlotOT2DMultiConfig(configFile):
 
                     outputDirList = []
                     labelList     = []
-                    for cName in config.OT2D_configurationName:
+                    for cName in config.OT2D_configurationNames:
                         outputDirList.append(simOutput.performOT2DP0P1FieldSpeciesDir(cName, p0, p1, AOG, field, LOL, species))
                         labelList.append(cName)
 

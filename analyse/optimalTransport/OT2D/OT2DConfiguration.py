@@ -69,23 +69,23 @@ class OT2DConfiguration(DefaultConfiguration):
         self.addAttribute('OT2D_timeResFunction', 
                           defaultVal='min')
 
-        self.addAttribute('OT2D_interpolateIntoOTResolution',
+        self.addAttribute('OT2D_interpolateIntoOT2DResolution',
                           defaultVal=True,
                           attrType='bool')
 
         self.addAttribute('OT2D_configurationNames',
-                          defaulVal=['adr3'],
+                          defaultVal=['adr3'],
                           attrType='list')
 
         self.addAttribute('OT2D_algorithmParametersFiles',
-                          defaulVal={'adr3':'OT2DAlgorithmParameters.cfg'},
+                          defaultVal={'adr3':'OT2DAlgorithmParameters.cfg'},
                           attrType='dict')
 
         self.addAttribute('OT2D_plottingParametersFiles',
-                          defaulVal={'adr3':'OT2DPlottingParameters.cfg'},
+                          defaultVal={'adr3':'OT2DPlottingParameters.cfg'},
                           attrType='dict')
 
         self.addAttribute('OT2D_plottingParametersFileAllConfig',
-                          defaulVal='OT2DPlottingParameters.cfg')
+                          defaultVal='OT2DPlottingParameters.cfg')
 
 #__________________________________________________
