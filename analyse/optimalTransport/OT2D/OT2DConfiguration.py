@@ -2,7 +2,8 @@
 # OT2DConfiguration.py
 #_____________________
 
-from ...utils.configuration.defaultConfiguration import DefaultConfiguration
+from ...utils.configuration.defaultConfiguration                  import DefaultConfiguration
+from interpolateIntoOT2DResolution.interpolatorIntoOT2DResolution import InterpolatorIntoOT2DResolution
 
 #__________________________________________________
 
@@ -20,11 +21,12 @@ class OT2DConfiguration(DefaultConfiguration):
 
     def checkAttributes(self):
         DefaultConfiguration.checkAttributes(self)
-        
-        while(len(self.preprocessRawData_analyseShape) < 4):
-            self.preprocessRawData_analyseShape.append(1)
+        self.OT2D_shape = (self.OT2D_Nt, self.OT2D_Nz, self.OT2D_Ny, self.OT2D_Nx)
 
-        self.preprocessRawData_analyseShape = tuple(self.preprocessRawData_analyseShape[0:4])
+    #_________________________
+
+    def interpolatorIntoOT2DResolution(self):
+        return InterpolatorIntoOT2DResolution(self)
 
     #_________________________
 
@@ -48,76 +50,42 @@ class OT2DConfiguration(DefaultConfiguration):
                           defaultVal=1.e-8,
                           attrType='float')
 
-        self.addAttribute('preprocessRawData_analyseShape', 
-                          defaultVal=[1,1,32,32],
-                          attrType='list')
+        self.addAttribute('OT2D_Nx',
+                          defaultVal=31,
+                          attrType='int')
+
+        self.addAttribute('OT2D_Ny',
+                          defaultVal=31,
+                          attrType='int')
+
+        self.addAttribute('OT2D_Nz',
+                          defaultVal=31,
+                          attrType='int')
+
+        self.addAttribute('OT2D_Nt',
+                          defaultVal=31,
+                          attrType='int')
 
         self.addAttribute('OT2D_timeResFunction', 
                           defaultVal='min')
 
-        self.addAttribute('OT2D_algoNames', 
-                          defaultVal=['adr3'],
+        self.addAttribute('OT2D_interpolateIntoOTResolution',
+                          defaultVal=True,
+                          attrType='bool')
+
+        self.addAttribute('OT2D_configurationNames',
+                          defaulVal=['adr3'],
                           attrType='list')
 
-        self.addAttribute('OT2D_dynamics', 
-                          defaultVal={'adr':'1', 'pd':'1', 'adr3':'4'},
+        self.addAttribute('OT2D_algorithmParametersFiles',
+                          defaulVal={'adr3':'OT2DAlgorithmParameters.cfg'},
                           attrType='dict')
 
-        self.addAttribute('OT2D_normType', 
-                          defaultVal={'adr':'0', 'pd':'0', 'adr3':'-1'},
+        self.addAttribute('OT2D_plottingParametersFiles',
+                          defaulVal={'adr3':'OT2DPlottingParameters.cfg'},
                           attrType='dict')
 
-        self.addAttribute('OT2D_iterTarget', 
-                          defaultVal={'adr':'1000', 'pd':'1000', 'adr3':'1000'},
-                          attrType='dict')
-
-        self.addAttribute('OT2D_nModPrint', 
-                          defaultVal={'adr':'200', 'pd':'200', 'adr3':'200'},
-                          attrType='dict')
-
-        self.addAttribute('OT2D_nModWrite', 
-                          defaultVal={'adr':'10', 'pd':'10', 'adr3':'10'},
-                          attrType='dict')
-
-        self.addAttribute('OT2D_initial', 
-                          defaultVal={'adr':'1', 'pd':'1', 'adr3':'1'},
-                          attrType='dict')
-
-        self.addAttribute('OT2D_initialID', 
-                          defaultVal={'adr':'./', 'pd':'./', 'adr3':'./'},
-                          attrType='dict')
-
-        self.addAttribute('OT2D_gamma', 
-                          defaultVal='0.013333333')
-
-        self.addAttribute('OT2D_alpha', 
-                          defaultVal='1.998')
-
-        self.addAttribute('OT2D_theta', 
-                          defaultVal='1.')
- 
-        self.addAttribute('OT2D_sigma', 
-                          defaultVal='85.')
-        
-        self.addAttribute('OT2D_tau', 
-                          defaultVal='0.0116470588235294')
-
-        self.addAttribute('OT2D_gamma3', 
-                          defaultVal='0.013333333')
-
-        self.addAttribute('OT2D_alpha3', 
-                          defaultVal='1.998')
-        
-        self.addAttribute('OT2D_omega1', 
-                          defaultVal='0.33')
-
-        self.addAttribute('OT2D_omega2', 
-                          defaultVal='0.33')
-
-        self.addAttribute('OT2D_omega3', 
-                          defaultVal='0.34')
-
-        self.addAttribute('OT2D_plottingParametersFile',
-                          defaultVal='OT2DPlottingParameters.cfg')
+        self.addAttribute('OT2D_plottingParametersFileAllConfig',
+                          defaulVal='OT2DPlottingParameters.cfg')
 
 #__________________________________________________

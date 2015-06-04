@@ -5,6 +5,7 @@
 import numpy as np
 from scipy.linalg import eigh
 
+from read         import readLinesNoFilter
 from ..sys.run    import runCommand
 
 #__________________________________________________
@@ -45,5 +46,18 @@ def saveSymMatrixEig(prefixFileName, matrix):
         np.save(prefixFileName+'_eigVects.npy', sortedEigVects)
     except:
         print('Could not save symmetric matrix in files : '+prefixFileName+'*.npy')
+
+#__________________________________________________
+
+def appendFileToFile(inputFile, outputFile):
+
+    lines = readLinesNoFilter(inputFile)
+    try:
+        f = open(outputFile, 'a')
+        for line in lines:
+            f.write(line)
+        f.close()
+    except:
+        print('Could not write file : '+outputFile)
 
 #__________________________________________________

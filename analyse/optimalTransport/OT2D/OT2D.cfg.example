@@ -11,39 +11,26 @@ printIO        = True
 EPSILON        = 1.e-8
 
 #__________________________________________________
-# Necessary parameters from Preprocess raw data
-
-preprocessRawData_analyseShape   = int : 1
-preprocessRawData_analyseShape   = int : 1
-preprocessRawData_analyseShape   = int : 32
-preprocessRawData_analyseShape   = int : 32
-
-#__________________________________________________
 # OT2D run parameters
 
-OT2D_timeResFunction = min
-OT2D_algoNames       = str : adr3 
-OT2D_dynamics        = adr3 : str : 4
-OT2D_normType        = adr3 : str : -1
-OT2D_iterTarget      = adr3 : str : 1000
-OT2D_nModPrint       = adr3 : str : 200
-OT2D_nModWrite       = adr3 : str : 10
-OT2D_initial         = adr3 : str : 1
-OT2D_initialID       = adr3 : str : ./
+OT2D_Nx                            = 31
+OT2D_Ny                            = 31
+OT2D_Nz                            = 31
+OT2D_Nt                            = 31
 
-# algorithm parameters - should not change a priori
-OT2D_gamma           = 0.013333333
-OT2D_alpha           = 1.998
-OT2D_theta           = 1.
-OT2D_sigma           = 85.
-OT2D_tau             = 0.0116470588235294
-OT2D_gamma3          = 0.013333333
-OT2D_alpha3          = 1.998
-OT2D_omega1          = 0.33
-OT2D_omega2          = 0.33
-OT2D_omega3          = 0.34
+OT2D_timeResFunction               = min
+OT2D_interpolateIntoOT2DResolution = True
+
+#__________________________________________________
+# List of possible configurations
+# with the corresponding algo and plotting parameters files
+OT2D_configurationNames = str  : adr3
+
+#__________________________________________________
+# OT2D algorithm parameters
+OT2D_algorithmParametersFiles = adr3 : str : OT2DAlgorithmParameters.cfg
 
 #__________________________________________________
 # OT2D plotting parameters
-
-OT2D_plottingParametersFile = OT2DPlottingParameters.cfg
+OT2D_plottingParametersFiles          = adr3 : str : OT2DPlottingParameters.cfg
+OT2D_plottingParametersFileAllConfig  = OT2DPlottingParameters.cfg

@@ -76,8 +76,15 @@ class SimulationsOutput:
 
         #_________________________
 
-        self.launcherOTDir   = self.launcherDir + 'optimalTransport'
+        self.launcherOTDir   = self.launcherDir + 'optimalTransport/'
         self.launcherOT2DDir = self.launcherOTDir + '2D/'
+        self.launcherInterpolateIntoOT2DResolutionDir       = self.launcherOT2DDir + 'interpolateIntoOT2DResolution/'
+        self.configFileInterpolateIntoOT2DResolutionDir     = self.launcherInterpolateIntoOT2DResolutionDir + 'interpolateIntoOT2DResolution.cfg'
+        self.fileProcessesInterpolateIntoOT2DResolutionDir  = self.launcherInterpolateIntoOT2DResolutionDir + 'processesInterpolateIntoOT2DResolution.dat'
+        self.fileLogInterpolateIntoOT2DResolutionDir        = self.launcherInterpolateIntoOT2DResolutionDir + 'logInterpolateIntoOT2DResolution'
+        self.fileNodesInterpolateIntoOT2DResolutionDir      = self.launcherInterpolateIntoOT2DResolutionDir + 'nodesInterpolateIntoOT2DResolution.dat'
+        self.pythonLauncherInterpolateIntoOT2DResolutionDir = self.launcherInterpolateIntoOT2DResolutionDir + 'interpolateIntoOT2DResolution.py'
+        self.bashLauncherInterpolateIntoOT2DResolutionDir   = self.launcherInterpolateIntoOT2DResolutionDir + 'interpolateIntoOT2DResolution.sh'
 
         #_________________________
 
@@ -120,7 +127,7 @@ class SimulationsOutput:
         return ( self.workingDir + proc + '/' )
 
     def procPreprocessedFieldDir(self, proc, AOG, field, lol):
-        return ( self.procPreprocessedDataDir(proc) + AOG + field.name + '/' + lol + '/' )
+        return ( self.procPreprocessedDataDir(proc) + 'rawResolution' + AOG + field.name + '/' + lol + '/' )
 
     def fileProcPreprocessedField(self, proc, AOG, field, lol, species):
         return ( self.procPreprocessedFieldDir(proc, AOG, field, lol) + species + '.npy' )
@@ -130,65 +137,76 @@ class SimulationsOutput:
 
     #_________________________
 
+    def procPreprocessedFieldOTResolutionDir(self, proc, AOG, field, lol):
+        return ( self.procPreprocessedDataDir(proc) + 'OTResolution' + AOG + field.name + '/' + lol + '/' )
+
+    def fileProcPreprocessedFieldOTResolution(self, proc, AOG, field, lol, species):
+        return ( self.procPreprocessedFieldOTResolutionDir(proc, AOG, field, lol) + species + '.npy' )
+
+    def fileProcPreprocessedFieldGSOTResolution(self, proc, AOG, field, lol, species, TS):
+        return ( self.procPreprocessedFieldOTResolutionDir(proc, AOG, field, lol) + species + 'grayScale' + TS + '.npy' )
+
+    #_________________________
+
     def simOutputFieldFigDir(self, AOG, field, lol, species):
         return ( self.simulationfigDir + AOG + field.name + '/' + lol + '/' + species + '/' )
 
     #_________________________
     
-    def launcherPerformOT2DDir(self, algoName):
-        return ( self.launcherOT2DDir + algoName + '/performOT2D/' )
+    def launcherPerformOT2DDir(self, configName):
+        return ( self.launcherOT2DDir + configName + '/performOT2D/' )
 
-    def fileProcessesPerformOT2D(self, algoName):
-        return ( self.launcherPerformOT2DDir(algoName) + 'processesPerformOT2D.dat' )
+    def fileProcessesPerformOT2D(self, configName):
+        return ( self.launcherPerformOT2DDir(configName) + 'processesPerformOT2D.dat' )
 
-    def fileLogPerformOT2D(self, algoName):
-        return ( self.launcherPerformOT2DDir(algoName) + 'logPerformOT2D' )
+    def fileLogPerformOT2D(self, configName):
+        return ( self.launcherPerformOT2DDir(configName) + 'logPerformOT2D' )
 
-    def fileNodesPerformOT2D(self, algoName):
-        return ( self.launcherPerformOT2DDir(algoName) + 'nodesPerformOT2D.dat' )
+    def fileNodesPerformOT2D(self, configName):
+        return ( self.launcherPerformOT2DDir(configName) + 'nodesPerformOT2D.dat' )
 
-    def pythonLauncherPerformOT2D(self, algoName):
-        return ( self.launcherPerformOT2DDir(algoName) + 'performOT2D.py' )
+    def pythonLauncherPerformOT2D(self, configName):
+        return ( self.launcherPerformOT2DDir(configName) + 'performOT2D.py' )
 
-    def bashLauncherPerformOT2D(self, algoName):
-        return ( self.launcherPerformOT2DDir(algoName) + 'performOT2D.sh' )
+    def bashLauncherPerformOT2D(self, configName):
+        return ( self.launcherPerformOT2DDir(configName) + 'performOT2D.sh' )
 
     def performOT2DFieldSpeciesDir(self, AOG, field, LOL, species):
         return ( self.OT2DDir + AOG + field.name + '/' + LOL + '/' + species + '/' ) 
 
-    def performOT2DP0P1FieldSpeciesDir(self, algoName, p0, p1, AOG, field, LOL, species):
-        return ( self.performOT2DFieldSpeciesDir(AOG, field, LOL, species) + str(p0) + '-' + str(p1) + '/' + algoName + '/' )
+    def performOT2DP0P1FieldSpeciesDir(self, configName, p0, p1, AOG, field, LOL, species):
+        return ( self.performOT2DFieldSpeciesDir(AOG, field, LOL, species) + str(p0) + '-' + str(p1) + '/' + configName + '/' )
 
-    def configFilePerformOT2DP0P1FieldSpecies(self, algoName, p0, p1, AOG, field, LOL, species):
-        return ( self.performOT2DP0P1FieldSpeciesDir(algoName, p0, p1, AOG, field, LOL, species) + algoName + '.cfg' )
+    def configFilePerformOT2DP0P1FieldSpecies(self, configName, p0, p1, AOG, field, LOL, species):
+        return ( self.performOT2DP0P1FieldSpeciesDir(configName, p0, p1, AOG, field, LOL, species) + configName + '.cfg' )
 
     #_________________________
 
-    def launcherPlotOT2DDir(self, algoName):
-        return ( self.launcherOT2DDir + algoName + '/plotOT2D/' )
+    def launcherPlotOT2DDir(self, configName):
+        return ( self.launcherOT2DDir + configName + '/plotOT2D/' )
     
-    def fileProcessesPlotOT2D(self, algoName):
-        return ( self.launcherPlotOT2DDir(algoName) + 'processesPlotOT2D.dat' )
+    def fileProcessesPlotOT2D(self, configName):
+        return ( self.launcherPlotOT2DDir(configName) + 'processesPlotOT2D.dat' )
 
-    def fileLogPlotOT2D(self, algoName):
-        return ( self.launcherPlotOT2DDir(algoName) + 'logPlotOT2D' )
+    def fileLogPlotOT2D(self, configName):
+        return ( self.launcherPlotOT2DDir(configName) + 'logPlotOT2D' )
 
-    def fileNodesPlotOT2D(self, algoName):
-        return ( self.launcherPlotOT2DDir(algoName) + 'nodesPlotOT2D.dat' )
+    def fileNodesPlotOT2D(self, configName):
+        return ( self.launcherPlotOT2DDir(configName) + 'nodesPlotOT2D.dat' )
 
-    def pythonLauncherPlotOT2D(self, algoName):
-        return ( self.launcherPlotOT2DDir(algoName) + 'plotOT2D.py' )
+    def pythonLauncherPlotOT2D(self, configName):
+        return ( self.launcherPlotOT2DDir(configName) + 'plotOT2D.py' )
 
-    def bashLauncherPlotOT2D(self, algoName):
-        return ( self.launcherPlotOT2DDir(algoName) + 'plotOT2D.sh' )
+    def bashLauncherPlotOT2D(self, configName):
+        return ( self.launcherPlotOT2DDir(configName) + 'plotOT2D.sh' )
 
     def plotOT2DFieldSpeciesDir(self, AOG, field, LOL, species):
         return ( self.OT2DfigDir + AOG + field.name + '/' + LOL + '/' + species + '/' )
 
-    def plotOT2DP0P1FieldSpeciesDir(self, algoName, p0, p1, AOG, field, LOL, species):
-        return ( self.plotOT2DFieldSpeciesDir(AOG, field, LOL, species) + str(p0) + '-' + str(p1) + '/' + algoName + '/' )
+    def plotOT2DP0P1FieldSpeciesDir(self, configName, p0, p1, AOG, field, LOL, species):
+        return ( self.plotOT2DFieldSpeciesDir(AOG, field, LOL, species) + str(p0) + '-' + str(p1) + '/' + configName + '/' )
 
-    def configFilePlotOT2DP0P1FieldSpecies(self, algoName, p0, p1, AOG, field, LOL, species):
-        return ( self.plotOT2DP0P1FieldSpeciesDir(algoName, p0, p1, AOG, field, LOL, species) + 'plotting_' + algoName + '.cfg' )
+    def configFilePlotOT2DP0P1FieldSpecies(self, configName, p0, p1, AOG, field, LOL, species):
+        return ( self.plotOT2DP0P1FieldSpeciesDir(configName, p0, p1, AOG, field, LOL, species) + 'plotting_' + configName + '.cfg' )
 
 #__________________________________________________
