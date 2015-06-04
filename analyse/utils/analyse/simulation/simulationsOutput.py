@@ -127,7 +127,7 @@ class SimulationsOutput:
         return ( self.workingDir + proc + '/' )
 
     def procPreprocessedFieldDir(self, proc, AOG, field, lol):
-        return ( self.procPreprocessedDataDir(proc) + 'rawResolution' + AOG + field.name + '/' + lol + '/' )
+        return ( self.procPreprocessedDataDir(proc) + 'rawResolution/' + AOG + field.name + '/' + lol + '/' )
 
     def fileProcPreprocessedField(self, proc, AOG, field, lol, species):
         return ( self.procPreprocessedFieldDir(proc, AOG, field, lol) + species + '.npy' )
@@ -138,7 +138,7 @@ class SimulationsOutput:
     #_________________________
 
     def procPreprocessedFieldOTResolutionDir(self, proc, AOG, field, lol):
-        return ( self.procPreprocessedDataDir(proc) + 'OTResolution' + AOG + field.name + '/' + lol + '/' )
+        return ( self.procPreprocessedDataDir(proc) + 'OTResolution/' + AOG + field.name + '/' + lol + '/' )
 
     def fileProcPreprocessedFieldOTResolution(self, proc, AOG, field, lol, species):
         return ( self.procPreprocessedFieldOTResolutionDir(proc, AOG, field, lol) + species + '.npy' )
