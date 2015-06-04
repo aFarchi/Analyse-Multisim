@@ -48,14 +48,13 @@ class RawDataPreprocessor:
                                       self.simOutput,
                                       AOG,
                                       species,
-                                      self.config.preprocessRawData_analyseShape,
                                       self.config.printIO)
 
             computeFMScalingMakeGSAOGFieldsBigMemory(rawData,
                                                      self.simOutput,
                                                      AOG,
                                                      species,
-                                                     self.config.preprocessRawData_nLevelsAnalyse,
+                                                     self.config.preprocessRawData_nLevelsGrayScale,
                                                      self.config.printIO)
 
         else:
@@ -63,14 +62,13 @@ class RawDataPreprocessor:
                              AOG,
                              GOR,
                              species,
-                             self.config.preprocessRawData_analyseShape,
                              self.config.printIO)
 
             computeFMScalingMakeGSAOGFields(self.simOutput,
                                             AOG,
                                             GOR,
                                             species,
-                                            self.config.preprocessRawData_nLevelsAnalyse,
+                                            self.config.preprocessRawData_nLevelsGrayScale,
                                             self.config.printIO)
 
     #_________________________

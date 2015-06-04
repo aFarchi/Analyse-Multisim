@@ -19,16 +19,6 @@ class PreprocessConfiguration(DefaultConfiguration):
 
     #_________________________
 
-    def checkAttributes(self):
-        DefaultConfiguration.checkAttributes(self)
-        
-        while(len(self.preprocessRawData_analyseShape) < 4):
-            self.preprocessRawData_analyseShape.append(1)
-
-        self.preprocessRawData_analyseShape = tuple(self.preprocessRawData_analyseShape[0:4])
-
-    #_________________________
-
     def process(self):
         return Preprocessor(self)
                         
@@ -66,12 +56,8 @@ class PreprocessConfiguration(DefaultConfiguration):
                           defaultVal=1.0,
                           attrType='float')
 
-        self.addAttribute('preprocessRawData_analyseShape', 
-                          defaultVal=[1,1,32,32],
-                          attrType='list')
-
-        self.addAttribute('preprocessRawData_nLevelsAnalyse', 
-                          defaultVal=30,
+        self.addAttribute('preprocessRawData_nLevelsGrayScale', 
+                          defaultVal=1000,
                           attrType='int')
 
 #__________________________________________________

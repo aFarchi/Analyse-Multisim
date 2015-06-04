@@ -21,7 +21,6 @@ def computeAOGFieldsBigMemory(rawData,
                               simOutput,
                               AOG,
                               species,
-                              analyseShape,
                               printIO):
 
     (scaling, maximum) = initScalingMaximum(simOutput, AOG)
@@ -35,7 +34,6 @@ def computeAOGFieldsBigMemory(rawData,
             maximum[lol][field.name] = data
 
         scaling[lol][field.name][proc] = scale
-        data                           = field.interpolate(data, analyseShape)
 
         fn = simOutput.fileProcPreprocessedField(proc, AOG, field, lol, species)
         if printIO:
@@ -51,7 +49,7 @@ def computeFMScalingMakeGSAOGFieldsBigMemory(rawData,
                                              simOutput,
                                              AOG,
                                              species,
-                                             nLevelsAnalyse,
+                                             nLevelsGrayScale,
                                              printIO):
 
     scalingFM = initScalingFM(simOutput, AOG)
@@ -64,7 +62,7 @@ def computeFMScalingMakeGSAOGFieldsBigMemory(rawData,
 
         for proc in simOutput.procList:
 
-            (FMScaling, GSNT, GST)           = field.computeFMScalingMakeGrayScale(rawData[proc], lol, scaling.mini, scaling.maxi, nLevelsAnalyse)
+            (FMScaling, GSNT, GST)           = field.computeFMScalingMakeGrayScale(rawData[proc], lol, scaling.mini, scaling.maxi, nLevelsGrayScale)
             scalingFM[lol][field.name][proc] = FMScaling
 
             fn = simOutput.fileProcPreprocessedFieldGS(proc, AOG, field, lol, species, 'Threshold')

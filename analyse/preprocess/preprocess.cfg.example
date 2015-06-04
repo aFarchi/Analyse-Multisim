@@ -15,12 +15,8 @@ EPSILON        = 1.e-8
 
 preprocessRawData = True
 
-preprocessRawData_bigMemory      = True
-preprocessRawData_xTSelect       = 0.5
-preprocessRawData_analyseShape   = int : 1
-preprocessRawData_analyseShape   = int : 1
-preprocessRawData_analyseShape   = int : 32
-preprocessRawData_analyseShape   = int : 32
-preprocessRawData_nLevelsAnalyse = 30
+preprocessRawData_bigMemory        = True
+preprocessRawData_xTSelect         = 0.5
+preprocessRawData_nLevelsGrayScale = 1000
 
 #__________________________________________________

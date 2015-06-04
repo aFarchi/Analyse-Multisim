@@ -21,7 +21,7 @@ def computeAOGFields(simOutput,
                      AOG,
                      GOR,
                      species,
-                     analyseShape,
+                     #analyseShape,
                      printIO):
     
     (scaling, maximum) = initScalingMaximum(simOutput, AOG)
@@ -40,7 +40,7 @@ def computeAOGFields(simOutput,
                 maximum[lol][field.name] = data
 
             scaling[lol][field.name][proc] = scale
-            data                           = field.interpolate(data, analyseShape)
+            #data                           = field.interpolate(data, analyseShape)
 
             fn = simOutput.fileProcPreprocessedField(proc, AOG, field, lol, species)
             if printIO:
@@ -56,7 +56,7 @@ def computeFMScalingMakeGSAOGFields(simOutput,
                                     AOG,
                                     GOR,
                                     species,
-                                    nLevelsAnalyse,
+                                    nLevelsGrayScale,
                                     printIO):
 
     scalingFM = initScalingFM(simOutput, AOG)
@@ -71,7 +71,7 @@ def computeFMScalingMakeGSAOGFields(simOutput,
             array   = np.load(fn)
             scaling = arrayToScaling(array)
             
-            (FMScaling, GSNT, GST)           = field.computeFMScalingMakeGrayScale(rawData[proc], lol, scaling.mini, scaling.maxi, nLevelsAnalyse)
+            (FMScaling, GSNT, GST)           = field.computeFMScalingMakeGrayScale(rawData[proc], lol, scaling.mini, scaling.maxi, nLevelsGrayScale)
             scalingFM[lol][field.name][proc] = FMScaling
 
             fn = simOutput.fileProcPreprocessedFieldGS(proc, AOG, field, lol, species, 'Threshold')
