@@ -98,7 +98,18 @@ class SimulationsOutput:
 
         #_________________________
 
+        self.launcherPlotFieldsDir    = self.launcherDir + 'plotting/fields/'
+        self.pythonLauncherPlotFields = self.launcherPlotFieldsDir + 'plotFields.py'
+        self.bashLauncherPlotFields   = self.launcherPlotFieldsDir + 'plotFields.sh'
+        self.fileProcessesPlotFields  = self.launcherPlotFieldsDir + 'processesPlotFields.dat'
+        self.configFilePlotFields     = self.launcherPlotFieldsDir + 'plotFields.cfg'
+        self.fileLogPlotFields        = self.launcherPlotFieldsDir + 'logPlotFields'
+        self.fileNodesPlotFields      = self.launcherPlotFieldsDir + 'nodesPlotFields.dat'
+
+        #_________________________
+
         self.simulationfigDir = self.figDir + 'simulation/'
+        self.fieldfigDir      = self.figDir + 'fields/'
         self.OTfigDir         = self.figDir + 'optimalTransport/'
         self.OT2DfigDir       = self.OTfigDir + 'OT2D/'
 
@@ -112,44 +123,49 @@ class SimulationsOutput:
 
     #_________________________
 
-    def scalingFieldDir(self, AOG, field, lol):
-        return ( self.scalingDir + AOG + field.name + '/' + lol + '/' )
+    def scalingFieldDir(self, AOG, field, LOL):
+        return ( self.scalingDir + AOG + field.name + '/' + LOL + '/' )
 
-    def fileScalingFieldSpecies(self, AOG, field, lol, species):
-        return ( self.scalingFieldDir(AOG, field, lol) + species + '.npy' )
+    def fileScalingFieldSpecies(self, AOG, field, LOL, species):
+        return ( self.scalingFieldDir(AOG, field, LOL) + species + '.npy' )
 
-    def fileFMScalingFieldSpecies(self, AOG, field, lol, species):
-        return ( self.scalingFieldDir(AOG, field,lol) + species + '_FM.npy' )
+    def fileFMScalingFieldSpecies(self, AOG, field, LOL, species):
+        return ( self.scalingFieldDir(AOG, field,LOL) + species + '_FM.npy' )
 
     #_________________________
 
     def procPreprocessedDataDir(self, proc):
         return ( self.workingDir + proc + '/' )
 
-    def procPreprocessedFieldDir(self, proc, AOG, field, lol):
-        return ( self.procPreprocessedDataDir(proc) + 'rawResolution/' + AOG + field.name + '/' + lol + '/' )
+    def procPreprocessedFieldDir(self, proc, AOG, field, LOL):
+        return ( self.procPreprocessedDataDir(proc) + 'rawResolution/' + AOG + field.name + '/' + LOL + '/' )
 
-    def fileProcPreprocessedField(self, proc, AOG, field, lol, species):
-        return ( self.procPreprocessedFieldDir(proc, AOG, field, lol) + species + '.npy' )
+    def fileProcPreprocessedField(self, proc, AOG, field, LOL, species):
+        return ( self.procPreprocessedFieldDir(proc, AOG, field, LOL) + species + '.npy' )
 
-    def fileProcPreprocessedFieldGS(self, proc, AOG, field, lol, species, TS):
-        return ( self.procPreprocessedFieldDir(proc, AOG, field, lol) + species + 'grayScale' + TS + '.npy' )
-
-    #_________________________
-
-    def procPreprocessedFieldOTResolutionDir(self, proc, AOG, field, lol):
-        return ( self.procPreprocessedDataDir(proc) + 'OTResolution/' + AOG + field.name + '/' + lol + '/' )
-
-    def fileProcPreprocessedFieldOTResolution(self, proc, AOG, field, lol, species):
-        return ( self.procPreprocessedFieldOTResolutionDir(proc, AOG, field, lol) + species + '.npy' )
-
-    def fileProcPreprocessedFieldGSOTResolution(self, proc, AOG, field, lol, species, TS):
-        return ( self.procPreprocessedFieldOTResolutionDir(proc, AOG, field, lol) + species + 'grayScale' + TS + '.npy' )
+    def fileProcPreprocessedFieldGS(self, proc, AOG, field, LOL, species, TS):
+        return ( self.procPreprocessedFieldDir(proc, AOG, field, LOL) + species + 'grayScale' + TS + '.npy' )
 
     #_________________________
 
-    def simOutputFieldFigDir(self, AOG, field, lol, species):
-        return ( self.simulationfigDir + AOG + field.name + '/' + lol + '/' + species + '/' )
+    def procPreprocessedFieldOTResolutionDir(self, proc, AOG, field, LOL):
+        return ( self.procPreprocessedDataDir(proc) + 'OTResolution/' + AOG + field.name + '/' + LOL + '/' )
+
+    def fileProcPreprocessedFieldOTResolution(self, proc, AOG, field, LOL, species):
+        return ( self.procPreprocessedFieldOTResolutionDir(proc, AOG, field, LOL) + species + '.npy' )
+
+    def fileProcPreprocessedFieldGSOTResolution(self, proc, AOG, field, LOL, species, TS):
+        return ( self.procPreprocessedFieldOTResolutionDir(proc, AOG, field, LOL) + species + 'grayScale' + TS + '.npy' )
+
+    #_________________________
+
+    def simOutputFieldFigDir(self, AOG, field, LOL, species):
+        return ( self.simulationfigDir + AOG + field.name + '/' + LOL + '/' + species + '/' )
+
+    #_________________________
+
+    def fieldFigDir(self, AOG, field, LOL, species):
+        return ( self.fieldfigDir + AOG + field.name + '/' + LOL + '/' + species + '/' )
 
     #_________________________
     

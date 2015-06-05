@@ -39,7 +39,7 @@ def colorBarRect(timeTextPBar):
     if timeTextPBar:
         yStart = 0.12
     else:
-        yStart = 0.0
+        yStart = 0.07
     yEnd       = 0.93
 
     return [xStart, yStart, xEnd, yEnd]

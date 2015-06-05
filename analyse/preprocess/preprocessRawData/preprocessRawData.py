@@ -21,7 +21,6 @@ def computeAOGFields(simOutput,
                      AOG,
                      GOR,
                      species,
-                     #analyseShape,
                      printIO):
     
     (scaling, maximum) = initScalingMaximum(simOutput, AOG)
@@ -40,7 +39,6 @@ def computeAOGFields(simOutput,
                 maximum[lol][field.name] = data
 
             scaling[lol][field.name][proc] = scale
-            #data                           = field.interpolate(data, analyseShape)
 
             fn = simOutput.fileProcPreprocessedField(proc, AOG, field, lol, species)
             if printIO:

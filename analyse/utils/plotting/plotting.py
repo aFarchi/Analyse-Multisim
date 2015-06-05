@@ -1,6 +1,6 @@
-#________
-# plot.py
-#________
+#____________
+# plotting.py
+#____________
 
 import numpy as np
 
