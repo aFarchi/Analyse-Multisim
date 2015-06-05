@@ -124,8 +124,8 @@ def makeLauncherPerformOT2D(configFile):
                         args['$N$']         = str(N)
                         args['$P$']         = str(timeResFunction(M, N))
 
-                        args['$filef0$']    = simOutput.fileProcPreprocessedField(simOutput.procList[p0], AOG, field, LOL, species)
-                        args['$filef1$']    = simOutput.fileProcPreprocessedField(simOutput.procList[p1], AOG, field, LOL, species)
+                        args['$filef0$']    = simOutput.fileProcPreprocessedFieldOTResolution(simOutput.procList[p0], AOG, field, LOL, species)
+                        args['$filef1$']    = simOutput.fileProcPreprocessedFieldOTResolution(simOutput.procList[p1], AOG, field, LOL, species)
 
                         writeDefaultConfigOT2D(simOutput.configFilePerformOT2DP0P1FieldSpecies(configName, p0, p1, AOG, field, LOL, species), 
                                                args, config.OT2D_algorithmParametersFiles[configName])
@@ -168,7 +168,7 @@ def makeLauncherPlotOT2DSingleConfig(configFile):
         
         args = {}
         args['$EPSILON$']     = str(config.EPSILON)
-        args['singleOrMulti'] = str(0)
+        args['$singleOrMulti$'] = str(0)
 
         f = open(simOutput.fileProcessesPlotOT2D(configName), 'w')
         f.write('CONFIG_FILE' + '\t' +
@@ -229,7 +229,7 @@ def makeLauncherPlotOT2DMultiConfig(configFile):
         
     args = {}
     args['$EPSILON$']     = str(config.EPSILON)
-    args['singleOrMulti'] = str(1)
+    args['$singleOrMulti$'] = str(1)
 
     f = open(simOutput.fileProcessesPlotOT2D(configName), 'w')
     f.write('CONFIG_FILE' + '\t' +

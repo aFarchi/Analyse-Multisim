@@ -9,7 +9,8 @@ from analyse.preprocess.makeLauncherPreprocess              import makeLauncherP
 from analyse.plotting.simulation.makeLauncherPlotSimulation import makeLauncherPlotSimulation
 from analyse.optimalTransport.OT2D.makeLaunchersOT2D        import makeLauncherInterpolateIntoOTResolution
 from analyse.optimalTransport.OT2D.makeLaunchersOT2D        import makeLauncherPerformOT2D
-from analyse.optimalTransport.OT2D.makeLaunchersOT2D        import makeLauncherPlotOT2D
+from analyse.optimalTransport.OT2D.makeLaunchersOT2D        import makeLauncherPlotOT2DSingleConfig
+from analyse.optimalTransport.OT2D.makeLaunchersOT2D        import makeLauncherPlotOT2DMultiConfig
 
 #__________________________________________________
 
@@ -32,8 +33,13 @@ if arguments['FUNCTION'] == 'performOT2D':
 
 #__________________________________________________
 
-if arguments['FUNCTION'] == 'plotOT2D':
-    makeLauncherPlotOT2D(arguments['CONFIG_FILE'])
+if arguments['FUNCTION'] == 'plotOT2DSingleConfig':
+    makeLauncherPlotOT2DSingleConfig(arguments['CONFIG_FILE'])
+
+#__________________________________________________
+
+if arguments['FUNCTION'] == 'plotOT2DMultiConfig':
+    makeLauncherPlotOT2DMultiConfig(arguments['CONFIG_FILE'])
 
 #__________________________________________________
 
