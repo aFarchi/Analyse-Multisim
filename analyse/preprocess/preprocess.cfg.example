@@ -17,6 +17,6 @@ preprocessRawData = True
 
 preprocessRawData_bigMemory        = True
 preprocessRawData_xTSelect         = 0.5
-preprocessRawData_nLevelsGrayScale = 1000
+preprocessRawData_nLevelsGrayScale = 100
 
 #__________________________________________________
