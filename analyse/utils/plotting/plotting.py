@@ -65,22 +65,67 @@ def makeGrid(nbrOfItems, extendDirection):
 
 #____________________________________________________________
 
+def addAxGS(plt, gs, index, modulo):
+    nc = int(np.mod(index, modulo))
+    nl = int((index-nc)/modulo)
+    return plt.subplot(gs[nl,nc])
+
+#____________________________________________________________
+
 def makeAxesGrid(plt, nbrOfItems, order, extendDirection):
     (nLines, nColumns) = makeGrid(nbrOfItems, extendDirection)
     gs                 = gridspec.GridSpec(nLines, nColumns)
     axes               = []
 
-    for j in xrange(nbrOfItems):
-        if order == 'horizontalFirst':
-            modulo = nColumns
-        elif order == 'verticalFirst':
-            modulo = nLines
+    if order == 'horizontalFirst':
+        modulo = nColumns
+    elif order == 'verticalFirst':
+        modulo = nLines
 
-        nc = int(np.mod(j, modulo))
-        nl = int((j-nc)/modulo)
-        axes.append(plt.subplot(gs[nl,nc]))
+    for j in xrange(nbrOfItems):
+        axes.append(addAxGS(plt, gs, j, modulo))
 
     return (gs, axes)
+
+#____________________________________________________________
+
+def makeAxesGridAttachGrayScale(plt, nbrOfItems, order, extendDirection, extendDirectionGS):
+    axes               = []
+    (nLines, nColumns) = makeGrid(nbrOfItems, extendDirection)
+    gsAxes             = []
+    if order == 'horizontalFirst':
+        modulo = nColumns
+    elif order == 'verticalFirst':
+        modulo = nLines
+
+    if extendDirectionGS == 'horizontal':
+        gs = gridspec.GridSpec(nLines, 2*nColumns)
+
+        for j in xrange(nbrOfItems):
+            nc = int(np.mod(j, modulo))
+            nl = int((j-nc)/modulo)
+            axes.append(plt.subplot(gs[nl,2*nc]))
+            gsAxes.append(plt.subplot(gs[nl,2*nc+1]))
+        return (gs, axes, gsAxes)
+
+    else:
+        gs = gridspec.GridSpec(2*nLines, nColumns)
+
+        for j in xrange(nbrOfItems):
+            nc = int(np.mod(j, modulo))
+            nl = int((j-nc)/modulo)
+            axes.append(plt.subplot(gs[2*nl,nc]))
+            gsAxes.append(plt.subplot(gs[2*nl+1,nc]))
+        return (gs, axes, gsAxes)
+            
+    #elif attachGS == 'one':
+    #    (nLines, nColumns) = makeGrid(nbrOfItems+1, extendDirection)
+    #    gs                 = gridspec.GridSpec(nLines, nColumns)
+    #
+    #    for j in xrange(nbrOfItems):
+    #        axes.append(addAxGS(plt, gs, j, modulo))
+    #    gsAx = addAxGS(plt, gs, nbrOfItems, modulo)
+    #    return (gs, axes, gsAx)
 
 #____________________________________________________________
 

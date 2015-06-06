@@ -108,10 +108,11 @@ class SimulationsOutput:
 
         #_________________________
 
-        self.simulationfigDir = self.figDir + 'simulation/'
-        self.fieldfigDir      = self.figDir + 'fields/'
-        self.OTfigDir         = self.figDir + 'optimalTransport/'
-        self.OT2DfigDir       = self.OTfigDir + 'OT2D/'
+        self.simulationfigDir           = self.figDir + 'simulation/'
+        self.fieldfigDir                = self.figDir + 'fields/fields/'
+        self.fieldAttachGrayScalefigDir = self.figDir + 'fields/fieldsAttachGrayScale/'
+        self.OTfigDir                   = self.figDir + 'optimalTransport/'
+        self.OT2DfigDir                 = self.OTfigDir + 'OT2D/'
 
     #_________________________
 
@@ -166,6 +167,11 @@ class SimulationsOutput:
 
     def fieldFigDir(self, AOG, field, LOL, species):
         return ( self.fieldfigDir + AOG + field.name + '/' + LOL + '/' + species + '/' )
+
+    #_________________________
+
+    def fieldAttachGrayScaleFigDir(self, AOG, field, LOL, species):
+        return ( self.fieldAttachGrayScalefigDir + AOG + field.name + '/' + LOL + '/' + species + '/' )
 
     #_________________________
     
@@ -224,5 +230,39 @@ class SimulationsOutput:
 
     def configFilePlotOT2DP0P1FieldSpecies(self, configName, p0, p1, AOG, field, LOL, species):
         return ( self.plotOT2DP0P1FieldSpeciesDir(configName, p0, p1, AOG, field, LOL, species) + 'plotting_' + configName + '.cfg' )
+
+    #_________________________
+
+    def makeProcLabelSuffixListList(self, AOO='all', addSimLabel=True):
+        
+        if AOO == 'all':
+        
+            procListList      = [self.procList]
+            suffixFigNameList = ['allsim']
+
+            if addSimLabel:
+                labelListList = [self.labelList]
+            else:
+                labelList     = []
+                for proc in self.procList:
+                    labelList.append('')
+                labelListList = [labelList]
+
+        elif AOO == 'one':
+
+            procListList      = []
+            labelListList     = []
+            suffixFigNameList = []
+
+            for (proc, label) in zip(self.simOutput.procList, self.simOutput.labelList):
+                procListList.append([proc])
+                suffixFigNameList.append([label])
+                
+                if addSimLabel:
+                    labelListList.append([label])
+                else:
+                    labelListList.append([''])
+
+        return (procListList, labelListList, suffixFigNameList)
 
 #__________________________________________________

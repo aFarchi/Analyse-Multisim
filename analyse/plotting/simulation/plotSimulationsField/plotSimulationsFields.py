@@ -20,11 +20,9 @@ from ....utils.io.files                              import fileNameSuffix
 
 def plotProcField(rawData, 
                   simOutput, 
-
                   procList,
                   labelList,
                   suffixFigName,
-
                   AOG, 
                   field, 
                   LOL, 
@@ -51,26 +49,8 @@ def plotProcField(rawData,
                   EPSILON): 
 
     (data, mini, maxi, tmax) = extractFieldAllIterations(rawData, procList, field, LOL)
-
-    xmin  = field.axMini(0)
-    ymin  = field.axMini(1)
-    xmax  = field.axMaxi(0)
-    ymax  = field.axMaxi(1)
-
-    if xLabel:
-        xLabel = field.labels[0]
-    else:
-        xLabel = ''
-
-    if yLabel:
-        yLabel = field.labels[1]
-    else:
-        yLabel = ''
-
-    if cLabel:
-        cLabel = field.name
-    else:
-        cLabel = ''
+    (xmin, xmax, ymin, ymax) = field.axExtend2d()
+    (xLabel,yLabel,cLabel)   = field.labels2d(xLabel, yLabel, cLabel)
 
     for t in xrange(tmax):
         
@@ -90,6 +70,7 @@ def plotProcField(rawData,
                        xmax=xmax,
                        ymin=ymin,
                        ymax=ymax,
+                       cmapName=cmapName,
                        vmin=mini,
                        vmax=maxi,
                        **plotterArgs)
@@ -116,7 +97,7 @@ def plotProcField(rawData,
         gs.tight_layout(figure, rect=figureRect(colorBar, timeTextPBar))
 
         if colorBar:
-            addColorBar(plt, 
+            addColorBar(plt,
                         timeTextPBar,
                         cmapName, 
                         mini,

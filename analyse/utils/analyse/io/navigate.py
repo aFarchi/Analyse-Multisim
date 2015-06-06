@@ -45,3 +45,8 @@ def InCloudOrBelowCould(AOG, GOR):
     return IOB
 
 #__________________________________________________
+
+def ThresholdNoThreshold():
+    return ['Threshold','NoThreshold']
+
+#__________________________________________________

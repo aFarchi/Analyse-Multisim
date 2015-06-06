@@ -74,4 +74,33 @@ class Field:
         dim = self.axes[ax]
         return self.simOutput.simConfig.axMaxis[dim]
 
+    #_________________________
+
+    def axExtend2d(self):
+        xmin  = self.axMini(0)
+        ymin  = self.axMini(1)
+        xmax  = self.axMaxi(0)
+        ymax  = self.axMaxi(1)
+        return (xmin, xmax, ymin, ymax)
+
+    #_________________________
+
+    def labels2d(self, xLabel, yLabel, cLabel):
+        if xLabel:
+            xLabel = self.labels[0]
+        else:
+            xLabel = ''
+
+        if yLabel:
+            yLabel = self.labels[1]
+        else:
+            yLabel = ''
+
+        if cLabel:
+            cLabel = self.name
+        else:
+            cLabel = ''
+
+        return (xLabel, yLabel, cLabel)
+
 #__________________________________________________

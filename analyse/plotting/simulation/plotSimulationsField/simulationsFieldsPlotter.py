@@ -56,26 +56,14 @@ class SimulationsFieldPlotter:
         else:
             LOLList   = [LOL]
 
-        cmapName      = 'jet'
-        if self.config.plotSimulationsField_colorBar:
-            cmapName  = self.config.plotSimulationsField_cmapName
+#        cmapName      = 'jet'
+#        if self.config.plotSimulationsField_colorBar:
+#            cmapName  = self.config.plotSimulationsField_cmapName
 
         for (field, LOL) in product(fieldList, LOLList):
 
-            if self.config.plotSimulationsField_AOO == 'all':
-                procListList      = [self.simOutput.procList]
-                labelListList     = [self.simOutput.labelList]
-                suffixFigNameList = ['allsim']
-
-            elif self.config.plotSimulationsField_AOO == 'one':
-                procListList      = []
-                labelListList     = []
-                suffixFigNameList = []
-
-                for (proc, label) in zip(self.simOutput.procList, self.simOutput.labelList):
-                    procListList.append([proc])
-                    labelListList.append([label])
-                    suffixFigNameList.append([label])
+            (procListList, labelListList, suffixFigNameList) = simOutput.makeProcLabelSuffixListList(AOO=self.config.plotSimulationsField_AOO,
+                                                                                                     addSimLabel=self.config.plotSimulationsField_simLabels)
 
             for (procList, labelList, suffixFigName) in zip(procListList, labelListList, suffixFigNameList):
 
@@ -104,7 +92,7 @@ class SimulationsFieldPlotter:
                               self.config.plotSimulationsField_yTicksDecimals,
                               self.config.plotSimulationsField_cTicksDecimals,
                               self.config.plotSimulationsField_colorBar,
-                              cmapName,
+                              self.config.plotSimulationsField_cmapName,
                               self.config.plotSimulationsField_timeTextPBar,
                               self.config.extensions,
                               self.config.EPSILON)
