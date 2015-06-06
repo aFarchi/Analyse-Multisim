@@ -50,7 +50,7 @@ def plotProcField(rawData,
 
     (data, mini, maxi, tmax) = extractFieldAllIterations(rawData, procList, field, LOL)
     (xmin, xmax, ymin, ymax) = field.axExtend2d()
-    (xLabel,yLabel,cLabel)   = field.labels2d(xLabel, yLabel, cLabel)
+    (xLabel, yLabel, cLabel) = field.labels2d(xLabel, yLabel, cLabel)
 
     for t in xrange(tmax):
         

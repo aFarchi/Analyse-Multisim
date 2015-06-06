@@ -7,6 +7,7 @@ from ..io.readLists                 import readFileProcesses
 from ..io.readLists                 import readFileMinValues
 from ..io.readLists                 import readFileLevels
 from ..io.readLists                 import readFileLabels
+from ..io.navigate                  import *
 from ..fields.defineFields          import defineFields
 from ..timeSelection.defaultTSelect import makeSelectXtimesNt
 from simulationsConfiguration       import SimulationsConfiguration
@@ -264,5 +265,25 @@ class SimulationsOutput:
                     labelListList.append([''])
 
         return (procListList, labelListList, suffixFigNameList)
+
+    #_________________________
+
+    def fieldLOLList(self, AOG, field=None, LOL=None):
+
+        if field is None:
+            fieldList = self.fieldList[AOG]
+        else:
+            fieldList = []
+            for f in self.fieldList[AOG]:
+                if field == f.name:
+                    fieldList.append(f)
+                    break
+
+        if LOL is None:
+            LOLList   = LinOrLog()
+        else:
+            LOLList   = [LOL]
+
+        return (fieldList, LOLList)
 
 #__________________________________________________

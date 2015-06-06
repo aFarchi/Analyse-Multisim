@@ -19,13 +19,10 @@ from ....utils.plotting.positions              import figureRect
 #__________________________________________________
 
 def plotProcField(simOutput, 
-
                   procList,
                   labelList,
                   suffixFigName,
-
                   applyGlobalScaling,
-
                   AOG, 
                   field, 
                   LOL, 
@@ -51,27 +48,9 @@ def plotProcField(simOutput,
                   EPSILON,
                   printIO): 
 
-    (data, mini, maxi) = extractProcessedData(simOutput, procList, AOG, field, LOL, species, applyGlobalScaling, printIO)
-
-    xmin  = field.axMini(0)
-    ymin  = field.axMini(1)
-    xmax  = field.axMaxi(0)
-    ymax  = field.axMaxi(1)
-
-    if xLabel:
-        xLabel = field.labels[0]
-    else:
-        xLabel = ''
-
-    if yLabel:
-        yLabel = field.labels[1]
-    else:
-        yLabel = ''
-
-    if cLabel:
-        cLabel = field.name
-    else:
-        cLabel = ''
+    (data, mini, maxi)       = extractProcessedData(simOutput, procList, AOG, field, LOL, species, applyGlobalScaling, printIO)
+    (xmin, xmax, ymin, ymax) = field.axExtend2d()
+    (xLabel, yLabel, cLabel) = field.labels2d(xLabel, yLabel, cLabel)
 
     figure     = plt.figure()
     plt.clf()
@@ -89,6 +68,7 @@ def plotProcField(simOutput,
                    xmax=xmax,
                    ymin=ymin,
                    ymax=ymax,
+                   cmapName=cmapName,
                    vmin=mini,
                    vmax=maxi,
                    **plotterArgs)

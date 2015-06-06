@@ -40,25 +40,8 @@ class SimulationsFieldPlotter:
 
     def plotAOGFields(self, AOG, GOR, species, field=None, LOL=None):
 
-        rawData = extractRawDataMultiProc(self.simOutput, AOG, GOR, species, self.config.printIO)
-
-        if field is None:
-            fieldList = self.simOutput.fieldList[AOG]
-        else:
-            fieldList = []
-            for f in self.simOutput.fieldList[AOG]:
-                if field == f.name:
-                    fieldList.append(f)
-                    break
-
-        if LOL is None:
-            LOLList   = LinOrLog()
-        else:
-            LOLList   = [LOL]
-
-#        cmapName      = 'jet'
-#        if self.config.plotSimulationsField_colorBar:
-#            cmapName  = self.config.plotSimulationsField_cmapName
+        rawData              = extractRawDataMultiProc(self.simOutput, AOG, GOR, species, self.config.printIO)
+        (fieldList, LOLList) = self.simOutput.fieldLOLList(AOG, field, LOL)
 
         for (field, LOL) in product(fieldList, LOLList):
 

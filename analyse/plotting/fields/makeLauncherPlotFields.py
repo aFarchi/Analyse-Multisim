@@ -52,6 +52,7 @@ def makeLauncherPlotFields(configFile):
 
             for (field, LOL) in product(simOutput.fieldList[AOG], LinOrLog()):
                 dirsToCreate.append(simOutput.fieldFigDir(AOG, field, LOL, species))
+                dirsToCreate.append(simOutput.fieldAttachGrayScaleFigDir(AOG, field, LOL, species))
 
             if config.plotFields_parallelize == 'less':
                 f.write('plotFields'                   + '\t' +

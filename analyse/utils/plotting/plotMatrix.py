@@ -72,16 +72,18 @@ def plotColorBar(cax, cmapName, mini, maxi, nbrTicks, ticksDecimals, label, orie
     else:
         ticks = np.linspace(mini, maxi, nbrTicks).round(decimals=ticksDecimals).tolist()
 
-    return mpl.colorbar.ColorbarBase(cax, cmap=cmap, norm=norm, ticks=ticks, label=label, orientation=orientation)
+    cbar = mpl.colorbar.ColorbarBase(cax, cmap=cmap, norm=norm, ticks=ticks, label=label, orientation=orientation)
+    cbar.solids.set_rasterized(True)
+    cbar.solids.set_edgecolor("face")
+    return cbar
 
 #__________________________________________________
 
 def plotGrayScale(ax, GS, mini, maxi, maxiGS, nLevels, cmapName, options, 
-                  nbrGSTicks, nbrCTicks, GSTicksDecimals, cTicksDecimals, direction, EPSILON):
+                  nbrCTicks, cTicksDecimals, direction, EPSILON):
 
-    levels = np.linspace(mini, maxi, nLevels)
-    plotColorBar(ax, cmapName, mini, maxi, nbrCTicks, cTicksDecimals, None, orientation='vertical')
-
+    levels = np.linspace(0.0, 1.0, nLevels)
+    plotColorBar(ax, cmapName, mini, maxi, nbrCTicks, cTicksDecimals, '', orientation=direction)
     for TS in GS:
         if direction == 'vertical':
             args = [GS[TS]/maxiGS, levels]
@@ -89,53 +91,6 @@ def plotGrayScale(ax, GS, mini, maxi, maxiGS, nLevels, cmapName, options,
             args = [levels, GS[TS]/maxiGS]
         args.append(options[TS])
         ax.plot(*args)
-
-    '''
-    if direction == 'vertical':
-        ymin = mini
-        ymax = maxi
-        xmin = 0.0
-        xmax = maxiGS
-
-        nbrXTicks      = nbrGSTicks
-        nbrYTicks      = nbrCTicks
-        xTicksDecimals = GSTicksDecimals
-        yTicksDecimals = cTicksDecimals
-
-        (matrixColorBar, X) = np.meshgrid(levels, [0,1], indexing='ij')
-        
-    else:
-        xmin = mini
-        xmax = maxi
-        ymin = 0.0
-        ymax = maxiGS
-
-        nbrXTicks      = nbrCTicks
-        nbrYTicks      = nbrGSTicks
-
-        xTicksDecimals = cTicksDecimals        
-        yTicksDecimals = GSTicksDecimals
-
-        (X, matrixColorBar) = np.meshgrid([0,1], levels, indexing='ij')
-
-
-    adaptAxesExtent(ax,
-                    xmin,
-                    xmax,
-                    ymin,
-                    ymax,
-                    0.0,
-                    0.0,
-                    nbrXTicks,
-                    nbrYTicks,
-                    xTicksDecimals,
-                    yTicksDecimals,
-                    EPSILON)
-    '''
-
-    #plotMatrix(ax, matrixColorBar, 'imshow', xmin=xmin, xmax=xmax, ymin=ymin, ymax=ymax, cmapName=cmapName, 
-    #           vmin=mini, vmax=maxi, interpolation='bilinear')
-    #return (xmin, xmax, ymin, ymax)
 
 #__________________________________________________
 

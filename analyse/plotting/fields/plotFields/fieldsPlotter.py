@@ -39,40 +39,14 @@ class FieldsPlotter:
 
     def plotAOGFields(self, AOG, GOR, species, field=None, LOL=None):
 
-        if field is None:
-            fieldList = self.simOutput.fieldList[AOG]
-        else:
-            fieldList = []
-            for f in self.simOutput.fieldList[AOG]:
-                if field == f.name:
-                    fieldList.append(f)
-                    break
-
-        if LOL is None:
-            LOLList   = LinOrLog()
-        else:
-            LOLList   = [LOL]
-
-        cmapName      = 'jet'
-        if self.config.plotFields_colorBar:
-            cmapName  = self.config.plotFields_cmapName
+        (fieldList, LOLList) = self.simOutput.fieldLOLList(AOG, field, LOL)
 
         for (field, LOL) in product(fieldList, LOLList):
 
-            if self.config.plotFields_AOO == 'all':
-                procListList      = [self.simOutput.procList]
-                labelListList     = [self.simOutput.labelList]
-                suffixFigNameList = ['allsim']
-
-            elif self.config.plotFields_AOO == 'one':
-                procListList      = []
-                labelListList     = []
-                suffixFigNameList = []
-
-                for (proc, label) in zip(self.simOutput.procList, self.simOutput.labelList):
-                    procListList.append([proc])
-                    labelListList.append([label])
-                    suffixFigNameList.append([label])
+            (procListList, 
+             labelListList, 
+             suffixFigNameList) = self.simOutput.makeProcLabelSuffixListList(AOO=self.config.plotFields_AOO,
+                                                                             addSimLabel=self.config.plotFields_simLabels)
 
             for (procList, labelList, suffixFigName) in zip(procListList, labelListList, suffixFigNameList):
 
@@ -101,7 +75,7 @@ class FieldsPlotter:
                               self.config.plotFields_yTicksDecimals,
                               self.config.plotFields_cTicksDecimals,
                               self.config.plotFields_colorBar,
-                              cmapName,
+                              self.config.plotFields_cmapName,
                               self.config.plotFields_extensions,
                               self.config.EPSILON,
                               self.config.printIO)

@@ -11,24 +11,24 @@ printIO        = True
 EPSILON        = 1.e-8
 
 #__________________________________________________
+# Necessary parameter from preprocessing
+preprocessRawData_nLevelsGrayScale = 1000
+
+#__________________________________________________
 # Plot fields
 
 plotFields = True
-
 plotFields_extensions         = str : .pdf
 plotFields_extensions         = str : .eps
-
 plotFields_AOO                = all
 plotFields_parallelize        = less
 plotFields_applyGlobalScaling = True
-
 plotFields_xLabel             = True
 plotFields_yLabel             = True
 plotFields_cLabel             = True
 plotFields_simLabels          = True
 plotFields_colorBar           = True
 plotFields_cmapName           = jet
-
 plotFields_extendX            = 0.0
 plotFields_extendY            = 0.0
 plotFields_nbrXTicks          = 2
@@ -37,11 +37,39 @@ plotFields_nbrCTicks          = 5
 plotFields_xTicksDecimals     = 2
 plotFields_yTicksDecimals     = 2
 plotFields_cTicksDecimals     = 2
-
 plotFields_plotter            = imshow
 plotFields_plotterArgs        = interpolation : str : nearest
-
 plotFields_order              = horizontalFirst
-plotFields_extendDirection    = vertical
+plotFields_extendDirection    = horizontal
+
+#_________________________________________________
+# Plot fields attach GrayScale
+
+plotFieldsAttachGrayScale = True
+plotFieldsAttachGrayScale_extensions         = str : .pdf
+plotFieldsAttachGrayScale_extensions         = str : .eps
+plotFieldsAttachGrayScale_AOO                = all
+plotFieldsAttachGrayScale_parallelize        = less
+plotFieldsAttachGrayScale_simLabels          = True
+plotFieldsAttachGrayScale_xLabel             = True
+plotFieldsAttachGrayScale_yLabel             = True
+plotFieldsAttachGrayScale_order              = horizontalFirst
+plotFieldsAttachGrayScale_extendDirection    = horizontal
+plotFieldsAttachGrayScale_plotter            = imshow
+plotFieldsAttachGrayScale_plotterArgs        = interpolation : str : nearest
+plotFieldsAttachGrayScale_extendX            = 0.0
+plotFieldsAttachGrayScale_extendY            = 0.0
+plotFieldsAttachGrayScale_nbrXTicks          = 2
+plotFieldsAttachGrayScale_nbrYTicks          = 2
+plotFieldsAttachGrayScale_nbrCTicks          = 5
+plotFieldsAttachGrayScale_xTicksDecimals     = 2
+plotFieldsAttachGrayScale_yTicksDecimals     = 2
+plotFieldsAttachGrayScale_cTicksDecimals     = 2
+plotFieldsAttachGrayScale_cmapName           = jet
+plotFieldsAttachGrayScale_scaleGS            = False
+plotFieldsAttachGrayScale_extendDirectionGS  = vertical
+plotFieldsAttachGrayScale_options            = Threshold   : str : g-
+plotFieldsAttachGrayScale_options            = NoThreshold : str : k-
+plotFieldsAttachGrayScale_directionGS        = vertical
 
 #__________________________________________________

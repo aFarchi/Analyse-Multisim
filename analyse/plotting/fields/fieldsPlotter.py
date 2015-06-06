@@ -2,18 +2,21 @@
 # fieldsPlotter.py
 #_________________
 
-from plotFields.fieldsPlotter import FieldsPlotter 
+from plotFields.fieldsPlotter                               import FieldsPlotter as FieldsOnlyPlotter
+from plotFieldsAttachGrayScale.fieldsAttachGrayScalePlotter import FieldsAttachGrayScalePlotter
 
 #__________________________________________________
 
-class SimulationsPlotter:
+class FieldsPlotter:
 
     def __init__(self, config):
-        self.fieldsPlotter = FieldsPlotter(config)
+        self.fieldsPlotter         = FieldsOnlyPlotter(config)
+        self.fieldsAttachGSPlotter = FieldsAttachGrayScalePlotter(config)
 
     #_________________________
 
     def plot(self, **kwargs):
         self.fieldsPlotter.plot(**kwargs)
+        self.fieldsAttachGSPlotter.plot(**kwargs)
 
 #__________________________________________________
