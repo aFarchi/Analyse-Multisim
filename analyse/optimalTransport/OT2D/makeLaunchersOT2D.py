@@ -25,28 +25,30 @@ def makeLauncherInterpolateIntoOT2DResolution(configFile):
     simOutput = buildSimulationsOutput(config)
 
     createDirectories([simOutput.launcherInterpolateIntoOT2DResolutionDir], config.printIO)
-    config.writeConfig(simOutput.configFileInterpolateIntoOT2DResolutionDir)
+    config.writeConfig(simOutput.configFileInterpolateIntoOT2DResolution)
 
     args                    = {}
-    args['$fileProcesses$'] = simOutput.fileProcessesInterpolateIntoOT2DResolutionDir
+    args['$fileProcesses$'] = simOutput.fileProcessesInterpolateIntoOT2DResolution
     args['$launcher$']      = simOutput.modulePath.moduleLauncher
     args['$interpretor$']   = 'python'
     args['$startString$']   = 'Preparing all fields'
 
-    args['$logFile$']       = simOutput.fileLogInterpolateIntoOT2DResolutionDir
-    args['$nodesFile$']     = simOutput.fileNodesInterpolateIntoOT2DResolutionDir
+    args['$logFile$']       = simOutput.fileLogInterpolateIntoOT2DResolution
+    args['$nodesFile$']     = simOutput.fileNodesInterpolateIntoOT2DResolution
 
-    writeDefaultPythonLauncher(simOutput.pythonLauncherInterpolateIntoOT2DResolutionDir, args, makeExecutable=True, printIO=config.printIO)
-    writeDefaultBashLauncher(simOutput.bashLauncherInterpolateIntoOT2DResolutionDir, args, makeExecutable=True, printIO=config.printIO)
-    writeDefaultNodesFile(simOutput.fileNodesInterpolateIntoOT2DResolutionDir)
+    writeDefaultPythonLauncher(simOutput.pythonLauncherInterpolateIntoOT2DResolution, args, makeExecutable=True, printIO=config.printIO)
+    writeDefaultBashLauncher(simOutput.bashLauncherInterpolateIntoOT2DResolution, args, makeExecutable=True, printIO=config.printIO)
+    writeDefaultNodesFile(simOutput.fileNodesInterpolateIntoOT2DResolution)
     
-    f = open(simOutput.fileProcessesInterpolateIntoOT2DResolutionDir, 'w')
+    f = open(simOutput.fileProcessesInterpolateIntoOT2DResolution, 'w')
     f.write('FUNCTION'    + '\t' +
             'CONFIG_FILE' + '\t' +
-            'RUN_AOO'     + '\t' +
+            'PARLLELIZE'  + '\t' +
             'AOG'         + '\t' +
             'GOR'         + '\t' +
-            'SPECIES'     + '\n' )
+            'SPECIES'     + '\t' +
+            'FIELD'       + '\t' +
+            'LOL'         + '\n' )
 
     dirsToCreate = []
     for (AOG, LOL) in product(AirOrGround(), LinOrLog()):
@@ -55,19 +57,104 @@ def makeLauncherInterpolateIntoOT2DResolution(configFile):
 
     for (AOG, GOR) in product(AirOrGround(), GazOrRadios()):
         for species in simOutput.simConfig.speciesList[GOR]:
-            f.write('interpolateIntoOT2DResolutionDir'                   + '\t' +
-                    simOutput.configFileInterpolateIntoOT2DResolutionDir + '\t' +
-                    'one'                                                + '\t' +
-                    AOG                                                  + '\t' +
-                    GOR                                                  + '\t' +
-                    species                                              + '\n' )
+
+            if config.OT2D_interpolateIntoOT2DResolution_parallelize == 'less':
+                f.write('interpolateIntoOT2DResolution'                   + '\t' +
+                        simOutput.configFileInterpolateIntoOT2DResolution + '\t' +
+                        'less'                                            + '\t' +
+                        AOG                                               + '\t' +
+                        GOR                                               + '\t' +
+                        species                                           + '\t' +
+                        'None'                                            + '\t' +
+                        'None'                                            + '\n' )
+
+            elif config.OT2D_interpolateIntoOT2DResolution_parallelize == 'more':
+                for (field, LOL) in product(simOutput.fieldList[AOG], LinOrLog()):
+                    f.write('interpolateIntoOT2DResolution'                   + '\t' +
+                            simOutput.configFileInterpolateIntoOT2DResolution + '\t' +
+                            'more'                                            + '\t' +
+                            AOG                                               + '\t' +
+                            GOR                                               + '\t' +
+                            species                                           + '\t' +
+                            field.name                                        + '\t' +
+                            LOL                                               + '\n' )
     f.close()
 
     createDirectories(dirsToCreate, config.printIO)
-    print('Written '+simOutput.pythonLauncherInterpolateIntoOT2DResolutionDir+' ...')
-    print('Written '+simOutput.bashLauncherInterpolateIntoOT2DResolutionDir+' ...')
-    print('Written '+simOutput.fileProcessesInterpolateIntoOT2DResolutionDir+' ...')
-    print('Written '+simOutput.fileNodesInterpolateIntoOT2DResolutionDir+' ...')
+    print('Written '+simOutput.pythonLauncherInterpolateIntoOT2DResolution+' ...')
+    print('Written '+simOutput.bashLauncherInterpolateIntoOT2DResolution+' ...')
+    print('Written '+simOutput.fileProcessesInterpolateIntoOT2DResolution+' ...')
+    print('Written '+simOutput.fileNodesInterpolateIntoOT2DResolution+' ...')
+
+    print('Do not forget to specify nodes / log files and number of processes.')
+
+#__________________________________________________
+
+def makeLauncherMergeOT2DResults(configFile):
+
+    config    = OT2DConfiguration(configFile)
+    simOutput = buildSimulationsOutput(config)
+
+    createDirectories([simOutput.launcherMergeOT2DResultsDir], config.printIO)
+    config.writeConfig(simOutput.configFileMergeOT2DResults)
+
+    args                    = {}
+    args['$fileProcesses$'] = simOutput.fileProcessesMergeOT2DResults
+    args['$launcher$']      = simOutput.modulePath.moduleLauncher
+    args['$interpretor$']   = 'python'
+    args['$startString$']   = 'Preparing all fields'
+
+    args['$logFile$']       = simOutput.fileLogMergeOT2DResults
+    args['$nodesFile$']     = simOutput.fileNodesMergeOT2DResults
+
+    writeDefaultPythonLauncher(simOutput.pythonLauncherMergeOT2DResults, args, makeExecutable=True, printIO=config.printIO)
+    writeDefaultBashLauncher(simOutput.bashLauncherMergeOT2DResults, args, makeExecutable=True, printIO=config.printIO)
+    writeDefaultNodesFile(simOutput.fileNodesMergeOT2DResults)
+
+    f = open(simOutput.fileProcessesMergeOT2DResults, 'w')
+    f.write('FUNCTION'    + '\t' +
+            'CONFIG_FILE' + '\t' +
+            'PARLLELIZE'  + '\t' +
+            'AOG'         + '\t' +
+            'GOR'         + '\t' +
+            'SPECIES'     + '\t' +
+            'FIELD'       + '\t' +
+            'LOL'         + '\t' +
+            'CONFIG_NAME' + '\n' )
+
+    for (AOG, GOR) in product(AirOrGround(), GazOrRadios()):
+        for species in simOutput.simConfig.speciesList[GOR]:
+
+            if config.OT2D_mergeOT2DResults_parallelize == 'less':
+                f.write('mergeOT2DResults'                   + '\t' +
+                        simOutput.configFileMergeOT2DResults + '\t' +
+                        'less'                               + '\t' +
+                        AOG                                  + '\t' +
+                        GOR                                  + '\t' +
+                        species                              + '\t' +
+                        'None'                               + '\t' +
+                        'None'                               + '\t' +
+                        'None'                               + '\n' )
+
+            elif config.OT2D_mergeOT2DResults_parallelize =='more':
+
+                for (field, LOL, configName) in product(simOutput.fieldList[AOG], LinOrLog(), config.OTGS_configurationNames):
+                    f.write('mergeOT2DResults'                   + '\t' +
+                            simOutput.configFileMergeOT2DResults + '\t' +
+                            'more'                               + '\t' +
+                            AOG                                  + '\t' +
+                            GOR                                  + '\t' +
+                            species                              + '\t' +
+                            field.name                           + '\t' +
+                            LOL                                  + '\t' +
+                            configName                           + '\n' )
+
+    f.close()
+
+    print('Written '+simOutput.pythonLauncherMergeOT2DResults+' ...')
+    print('Written '+simOutput.bashLauncherMergeOT2DResults+' ...')
+    print('Written '+simOutput.fileProcessesMergeOT2DResults+' ...')
+    print('Written '+simOutput.fileNodesMergeOT2DResults+' ...')
 
     print('Do not forget to specify nodes / log files and number of processes.')
 

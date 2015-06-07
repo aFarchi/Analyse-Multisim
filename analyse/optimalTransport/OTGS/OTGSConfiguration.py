@@ -55,7 +55,7 @@ class OTGSConfiguration(DefaultConfiguration):
                           defaultVal=1.e-8,
                           attrType='float')
 
-        #_________________________
+        #_______________
 
         self.addAttribute('OTGS_resolution',
                           defaultVal=31,
@@ -63,6 +63,11 @@ class OTGSConfiguration(DefaultConfiguration):
 
         self.addAttribute('OTGS_interpolateIntoOTGSResolution_parallelize',
                           defaultVal='more')
+
+        self.addAttribute('OTGS_mergeOTGSResults_parallelize',
+                          defaultVal='more')
+
+        #_______________
 
         self.addAttribute('OTGS_configurationNames',
                           defaultVal=['adr3'],

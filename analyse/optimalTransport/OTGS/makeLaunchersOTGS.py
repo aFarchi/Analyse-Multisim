@@ -70,8 +70,7 @@ def makeLauncherInterpolateIntoOTGSResolution(configFile):
                         'None'                                            + '\t' +
                         'None'                                            + '\n' )
 
-            elif config.OTGS_interpolateIntoOTGSResolution_parallelize =='more':
-                
+            elif config.OTGS_interpolateIntoOTGSResolution_parallelize =='more':                
                 for (field, LOL, TS) in product(simOutput.fieldList[AOG], LinOrLog(), ThresholdNoThreshold()):
                     f.write('interpolateIntoOTGSResolution'                   + '\t' +
                             simOutput.configFileInterpolateIntoOTGSResolution + '\t' +
@@ -159,7 +158,6 @@ def makeLauncherMergeOTGSResults(configFile):
 
     f.close()
 
-    createDirectories(dirsToCreate, config.printIO)
     print('Written '+simOutput.pythonLauncherMergeOTGSResults+' ...')
     print('Written '+simOutput.bashLauncherMergeOTGSResults+' ...')
     print('Written '+simOutput.fileProcessesMergeOTGSResults+' ...')
@@ -173,11 +171,6 @@ def makeLauncherPerformOTGS(configFile):
 
     config    = OTGSConfiguration(configFile)
     simOutput = buildSimulationsOutput(config)
-
-    if config.OTGS_timeResFunction == 'min':
-        timeResFunction = minTimeRes
-    elif config.OTGS_timeResFunction == 'max':
-        timeResFunction = maxTimeRes
 
     for configName in config.OTGS_configurationNames:
 

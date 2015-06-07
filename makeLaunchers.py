@@ -16,6 +16,7 @@ from analyse.optimalTransport.OTGS.makeLaunchersOTGS        import makeLauncherP
 from analyse.optimalTransport.OTGS.makeLaunchersOTGS        import makeLauncherPlotOTGSMultiConfig
 
 from analyse.optimalTransport.OT2D.makeLaunchersOT2D        import makeLauncherInterpolateIntoOT2DResolution
+from analyse.optimalTransport.OT2D.makeLaunchersOT2D        import makeLauncherMergeOT2DResults
 from analyse.optimalTransport.OT2D.makeLaunchersOT2D        import makeLauncherPerformOT2D
 from analyse.optimalTransport.OT2D.makeLaunchersOT2D        import makeLauncherPlotOT2DSingleConfig
 from analyse.optimalTransport.OT2D.makeLaunchersOT2D        import makeLauncherPlotOT2DMultiConfig
@@ -83,5 +84,10 @@ if arguments['FUNCTION'] == 'plotOT2DMultiConfig':
 
 if arguments['FUNCTION'] == 'interpolateIntoOT2DResolution':
     makeLauncherInterpolateIntoOT2DResolution(arguments['CONFIG_FILE'])
+
+#__________________________________________________
+
+if arguments['FUNCTION'] == 'mergeOT2DResults':
+    makeLauncherMergeOT2DResults(arguments['CONFIG_FILE'])
 
 #__________________________________________________

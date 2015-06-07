@@ -97,13 +97,21 @@ class SimulationsOutput:
         self.bashLauncherMergeOTGSResults   = self.launcherMergeOTGSResultsDir + 'mergeOTGSResults.sh'
 
         self.launcherOT2DDir = self.launcherOTDir + '2D/'
-        self.launcherInterpolateIntoOT2DResolutionDir       = self.launcherOT2DDir + 'interpolateIntoOT2DResolution/'
-        self.configFileInterpolateIntoOT2DResolutionDir     = self.launcherInterpolateIntoOT2DResolutionDir + 'interpolateIntoOT2DResolution.cfg'
-        self.fileProcessesInterpolateIntoOT2DResolutionDir  = self.launcherInterpolateIntoOT2DResolutionDir + 'processesInterpolateIntoOT2DResolution.dat'
-        self.fileLogInterpolateIntoOT2DResolutionDir        = self.launcherInterpolateIntoOT2DResolutionDir + 'logInterpolateIntoOT2DResolution'
-        self.fileNodesInterpolateIntoOT2DResolutionDir      = self.launcherInterpolateIntoOT2DResolutionDir + 'nodesInterpolateIntoOT2DResolution.dat'
-        self.pythonLauncherInterpolateIntoOT2DResolutionDir = self.launcherInterpolateIntoOT2DResolutionDir + 'interpolateIntoOT2DResolution.py'
-        self.bashLauncherInterpolateIntoOT2DResolutionDir   = self.launcherInterpolateIntoOT2DResolutionDir + 'interpolateIntoOT2DResolution.sh'
+        self.launcherInterpolateIntoOT2DResolutionDir    = self.launcherOT2DDir + 'interpolateIntoOT2DResolution/'
+        self.configFileInterpolateIntoOT2DResolution     = self.launcherInterpolateIntoOT2DResolutionDir + 'interpolateIntoOT2DResolution.cfg'
+        self.fileProcessesInterpolateIntoOT2DResolution  = self.launcherInterpolateIntoOT2DResolutionDir + 'processesInterpolateIntoOT2DResolution.dat'
+        self.fileLogInterpolateIntoOT2DResolution        = self.launcherInterpolateIntoOT2DResolutionDir + 'logInterpolateIntoOT2DResolution'
+        self.fileNodesInterpolateIntoOT2DResolution      = self.launcherInterpolateIntoOT2DResolutionDir + 'nodesInterpolateIntoOT2DResolution.dat'
+        self.pythonLauncherInterpolateIntoOT2DResolution = self.launcherInterpolateIntoOT2DResolutionDir + 'interpolateIntoOT2DResolution.py'
+        self.bashLauncherInterpolateIntoOT2DResolution   = self.launcherInterpolateIntoOT2DResolutionDir + 'interpolateIntoOT2DResolution.sh'
+
+        self.launcherMergeOT2DResultsDir    = self.launcherOT2DDir + 'mergeOT2DResults/'
+        self.configFileMergeOT2DResults     = self.launcherMergeOT2DResultsDir + 'mergeOT2DResults.cfg'
+        self.fileProcessesMergeOT2DResults  = self.launcherMergeOT2DResultsDir + 'processesMergeOT2DResults.dat'
+        self.fileLogMergeOT2DResults        = self.launcherMergeOT2DResultsDir + 'logMergeOT2DResults'
+        self.fileNodesMergeOT2DResults      = self.launcherMergeOT2DResultsDir + 'nodesMergeOT2DResults.dat'
+        self.pythonLauncherMergeOT2DResults = self.launcherMergeOT2DResultsDir + 'mergeOT2DResults.py'
+        self.bashLauncherMergeOT2DResults   = self.launcherMergeOT2DResultsDir + 'mergeOT2DResults.sh'
 
         #_________________________
 
@@ -221,6 +229,12 @@ class SimulationsOutput:
 
     def configFilePerformOT2DP0P1FieldSpecies(self, configName, p0, p1, AOG, field, LOL, species):
         return ( self.performOT2DP0P1FieldSpeciesDir(configName, p0, p1, AOG, field, LOL, species) + configName + '.cfg' )
+
+    def resultsFileOT2DP0P1FieldSpecies(self, configName, p0, p1, AOG, field, LOL, species):
+        return ( self.performOT2DP0P1FieldSpeciesDir(configName, p0, p1, AOG, field, LOL, species) + 'result.bin' )
+
+    def mergedResultsFileOT2DFieldSpecies(self, configName, AOG, field, LOL, species):
+        return ( self.performOTGSFieldSpeciesDir(AOG, field, LOL, species) + 'results_'+configName )
 
     #_________________________
     

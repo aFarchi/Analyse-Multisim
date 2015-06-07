@@ -19,26 +19,38 @@ class InterpolatorIntoOT2DResolution:
     #_________________________
 
     def run(self, **kwargs):
-        if not self.config.OT2D_interpolateIntoOT2DResolution:
-            return
-
         try:
             AOG     = kwargs['AOG']
             GOR     = kwargs['GOR']
             species = kwargs['species']
-            self.interpolateIntoOT2DResolutionForSpecies(AOG, GOR, species)
+            try:
+                field = kwargs['field']
+            except:
+                field = None
+            try:
+                LOL   = kwargs['LOL']
+            except:
+                LOL   = None
+
+            self.interpolateIntoOT2DResolutionForSpecies(AOG, GOR, species, field, LOL)
         except:
             self.interpolateIntoOT2DResolutionForAllSpecies()
 
     #_________________________
 
-    def interpolateIntoOT2DResolutionForSpecies(self, AOG, GOR, species):
+    def interpolateIntoOT2DResolutionForSpecies(self, AOG, GOR, species, field=None, LOL=None):
 
-        interpolateAOGFieldsIntoOT2DResolution(self.simOutput,
-                                             AOG,
-                                             species,
-                                             self.config.OT2D_shape,
-                                             self.config.printIO)
+        (fieldList, LOLList) = self.simOutput.fieldLOLList(AOG, field, LOL)
+
+        for (field, LOL, proc) in product(fieldList, LOLList, self.simOutput.procList):
+            interpolateAOGFieldsIntoOT2DResolution(self.simOutput,
+                                                   AOG,
+                                                   species,
+                                                   field,
+                                                   LOL,
+                                                   proc,
+                                                   self.config.OT2D_shape,
+                                                   self.config.printIO)
 
     #_________________________
     

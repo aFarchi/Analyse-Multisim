@@ -13,13 +13,14 @@ EPSILON        = 1.e-8
 #__________________________________________________
 # OT2D run parameters
 
-OT2D_Nx                            = 31
-OT2D_Ny                            = 31
-OT2D_Nz                            = 31
-OT2D_Nt                            = 31
+OT2D_Nx                                        = 31
+OT2D_Ny                                        = 31
+OT2D_Nz                                        = 31
+OT2D_Nt                                        = 31
 
-OT2D_timeResFunction               = min
-OT2D_interpolateIntoOT2DResolution = True
+OT2D_timeResFunction                           = min
+OT2D_interpolateIntoOT2DResolution_parallelize = more
+OT2D_mergeOT2DResults_parallelize              = more
 
 #__________________________________________________
 # List of possible configurations

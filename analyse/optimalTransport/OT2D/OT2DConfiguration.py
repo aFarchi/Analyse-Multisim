@@ -4,6 +4,7 @@
 
 from ...utils.configuration.defaultConfiguration                  import DefaultConfiguration
 from interpolateIntoOT2DResolution.interpolatorIntoOT2DResolution import InterpolatorIntoOT2DResolution
+from mergeOT2DResults.OT2DResultsMerger                           import OT2DResultsMerger
 
 #__________________________________________________
 
@@ -30,6 +31,11 @@ class OT2DConfiguration(DefaultConfiguration):
 
     #_________________________
 
+    def OT2DResultMerger(self):
+        return OT2DResultsMerger(self)
+
+    #_________________________
+
     def defaultAttributes(self):
         DefaultConfiguration.defaultAttributes(self)
 
@@ -50,6 +56,8 @@ class OT2DConfiguration(DefaultConfiguration):
                           defaultVal=1.e-8,
                           attrType='float')
 
+        #_______________
+
         self.addAttribute('OT2D_Nx',
                           defaultVal=31,
                           attrType='int')
@@ -69,9 +77,13 @@ class OT2DConfiguration(DefaultConfiguration):
         self.addAttribute('OT2D_timeResFunction', 
                           defaultVal='min')
 
-        self.addAttribute('OT2D_interpolateIntoOT2DResolution',
-                          defaultVal=True,
-                          attrType='bool')
+        self.addAttribute('OT2D_interpolateIntoOT2DResolution_parallelize',
+                          defaultVal='more')
+
+        self.addAttribute('OT2D_mergeOT2DResults_parallelize',
+                          defaultVal='more')
+
+        #_______________
 
         self.addAttribute('OT2D_configurationNames',
                           defaultVal=['adr3'],

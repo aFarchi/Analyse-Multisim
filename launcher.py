@@ -55,7 +55,7 @@ if arguments['FUNCTION'] == 'interpolateIntoOTGSResolution':
 if arguments['FUNCTION'] == 'mergeOTGSResults':
 
     config       = OTGSConfiguration(arguments['CONFIG_FILE'])
-    interpolator = config.OTGSResultMerger()
+    merger       = config.OTGSResultMerger()
     args         = {}
 
     try:
@@ -71,21 +71,49 @@ if arguments['FUNCTION'] == 'mergeOTGSResults':
     except:
         pass
 
-    interpolator.run(**args)
+    merger.run(**args)
 
 #__________________________________________________
 
-if arguments['FUNCTION'] == 'interpolateIntoOT2DResolutionDir':
+if arguments['FUNCTION'] == 'interpolateIntoOT2DResolution':
 
     config       = OT2DConfiguration(arguments['CONFIG_FILE'])
     interpolator = config.interpolatorIntoOT2DResolution()
     args         = {}
 
-    if arguments['RUN_AOO'] == 'one':
+    try:
         args['AOG']     = arguments['AOG']
         args['GOR']     = arguments['GOR']
         args['species'] = arguments['SPECIES']
 
+        if arguments['PARLLELIZE'] == 'more':
+            args['field'] = arguments['FIELD']
+            args['LOL']   = arguments['LOL']
+    except:
+        pass
+
     interpolator.run(**args)
+
+#__________________________________________________
+
+if arguments['FUNCTION'] == 'mergeOT2DResults':
+
+    config       = OT2DConfiguration(arguments['CONFIG_FILE'])
+    merger       = config.OT2DResultMerger()
+    args         = {}
+
+    try:
+        args['AOG']     = arguments['AOG']
+        args['GOR']     = arguments['GOR']
+        args['species'] = arguments['SPECIES']
+
+        if arguments['PARLLELIZE'] == 'more':
+            args['field']      = arguments['FIELD']
+            args['LOL']        = arguments['LOL']
+            args['configName'] = arguments['CONFIG_NAME']
+    except:
+        pass
+
+    merger.run(**args)
 
 #__________________________________________________
