@@ -80,13 +80,21 @@ class SimulationsOutput:
 
         self.launcherOTDir   = self.launcherDir + 'optimalTransport/'
         self.launcherOTGSDir = self.launcherOTDir + 'GS/'
-        self.launcherInterpolateIntoOTGSResolutionDir       = self.launcherOTGSDir + 'interpolateIntoOTGSResolution/'
-        self.configFileInterpolateIntoOTGSResolutionDir     = self.launcherInterpolateIntoOTGSResolutionDir + 'interpolateIntoOTGSResolution.cfg'
-        self.fileProcessesInterpolateIntoOTGSResolutionDir  = self.launcherInterpolateIntoOTGSResolutionDir + 'processesInterpolateIntoOTGSResolution.dat'
-        self.fileLogInterpolateIntoOTGSResolutionDir        = self.launcherInterpolateIntoOTGSResolutionDir + 'logInterpolateIntoOTGSResolution'
-        self.fileNodesInterpolateIntoOTGSResolutionDir      = self.launcherInterpolateIntoOTGSResolutionDir + 'nodesInterpolateIntoOTGSResolution.dat'
-        self.pythonLauncherInterpolateIntoOTGSResolutionDir = self.launcherInterpolateIntoOTGSResolutionDir + 'interpolateIntoOTGSResolution.py'
-        self.bashLauncherInterpolateIntoOTGSResolutionDir   = self.launcherInterpolateIntoOTGSResolutionDir + 'interpolateIntoOTGSResolution.sh'
+        self.launcherInterpolateIntoOTGSResolutionDir    = self.launcherOTGSDir + 'interpolateIntoOTGSResolution/'
+        self.configFileInterpolateIntoOTGSResolution     = self.launcherInterpolateIntoOTGSResolutionDir + 'interpolateIntoOTGSResolution.cfg'
+        self.fileProcessesInterpolateIntoOTGSResolution  = self.launcherInterpolateIntoOTGSResolutionDir + 'processesInterpolateIntoOTGSResolution.dat'
+        self.fileLogInterpolateIntoOTGSResolution        = self.launcherInterpolateIntoOTGSResolutionDir + 'logInterpolateIntoOTGSResolution'
+        self.fileNodesInterpolateIntoOTGSResolution      = self.launcherInterpolateIntoOTGSResolutionDir + 'nodesInterpolateIntoOTGSResolution.dat'
+        self.pythonLauncherInterpolateIntoOTGSResolution = self.launcherInterpolateIntoOTGSResolutionDir + 'interpolateIntoOTGSResolution.py'
+        self.bashLauncherInterpolateIntoOTGSResolution   = self.launcherInterpolateIntoOTGSResolutionDir + 'interpolateIntoOTGSResolution.sh'
+
+        self.launcherMergeOTGSResultsDir    = self.launcherOTGSDir + 'mergeOTGSResults/'
+        self.configFileMergeOTGSResults     = self.launcherMergeOTGSResultsDir + 'mergeOTGSResults.cfg'
+        self.fileProcessesMergeOTGSResults  = self.launcherMergeOTGSResultsDir + 'processesMergeOTGSResults.dat'
+        self.fileLogMergeOTGSResults        = self.launcherMergeOTGSResultsDir + 'logMergeOTGSResults'
+        self.fileNodesMergeOTGSResults      = self.launcherMergeOTGSResultsDir + 'nodesMergeOTGSResults.dat'
+        self.pythonLauncherMergeOTGSResults = self.launcherMergeOTGSResultsDir + 'mergeOTGSResults.py'
+        self.bashLauncherMergeOTGSResults   = self.launcherMergeOTGSResultsDir + 'mergeOTGSResults.sh'
 
         self.launcherOT2DDir = self.launcherOTDir + '2D/'
         self.launcherInterpolateIntoOT2DResolutionDir       = self.launcherOT2DDir + 'interpolateIntoOT2DResolution/'
@@ -234,14 +242,20 @@ class SimulationsOutput:
     def bashLauncherPerformOTGS(self, configName):
         return ( self.launcherPerformOTGSDir(configName) + 'performOTGS.sh' )
 
-    def performOTGSFieldSpeciesDir(self, AOG, field, LOL, species):
-        return ( self.OTGSDir + AOG + field.name + '/' + LOL + '/' + species + '/' ) 
+    def performOTGSFieldSpeciesDir(self, AOG, field, LOL, species, TS):
+        return ( self.OTGSDir + AOG + field.name + '/' + LOL + '/' + species + '/' + TS + '/' ) 
 
-    def performOTGSP0P1FieldSpeciesDir(self, configName, p0, p1, AOG, field, LOL, species):
-        return ( self.performOTGSFieldSpeciesDir(AOG, field, LOL, species) + str(p0) + '-' + str(p1) + '/' + configName + '/' )
+    def performOTGSP0P1FieldSpeciesDir(self, configName, p0, p1, AOG, field, LOL, species, TS):
+        return ( self.performOTGSFieldSpeciesDir(AOG, field, LOL, species, TS) + str(p0) + '-' + str(p1) + '/' + configName + '/' )
 
-    def configFilePerformOTGSP0P1FieldSpecies(self, configName, p0, p1, AOG, field, LOL, species):
-        return ( self.performOTGSP0P1FieldSpeciesDir(configName, p0, p1, AOG, field, LOL, species) + configName + '.cfg' )
+    def configFilePerformOTGSP0P1FieldSpecies(self, configName, p0, p1, AOG, field, LOL, species, TS):
+        return ( self.performOTGSP0P1FieldSpeciesDir(configName, p0, p1, AOG, field, LOL, species, TS) + configName + '.cfg' )
+
+    def resultsFileOTGSP0P1FieldSpecies(self, configName, p0, p1, AOG, field, LOL, species, TS):
+        return ( self.performOTGSP0P1FieldSpeciesDir(configName, p0, p1, AOG, field, LOL, species, TS) + 'result.bin' )
+
+    def mergedResultsFileOTGSFieldSpecies(self, configName, AOG, field, LOL, species, TS):
+        return ( self.performOTGSFieldSpeciesDir(AOG, field, LOL, species, TS) + 'results_'+configName )
 
     #_________________________
 
@@ -292,14 +306,14 @@ class SimulationsOutput:
     def bashLauncherPlotOTGS(self, configName):
         return ( self.launcherPlotOTGSDir(configName) + 'plotOTGS.sh' )
 
-    def plotOTGSFieldSpeciesDir(self, AOG, field, LOL, species):
-        return ( self.OTGSfigDir + AOG + field.name + '/' + LOL + '/' + species + '/' )
+    def plotOTGSFieldSpeciesDir(self, AOG, field, LOL, species, TS):
+        return ( self.OTGSfigDir + AOG + field.name + '/' + LOL + '/' + species + '/' + TS + '/' )
 
-    def plotOTGSP0P1FieldSpeciesDir(self, configName, p0, p1, AOG, field, LOL, species):
-        return ( self.plotOTGSFieldSpeciesDir(AOG, field, LOL, species) + str(p0) + '-' + str(p1) + '/' + configName + '/' )
+    def plotOTGSP0P1FieldSpeciesDir(self, configName, p0, p1, AOG, field, LOL, species, TS):
+        return ( self.plotOTGSFieldSpeciesDir(AOG, field, LOL, species, TS) + str(p0) + '-' + str(p1) + '/' + configName + '/' )
 
-    def configFilePlotOTGSP0P1FieldSpecies(self, configName, p0, p1, AOG, field, LOL, species):
-        return ( self.plotOTGSP0P1FieldSpeciesDir(configName, p0, p1, AOG, field, LOL, species) + 'plotting_' + configName + '.cfg' )
+    def configFilePlotOTGSP0P1FieldSpecies(self, configName, p0, p1, AOG, field, LOL, species, TS):
+        return ( self.plotOTGSP0P1FieldSpeciesDir(configName, p0, p1, AOG, field, LOL, species, TS) + 'plotting_' + configName + '.cfg' )
 
     #_________________________
 
@@ -354,5 +368,17 @@ class SimulationsOutput:
             LOLList   = [LOL]
 
         return (fieldList, LOLList)
+
+    #_________________________
+
+    def fieldLOLTSList(self, AOG, field=None, LOL=None, TS=None):
+
+        (fieldList, LOLList) = self.fieldLOLList(AOG, field, LOL)
+        if TS is None:
+            TSList = ThresholdNoThreshold()
+        else:
+            TSList = [TS]
+
+        return (fieldList, LOLList, TSList)
 
 #__________________________________________________

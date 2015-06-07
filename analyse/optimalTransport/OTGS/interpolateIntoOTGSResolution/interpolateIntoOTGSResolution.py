@@ -6,35 +6,34 @@ import numpy as np
 
 from fractions                     import gcd
 from scipy.interpolate             import interp1d
-from itertools                     import product
-
-from ....utils.analyse.io.navigate import *
 
 #__________________________________________________
 
-def interpolateAOGFieldsGSIntoOTGSResolution(simOutput,
-                                             AOG,
-                                             species,
-                                             OTGSResolution,
-                                             printIO):
+def interpolateProcPreprocessedDieldGSIntoOTGSResolution(simOutput,
+                                                         AOG,
+                                                         species,
+                                                         field,
+                                                         LOL,
+                                                         TS,
+                                                         proc,
+                                                         OTGSResolution,
+                                                         printIO):
     
-    for (proc, field, LOL, TS) in product(simOutput.procList, simOutput.fieldList[AOG], LinOrLog(), ThresholdNoThreshold()):
+    fn   = simOutput.fileProcPreprocessedFieldGS(proc, AOG, field, LOL, species, TS)
+    if printIO:
+        print ('Reading '+fn+' ...')
+    data = np.load(fn)
+    data = interpolateGS(data, OTGSResolution+1)
 
-        fn   = simOutput.fileProcPreprocessedFieldGS(proc, AOG, field, LOL, species, TS)
-        if printIO:
-            print ('Reading '+fn+' ...')
-        data = np.load(fn)
-        data = interpolateGS(data, OTGSResolution+1)
+    data[1]                += data[0]
+    data[0]                 = 0.0
+    data[OTGSResolution-2] += data[OTGSResolution-1]
+    data[OTGSResolution-1]  = 0.0
 
-        data[1]                += data[0]
-        data[0]                 = 0.0
-        data[OTGSResolution-2] += data[OTGSResolution-1]
-        data[OTGSResolution-1]  = 0.0
-
-        fn = simOutput.fileProcPreprocessedFieldGSOTResolution(proc, AOG, field, lol, species, TS)
-        if printIO:
-            print ('Writing '+fn+' ...')
-        np.save(fn, data)
+    fn = simOutput.fileProcPreprocessedFieldGSOTResolution(proc, AOG, field, lol, species, TS)
+    if printIO:
+        print ('Writing '+fn+' ...')
+    np.save(fn, data)
 
 #__________________________________________________
 

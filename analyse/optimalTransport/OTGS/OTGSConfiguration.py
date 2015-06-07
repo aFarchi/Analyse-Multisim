@@ -4,6 +4,7 @@
 
 from ...utils.configuration.defaultConfiguration                  import DefaultConfiguration
 from interpolateIntoOTGSResolution.interpolatorIntoOTGSResolution import InterpolatorIntoOTGSResolution
+from mergeOTGSResults.OTGSResultsMerger                           import OTGSResultsMerger
 
 #__________________________________________________
 
@@ -26,6 +27,11 @@ class OTGSConfiguration(DefaultConfiguration):
 
     def interpolatorIntoOTGSResolution(self):
         return InterpolatorIntoOTGSResolution(self)
+
+    #_________________________
+
+    def OTGSResultMerger(self):
+        return OTGSResultsMerger(self)
 
     #_________________________
 
@@ -55,9 +61,8 @@ class OTGSConfiguration(DefaultConfiguration):
                           defaultVal=31,
                           attrType='int')
 
-        self.addAttribute('OTGS_interpolateIntoOTGSResolution',
-                          defaultVal=True,
-                          attrType='bool')
+        self.addAttribute('OTGS_interpolateIntoOTGSResolution_parallelize',
+                          defaultVal='more')
 
         self.addAttribute('OTGS_configurationNames',
                           defaultVal=['adr3'],

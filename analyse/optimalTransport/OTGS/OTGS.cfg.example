@@ -13,8 +13,9 @@ EPSILON        = 1.e-8
 #__________________________________________________
 # OTGS run parameters
 
-OTGS_resolution                    = 31
-OTGS_interpolateIntoOTGSResolution = True
+OTGS_resolution                                = 31
+OTGS_interpolateIntoOTGSResolution_parallelize = more
+OTGS_mergeOTGSResults_parallelize              = more
 
 #__________________________________________________
 # List of possible configurations

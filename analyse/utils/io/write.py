@@ -31,21 +31,27 @@ def createDirectories(dirList, printIO=False):
 
 def saveSymMatrixEig(prefixFileName, matrix):
     n = matrix.shape[0]
-
-    (eigVals,eigVects) = eigh(matrix)
-
-    indexes            = np.argsort(abs(eigVals))
-    i                  = np.arange(n)
-
-    sortedEigVals      = eigVals[indexes[n-1-i]]
-    sortedEigVects     = eigVects[:, indexes[n-1-i]]
-
     try:
         np.save(prefixFileName+'.npy', matrix)
+    except:
+        print('Could not save symmetric matrix in files : '+prefixFileName+'.npy')
+    
+    try:
+        (eigVals,eigVects) = eigh(matrix)
+
+        indexes            = np.argsort(abs(eigVals))
+        i                  = np.arange(n)
+        
+        sortedEigVals      = eigVals[indexes[n-1-i]]
+        sortedEigVects     = eigVects[:, indexes[n-1-i]]
+    except:
+        print('Could not compute eigenvalues of symmetric matrix.')
+
+    try:
         np.save(prefixFileName+'_eigVals.npy', sortedEigVals)
         np.save(prefixFileName+'_eigVects.npy', sortedEigVects)
     except:
-        print('Could not save symmetric matrix in files : '+prefixFileName+'*.npy')
+        print('Could not save eigenvalues of symmetric matrix in files : '+prefixFileName+'_eig*.npy')
 
 #__________________________________________________
 
