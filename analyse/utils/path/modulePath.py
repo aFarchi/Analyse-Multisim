@@ -16,6 +16,8 @@ class ModulePath:
         self.OTModulePath            = '/Users/Alban/Desktop/Optimal-Transport/'
         self.OT2DLauncher            = self.OTModulePath + 'launchSimulation2D.py'
         self.OT2DLauncherPlotting    = self.OTModulePath + 'plotSimulation2D.py'
+        self.OT1DLauncher            = self.OTModulePath + 'launchSimulation1D.py'
+        self.OT1DLauncherPlotting    = self.OTModulePath + 'plotSimulation1D.py'
 
         #_________________________
 
@@ -29,5 +31,7 @@ class ModulePath:
         self.defaultFilesOTConfigPath = self.modulePath + 'utils/OTConfig/'
         self.defaultConfigOT2D        = self.defaultFilesOTConfigPath + 'defaultOT2D.cfg'
         self.defaultConfigPlotOT2D    = self.defaultFilesOTConfigPath + 'defaultPlotOT2D.cfg'
+        self.defaultConfigOT1D        = self.defaultFilesOTConfigPath + 'defaultOT1D.cfg'
+        self.defaultConfigPlotOT1D    = self.defaultFilesOTConfigPath + 'defaultPlotOT1D.cfg'
 
 #__________________________________________________

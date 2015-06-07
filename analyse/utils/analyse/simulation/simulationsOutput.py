@@ -53,6 +53,7 @@ class SimulationsOutput:
         self.figDir        = self.workingDir + 'figures/'
         self.OTDir         = self.workingDir + 'optimalTransport/'
         self.OT2DDir       = self.OTDir + 'OT2D/'
+        self.OTGSDir       = self.OTDir + 'OTGS/'
 
         #_________________________
 
@@ -78,6 +79,15 @@ class SimulationsOutput:
         #_________________________
 
         self.launcherOTDir   = self.launcherDir + 'optimalTransport/'
+        self.launcherOTGSDir = self.launcherOTDir + 'GS/'
+        self.launcherInterpolateIntoOTGSResolutionDir       = self.launcherOTGSDir + 'interpolateIntoOTGSResolution/'
+        self.configFileInterpolateIntoOTGSResolutionDir     = self.launcherInterpolateIntoOTGSResolutionDir + 'interpolateIntoOTGSResolution.cfg'
+        self.fileProcessesInterpolateIntoOTGSResolutionDir  = self.launcherInterpolateIntoOTGSResolutionDir + 'processesInterpolateIntoOTGSResolution.dat'
+        self.fileLogInterpolateIntoOTGSResolutionDir        = self.launcherInterpolateIntoOTGSResolutionDir + 'logInterpolateIntoOTGSResolution'
+        self.fileNodesInterpolateIntoOTGSResolutionDir      = self.launcherInterpolateIntoOTGSResolutionDir + 'nodesInterpolateIntoOTGSResolution.dat'
+        self.pythonLauncherInterpolateIntoOTGSResolutionDir = self.launcherInterpolateIntoOTGSResolutionDir + 'interpolateIntoOTGSResolution.py'
+        self.bashLauncherInterpolateIntoOTGSResolutionDir   = self.launcherInterpolateIntoOTGSResolutionDir + 'interpolateIntoOTGSResolution.sh'
+
         self.launcherOT2DDir = self.launcherOTDir + '2D/'
         self.launcherInterpolateIntoOT2DResolutionDir       = self.launcherOT2DDir + 'interpolateIntoOT2DResolution/'
         self.configFileInterpolateIntoOT2DResolutionDir     = self.launcherInterpolateIntoOT2DResolutionDir + 'interpolateIntoOT2DResolution.cfg'
@@ -114,6 +124,7 @@ class SimulationsOutput:
         self.fieldAttachGrayScalefigDir = self.figDir + 'fields/fieldsAttachGrayScale/'
         self.OTfigDir                   = self.figDir + 'optimalTransport/'
         self.OT2DfigDir                 = self.OTfigDir + 'OT2D/'
+        self.OTGSfigDir                 = self.OTfigDir + 'OTGS/'
 
     #_________________________
 
@@ -204,6 +215,35 @@ class SimulationsOutput:
         return ( self.performOT2DP0P1FieldSpeciesDir(configName, p0, p1, AOG, field, LOL, species) + configName + '.cfg' )
 
     #_________________________
+    
+    def launcherPerformOTGSDir(self, configName):
+        return ( self.launcherOTGSDir + configName + '/performOTGS/' )
+
+    def fileProcessesPerformOTGS(self, configName):
+        return ( self.launcherPerformOTGSDir(configName) + 'processesPerformOTGS.dat' )
+
+    def fileLogPerformOTGS(self, configName):
+        return ( self.launcherPerformOTGSDir(configName) + 'logPerformOTGS' )
+
+    def fileNodesPerformOTGS(self, configName):
+        return ( self.launcherPerformOTGSDir(configName) + 'nodesPerformOTGS.dat' )
+
+    def pythonLauncherPerformOTGS(self, configName):
+        return ( self.launcherPerformOTGSDir(configName) + 'performOTGS.py' )
+
+    def bashLauncherPerformOTGS(self, configName):
+        return ( self.launcherPerformOTGSDir(configName) + 'performOTGS.sh' )
+
+    def performOTGSFieldSpeciesDir(self, AOG, field, LOL, species):
+        return ( self.OTGSDir + AOG + field.name + '/' + LOL + '/' + species + '/' ) 
+
+    def performOTGSP0P1FieldSpeciesDir(self, configName, p0, p1, AOG, field, LOL, species):
+        return ( self.performOTGSFieldSpeciesDir(AOG, field, LOL, species) + str(p0) + '-' + str(p1) + '/' + configName + '/' )
+
+    def configFilePerformOTGSP0P1FieldSpecies(self, configName, p0, p1, AOG, field, LOL, species):
+        return ( self.performOTGSP0P1FieldSpeciesDir(configName, p0, p1, AOG, field, LOL, species) + configName + '.cfg' )
+
+    #_________________________
 
     def launcherPlotOT2DDir(self, configName):
         return ( self.launcherOT2DDir + configName + '/plotOT2D/' )
@@ -231,6 +271,35 @@ class SimulationsOutput:
 
     def configFilePlotOT2DP0P1FieldSpecies(self, configName, p0, p1, AOG, field, LOL, species):
         return ( self.plotOT2DP0P1FieldSpeciesDir(configName, p0, p1, AOG, field, LOL, species) + 'plotting_' + configName + '.cfg' )
+
+    #_________________________
+
+    def launcherPlotOTGSDir(self, configName):
+        return ( self.launcherOTGSDir + configName + '/plotOTGS/' )
+    
+    def fileProcessesPlotOTGS(self, configName):
+        return ( self.launcherPlotOTGSDir(configName) + 'processesPlotOTGS.dat' )
+
+    def fileLogPlotOTGS(self, configName):
+        return ( self.launcherPlotOTGSDir(configName) + 'logPlotOTGS' )
+
+    def fileNodesPlotOTGS(self, configName):
+        return ( self.launcherPlotOTGSDir(configName) + 'nodesPlotOTGS.dat' )
+
+    def pythonLauncherPlotOTGS(self, configName):
+        return ( self.launcherPlotOTGSDir(configName) + 'plotOTGS.py' )
+
+    def bashLauncherPlotOTGS(self, configName):
+        return ( self.launcherPlotOTGSDir(configName) + 'plotOTGS.sh' )
+
+    def plotOTGSFieldSpeciesDir(self, AOG, field, LOL, species):
+        return ( self.OTGSfigDir + AOG + field.name + '/' + LOL + '/' + species + '/' )
+
+    def plotOTGSP0P1FieldSpeciesDir(self, configName, p0, p1, AOG, field, LOL, species):
+        return ( self.plotOTGSFieldSpeciesDir(AOG, field, LOL, species) + str(p0) + '-' + str(p1) + '/' + configName + '/' )
+
+    def configFilePlotOTGSP0P1FieldSpecies(self, configName, p0, p1, AOG, field, LOL, species):
+        return ( self.plotOTGSP0P1FieldSpeciesDir(configName, p0, p1, AOG, field, LOL, species) + 'plotting_' + configName + '.cfg' )
 
     #_________________________
 

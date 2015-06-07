@@ -8,7 +8,7 @@ from analyse.utils.sys.argv                                 import extractArgv
 from analyse.preprocess.makeLauncherPreprocess              import makeLauncherPreprocessRawDataForAllSpecies
 from analyse.plotting.simulation.makeLauncherPlotSimulation import makeLauncherPlotSimulation
 from analyse.plotting.fields.makeLauncherPlotFields         import makeLauncherPlotFields
-from analyse.optimalTransport.OT2D.makeLaunchersOT2D        import makeLauncherInterpolateIntoOTResolution
+from analyse.optimalTransport.OT2D.makeLaunchersOT2D        import makeLauncherInterpolateIntoOT2DResolution
 from analyse.optimalTransport.OT2D.makeLaunchersOT2D        import makeLauncherPerformOT2D
 from analyse.optimalTransport.OT2D.makeLaunchersOT2D        import makeLauncherPlotOT2DSingleConfig
 from analyse.optimalTransport.OT2D.makeLaunchersOT2D        import makeLauncherPlotOT2DMultiConfig
@@ -49,7 +49,7 @@ if arguments['FUNCTION'] == 'plotOT2DMultiConfig':
 
 #__________________________________________________
 
-if arguments['FUNCTION'] == 'interpolateIntoOTResolution':
-    makeLauncherInterpolateIntoOTResolution(arguments['CONFIG_FILE'])
+if arguments['FUNCTION'] == 'interpolateIntoOT2DResolution':
+    makeLauncherInterpolateIntoOT2DResolution(arguments['CONFIG_FILE'])
 
 #__________________________________________________

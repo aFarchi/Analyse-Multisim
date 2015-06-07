@@ -19,7 +19,7 @@ from ...utils.analyse.timeSelection.defaultTimeResolution import maxTimeRes
 
 #__________________________________________________
 
-def makeLauncherInterpolateIntoOTResolution(configFile):
+def makeLauncherInterpolateIntoOT2DResolution(configFile):
     
     config    = OT2DConfiguration(configFile)
     simOutput = buildSimulationsOutput(config)

@@ -37,3 +37,15 @@ def readDefaultConfigPlotOT2D():
 
 #__________________________________________________
 
+def readDefaultConfigOTGS():
+    mp = ModulePath()
+    return readLinesNoFilter(mp.defaultConfigOTGS)
+
+#__________________________________________________
+
+def readDefaultConfigPlotOTGS():
+    mp = ModulePath()
+    return readLinesNoFilter(mp.defaultConfigPlotOTGS)
+
+#__________________________________________________
+
