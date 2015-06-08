@@ -71,3 +71,27 @@ def extractGrayScales(simOutput, procList, AOG, field, LOL, species, scaleGS, pr
     return (datas, mini, maxi)
 
 #__________________________________________________
+
+def extractProcessedDataFullScaling(simOutput, AOG, field, LOL, species, printIO=False):
+
+    datas = {}
+
+    for proc in simOutput.procList:
+        fn = simOutput.fileProcPreprocessedField(proc, AOG, field, LOL, species)
+        if printIO:
+            print('Reading '+fn+' ...')
+        data        = np.load(fn)
+        datas[proc] = data
+
+    fn = simOutput.fileScalingFieldSpecies(AOG, field, LOL, species)
+    if printIO:
+        print ('Reading '+fn+' ...')
+    array   = np.load(fn)
+    scaling = arrayToScaling(array)
+
+    fn = simOutput.fileFMScalingFieldSpecies(AOG, field, LOL, species)
+    scalingFM = np.load(fn)
+
+    return (datas, scaling, scalingFM)
+
+#__________________________________________________

@@ -163,6 +163,11 @@ class SimulationsOutput:
 
     #_________________________
 
+    def analyseFieldSeciesDir(self, AOG, field, LOL, species):
+        return ( self.statDir + AOG + field.name + '/' + LOL + '/' )
+
+    #_________________________
+
     def procPreprocessedDataDir(self, proc):
         return ( self.workingDir + proc + '/' )
 
