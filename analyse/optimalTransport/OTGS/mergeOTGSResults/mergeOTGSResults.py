@@ -28,8 +28,8 @@ def mergeOTGSResultsForField(simOutput,
             resFile        = simOutput.resultsFileOTGSP0P1FieldSpecies(configName, p0, p1, AOG, field, LOL, species, TS)
             f              = open(resFile, 'rb')
             p              = pck.Unpickler(f)
-            results[p1,p2] = p.load()
-            results[p2,p1] = results[p1,p2]
+            results[p0,p1] = p.load()
+            results[p1,p0] = results[p0,p1]
             f.close()
 
     mergedResFile = simOutput.mergedResultsFileOTGSFieldSpecies(configName, AOG, field, LOL, species, TS)
