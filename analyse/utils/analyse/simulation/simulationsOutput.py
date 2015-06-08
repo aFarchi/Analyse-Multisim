@@ -78,6 +78,17 @@ class SimulationsOutput:
 
         #_________________________
 
+        self.launcherStatisticalAnalyseFiles = {}
+        self.launcherStatisticalAnalyseFiles['directory']  = self.launcherDir + 'statisticalAnalyse/performStatisticalAnalyse/'
+        self.launcherStatisticalAnalyseFiles['pyLauncher'] = self.launcherStatisticalAnalyseFiles['directory'] + 'performStatisticalAnalyse.py'
+        self.launcherStatisticalAnalyseFiles['shLauncher'] = self.launcherStatisticalAnalyseFiles['directory'] + 'performStatisticalAnalyse.sh'
+        self.launcherStatisticalAnalyseFiles['processes']  = self.launcherStatisticalAnalyseFiles['directory'] + 'processesPerformStatisticalAnalyse.dat'
+        self.launcherStatisticalAnalyseFiles['config']     = self.launcherStatisticalAnalyseFiles['directory'] + 'performStatisticalAnalyse.cfg'
+        self.launcherStatisticalAnalyseFiles['nodes']      = self.launcherStatisticalAnalyseFiles['directory'] + 'nodesPerformStatisticalAnalyse.dat'
+        self.launcherStatisticalAnalyseFiles['log']        = self.launcherStatisticalAnalyseFiles['directory'] + 'logPerformStatisticalAnalyse'
+
+        #_________________________
+
         self.launcherOTDir   = self.launcherDir + 'optimalTransport/'
         self.launcherOTGSDir = self.launcherOTDir + 'GS/'
         self.launcherInterpolateIntoOTGSResolutionDir    = self.launcherOTGSDir + 'interpolateIntoOTGSResolution/'

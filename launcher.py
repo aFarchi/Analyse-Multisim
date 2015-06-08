@@ -4,10 +4,11 @@
 # launcher.py
 #____________
 
-from analyse.utils.sys.argv                          import extractArgv
-from analyse.preprocess.preprocessConfiguration      import PreprocessConfiguration
-from analyse.optimalTransport.OTGS.OTGSConfiguration import OTGSConfiguration 
-from analyse.optimalTransport.OT2D.OT2DConfiguration import OT2DConfiguration 
+from analyse.utils.sys.argv                                    import extractArgv
+from analyse.statiticalAnalyse.statisticalAnalyseConfiguration import StatisticalAnalyseConfiguration
+from analyse.preprocess.preprocessConfiguration                import PreprocessConfiguration
+from analyse.optimalTransport.OTGS.OTGSConfiguration           import OTGSConfiguration 
+from analyse.optimalTransport.OT2D.OT2DConfiguration           import OT2DConfiguration 
 
 #__________________________________________________
 
@@ -115,5 +116,25 @@ if arguments['FUNCTION'] == 'mergeOT2DResults':
         pass
 
     merger.run(**args)
+
+#__________________________________________________
+
+if arguments['FUNCTION'] == 'performStatisticalAnalyse':
+
+    config   = StatisticalAnalyseConfiguration(arguments['CONFIG_FILE'])
+    analyser = config.analyser()
+    args     = {}
+
+    try:
+        args['AOG']     = arguments['AOG']
+        args['species'] = arguments['SPECIES']
+
+        if arguments['PARLLELIZE'] == 'more':
+            args['field']      = arguments['FIELD']
+            args['LOL']        = arguments['LOL']
+    except:
+        pass
+
+    analyser.run(**args)
 
 #__________________________________________________

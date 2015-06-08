@@ -1,0 +1,20 @@
+#__________________________________________________
+# Example of configuration file
+
+#__________________________________________________
+# General parameters
+
+outputDir      = /cerea_raid/users/farchia/Fukushima-multisim/output/
+sessionName    = sim-test-3/
+workName       = analyse/
+printIO        = True
+EPSILON        = 1.e-8
+
+#__________________________________________________
+# Statistical analyse parameters
+
+statisticalAnalyse_parallelize   = more
+statisticalAnalyse_nLevelsAlpha  = 5
+statisticalAnalyse_chooseScaling = mean
+
+#__________________________________________________
