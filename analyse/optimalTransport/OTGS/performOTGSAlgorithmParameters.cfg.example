@@ -2,6 +2,8 @@
 # OTGSAlgorithmParameters.cfg
 #__________________________________________________
 
+fineResolution = 1000
+
 # dynamics type
 # 0 -> normal dynamics (requires spatial boundary conditions)
 # 1 -> normal dynamics with 0 spatial boundary conditions

@@ -39,13 +39,13 @@ def readDefaultConfigPlotOT2D():
 
 def readDefaultConfigOTGS():
     mp = ModulePath()
-    return readLinesNoFilter(mp.defaultConfigOTGS)
+    return readLinesNoFilter(mp.defaultConfigOT1D)
 
 #__________________________________________________
 
 def readDefaultConfigPlotOTGS():
     mp = ModulePath()
-    return readLinesNoFilter(mp.defaultConfigPlotOTGS)
+    return readLinesNoFilter(mp.defaultConfigPlotOT1D)
 
 #__________________________________________________
 
