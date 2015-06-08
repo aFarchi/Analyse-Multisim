@@ -20,13 +20,13 @@ OTGS_mergeOTGSResults_parallelize              = more
 #__________________________________________________
 # List of possible configurations
 # with the corresponding algo and plotting parameters files
-OTGS_configurationNames = str : adr3
+OTGS_configurationNames = str : pd
 
 #__________________________________________________
 # OTGS algorithm parameters
-OTGS_algorithmParametersFiles = adr3 : str : OTGSAlgorithmParameters.cfg
+OTGS_algorithmParametersFiles = pd : str : OTGSAlgorithmParameters.cfg
 
 #__________________________________________________
 # OTGS plotting parameters
-OTGS_plottingParametersFiles          = adr3 : str : OTGSPlottingParameters.cfg
+OTGS_plottingParametersFiles          = pd : str : OTGSPlottingParameters.cfg
 OTGS_plottingParametersFileAllConfig  = OTGSPlottingParameters.cfg

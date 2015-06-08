@@ -4,7 +4,7 @@
 
 from itertools                                            import product
 
-from OTGSConfiguration                                    import OTFSConfiguration
+from OTGSConfiguration                                    import OTGSConfiguration
 from ...utils.analyse.io.navigate                         import *
 from ...utils.analyse.simulation.simulationsOutput        import buildSimulationsOutput
 from ...utils.io.write                                    import createDirectories

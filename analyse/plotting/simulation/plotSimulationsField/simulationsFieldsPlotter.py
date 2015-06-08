@@ -45,8 +45,10 @@ class SimulationsFieldPlotter:
 
         for (field, LOL) in product(fieldList, LOLList):
 
-            (procListList, labelListList, suffixFigNameList) = simOutput.makeProcLabelSuffixListList(AOO=self.config.plotSimulationsField_AOO,
-                                                                                                     addSimLabel=self.config.plotSimulationsField_simLabels)
+            (procListList, 
+             labelListList, 
+             suffixFigNameList) = self.simOutput.makeProcLabelSuffixListList(AOO=self.config.plotSimulationsField_AOO,
+                                                                             addSimLabel=self.config.plotSimulationsField_simLabels)
 
             for (procList, labelList, suffixFigName) in zip(procListList, labelListList, suffixFigNameList):
 
@@ -77,7 +79,7 @@ class SimulationsFieldPlotter:
                               self.config.plotSimulationsField_colorBar,
                               self.config.plotSimulationsField_cmapName,
                               self.config.plotSimulationsField_timeTextPBar,
-                              self.config.extensions,
+                              self.config.plotSimulationsField_extensions,
                               self.config.EPSILON)
 
 #__________________________________________________

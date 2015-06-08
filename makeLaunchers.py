@@ -42,7 +42,7 @@ if arguments['FUNCTION'] == 'plotFields':
 
 #__________________________________________________
 
-if arguments['FUNCTION'] == 'interpolateIntoOTGS':
+if arguments['FUNCTION'] == 'interpolateIntoOTGSResolution':
     makeLauncherInterpolateIntoOTGSResolution(arguments['CONFIG_FILE'])
 
 #__________________________________________________

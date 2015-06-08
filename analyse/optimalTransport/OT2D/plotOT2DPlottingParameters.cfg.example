@@ -1,5 +1,5 @@
 #__________________________________________________
-# oT2DPlottingParameters.cfg
+# OT2DPlottingParameters.cfg
 #__________________________________________________
 
 extension = str : .pdf
@@ -48,3 +48,5 @@ plotFinalState_yTicksDecimals       = 1
 plotFinalState_cTicksDecimals       = 2
 plotFinalState_order                = horizontalFirst
 plotFinalState_extendDirection      = horizontal
+
+#__________________________________________________

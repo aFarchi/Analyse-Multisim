@@ -10,7 +10,7 @@ from ....utils.analyse.io.navigate                   import *
 
 #__________________________________________________
 
-class InterpolatorIntoOT2DResolution:
+class InterpolatorIntoOTGSResolution:
 
     def __init__(self, config):
         self.config    = config

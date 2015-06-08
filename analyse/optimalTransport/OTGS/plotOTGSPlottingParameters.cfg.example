@@ -1,5 +1,5 @@
 #__________________________________________________
-# oT2DPlottingParameters.cfg
+# OTGSPlottingParameters.cfg
 #__________________________________________________
 
 extension = str : .pdf
@@ -26,25 +26,18 @@ plotFinalState = True
 # Options for plotting final state
 plotFinalState_prefixFigName        = finalState_
 plotFinalState_transparencyFunction = customTransparency
-plotFinalState_plotter              = imshow
-plotFinalState_args                 = interpolation : str   : nearest
-plotFinalState_argsInit             = colors        : str   : k
-plotFinalState_argsInit             = linestyles    : str   : solid
-plotFinalState_argsFinal            = colors        : str   : k
-plotFinalState_argsFinal            = linestyles    : str   : solid
-plotFinalState_colorBar             = True
-plotFinalState_cmapName             = jet
+plotFinalState_legend               = True
+plotFinalState_grid                 = True
 plotFinalState_timeTextPBar         = True
 plotFinalState_xLabel               = $x$
-plotFinalState_yLabel               = $y$
-plotFinalState_cLabel               = $f$
+plotFinalState_yLabel               =
 plotFinalState_extendX              = 0.0
-plotFinalState_extendY              = 0.0
-plotFinalState_nbrXTicks            = 2
-plotFinalState_nbrYTicks            = 2
-plotFinalState_nbrCTicks            = 5
-plotFinalState_xTicksDecimals       = 1
-plotFinalState_yTicksDecimals       = 1
-plotFinalState_cTicksDecimals       = 2
+plotFinalState_extendY              = 0.05
+plotFinalState_nbrXTicks            = 5
+plotFinalState_nbrYTicks            = 5
+plotFinalState_xTicksDecimals       = 2
+plotFinalState_yTicksDecimals       = 2
 plotFinalState_order                = horizontalFirst
-plotFinalState_extendDirection      = horizontal
+plotFinalState_extendDirection      = vertical
+
+#__________________________________________________
