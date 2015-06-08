@@ -33,17 +33,21 @@ def makeGrayScale(matrix, levels=None, mini=None, maxi=None, nLevels=32, thresho
 
     # rescale CDF
     if CDF[nLevels-1] == 0.0:
-        CDF    = np.ones(nLevels)
-        CDF[0] = 0.0
-    else:
-        CDF   /= CDF[nLevels-1]
+        PDF = np.zeros(nLevels)
+        PDF[0] = 1.0# / spacing
+        return PDF
+
+    CDF /= CDF[nLevels-1]
 
     # derivate CDF
-    dCDF = ( CDF[1:] - CDF[:nLevels-1] ) / spacing
+    dCDF = ( CDF[1:] - CDF[:nLevels-1] )# / spacing
 
     # interpolate PDF = derivate(CDF)
-    PDF  = np.zeros(nLevels)
+    PDF              = np.zeros(nLevels)
+    PDF[0]           = dCDF[0] / 2.0
     PDF[1:nLevels-1] = ( dCDF[1:] + dCDF[:nLevels-2] ) / 2.0
+    PDF[nLevels-1]   = dCDF[nLevels-2] / 2.0
+
     return PDF
 
 #__________________________________________________
