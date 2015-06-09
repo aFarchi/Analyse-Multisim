@@ -95,3 +95,56 @@ def extractProcessedDataFullScaling(simOutput, AOG, field, LOL, species, printIO
     return (datas, scaling, scalingFM)
 
 #__________________________________________________
+
+def extractProcessedDataForwardTransport(simOutput, configName, p0, p1, AOG, field, LOL, species, TS, printIO=False):
+
+    proc0 = simOutput.procList[p0]
+    proc1 = simOutput.procList[p1]
+    
+    fn = simOutput.applyOTGSForwardP0P1FieldSpecies(configName, p0, p1, AOG, field, LOL, species, TS)
+    if printIO:
+        print('Reading '+fn+' ...')
+    data0 = np.load(fn)
+
+    fn = simOutput.fileProcPreprocessedField(proc1, AOG, field, LOL, species)
+    if printIO:
+        print('Reading '+fn+' ...')
+    data1 = np.load(fn)
+
+    scaling = extractScalingFieldSpecies(simOutput, AOG, field, LOL, species, printIO)
+
+    return (data0, data1, scaling.mini, scaling.maxi)
+
+#__________________________________________________
+
+def extractScalingFieldSpecies(simOutput, AOG, field, LOL, species, printIO=False):
+    fn = simOutput.fileScalingFieldSpecies(AOG, field, LOL, species)
+    if printIO:
+        print ('Reading '+fn+' ...')
+    array   = np.load(fn)
+    scaling = arrayToScaling(array)
+
+    return scaling
+
+#__________________________________________________
+
+def extractProcessedDataBackwardTransport(simOutput, configName, p0, p1, AOG, field, LOL, species, TS, printIO=False):
+
+    proc0 = simOutput.procList[p0]
+    proc1 = simOutput.procList[p1]
+    
+    fn = simOutput.applyOTGSBackwardP0P1FieldSpecies(configName, p0, p1, AOG, field, LOL, species, TS)
+    if printIO:
+        print('Reading '+fn+' ...')
+    data1 = np.load(fn)
+
+    fn = simOutput.fileProcPreprocessedField(proc0, AOG, field, LOL, species)
+    if printIO:
+        print('Reading '+fn+' ...')
+    data0 = np.load(fn)
+
+    scaling = extractScalingFieldSpecies(simOutput, AOG, field, LOL, species, printIO)
+
+    return (data0, data1, scaling.mini, scaling.maxi)
+
+#__________________________________________________

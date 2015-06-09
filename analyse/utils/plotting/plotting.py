@@ -195,3 +195,21 @@ def adaptAxesExtent(ax, xmin, xmax, ymin, ymax, extendX, extendY, nbrXTicks, nbr
     ax.set_yticks(yTicks)
 
 #____________________________________________________________
+
+def makeAxesApplyGSTransport(plt, orientation):
+
+    gs = gridspec.GridSpec(2, 2)
+
+    if orientation == 'horizontal':
+        ax1  = plt.subplot(gs[0, 0])
+        ax2  = plt.subplot(gs[0, 1])
+        axGS = plt.subplot(gs[1, :])
+
+    elif orientation == 'vertical':
+        ax1  = plt.subplot(gs[0, 0])
+        ax2  = plt.subplot(gs[1, 0])
+        axGS = plt.subplot(gs[:, 1])
+    
+    return (gs, ax1, ax2, axGS)
+
+#____________________________________________________________

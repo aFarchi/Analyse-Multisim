@@ -1,0 +1,63 @@
+#__________________________________________________
+# Example of configuration file
+
+#__________________________________________________
+# General parameters
+ 
+outputDir      = /cerea_raid/users/farchia/Fukushima-multisim/output/
+sessionName    = sim-test-3/
+workName       = analyse/
+printIO        = True
+EPSILON        = 1.e-8
+
+#__________________________________________________
+# Necessary parameter from OTGS config
+
+OTGS_configurationNames = str : pd
+
+#__________________________________________________
+# Parallelization parameter
+plotApplyGSTransport_parallelize = more
+
+#__________________________________________________
+# Plot Forward/Backward transport
+
+plotForBackwardTransport = True
+
+plotForBackwardTransport_nLevelsGS      = 100
+plotForBackwardTransport_optionInit     = g-
+plotForBackwardTransport_optionFinal    = r-
+plotForBackwardTransport_xLabel         = True
+plotForBackwardTransport_yLabel         = True
+plotForBackwardTransport_directionGS    = horizontal
+plotForBackwardTransport_cmapName       = jet
+plotForBackwardTransport_plotter        = imshow 
+plotForBackwardTransport_plotterArgs    = interpolation : str : nearest
+plotForBackwardTransport_extendX        = 0.0
+plotForBackwardTransport_extendY        = 0.0
+plotForBackwardTransport_nbrXTicks      = 2
+plotForBackwardTransport_nbrYTicks      = 2
+plotForBackwardTransport_nbrCTicks      = 5
+plotForBackwardTransport_xTicksDecimals = 2
+plotForBackwardTransport_yTicksDecimals = 2
+plotForBackwardTransport_cTicksDecimals = 2
+plotForBackwardTransport_extensions     = str : .pdf
+					 
+#_________________________________________________
+# Plot Tmap
+
+plotTransportMap = True
+
+plotTransportMap_TmapError       = 0.001
+plotTransportMap_TmapResolution  = 100
+plotTransportMap_optionsForward  = g-
+plotTransportMap_optionsBackward = r-
+plotTransportMap_extendX         = 0.0
+plotTransportMap_extendY         = 0.0
+plotTransportMap_nbrXTicks       = 5
+plotTransportMap_nbrYTicks       = 5
+plotTransportMap_xTicksDecimals  = 2
+plotTransportMap_yTicksDecimals  = 2
+plotTransportMap_extensions      = str : .pdf
+
+#__________________________________________________

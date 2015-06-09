@@ -4,9 +4,10 @@
 # launcherPlotting.py
 #____________________
 
-from analyse.utils.sys.argv                                  import extractArgv
-from analyse.plotting.simulation.plotSimulationConfiguration import PlotSimulationConfiguration
-from analyse.plotting.fields.plotFieldsConfiguration         import PlotFieldsConfiguration
+from analyse.utils.sys.argv                                       import extractArgv
+from analyse.plotting.simulation.plotSimulationConfiguration      import PlotSimulationConfiguration
+from analyse.plotting.fields.plotFieldsConfiguration              import PlotFieldsConfiguration
+from analyse.plotting.applyGSTransport.plotTransportConfiguration import PlotTransportConfiguration
 
 #__________________________________________________
 
@@ -45,6 +46,25 @@ if arguments['FUNCTION'] == 'plotFields':
     if arguments['PARLLELIZE'] == 'more':
         args['field'] = arguments['FIELD']
         args['LOL']   = arguments['LOL']
+        
+    plotter.plot(**args)
+
+#__________________________________________________
+
+if arguments['FUNCTION'] == 'plotApplyGSTransport':
+
+    config  = PlotTransportConfiguration(arguments['CONFIG_FILE'])
+    plotter = config.plotter()
+
+    args              = {}
+    args['AOG']       = arguments['AOG']
+    args['species']   = arguments['SPECIES']
+
+    if arguments['PARLLELIZE'] == 'more':
+        args['field']      = arguments['FIELD']
+        args['LOL']        = arguments['LOL']
+        args['TS']         = arguments['TS']
+        args['configName'] = arguments['CONFIG_NAME']
         
     plotter.plot(**args)
 

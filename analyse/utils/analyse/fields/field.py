@@ -39,13 +39,22 @@ class Field:
 
     #_________________________
 
+    def computeGrayScale(self, data, mini, maxi, nLevels, threshold=True):
+        if threshold:
+            threshold = self.minValue
+        else:
+            threshold = None
+        return makeGrayScale(data, mini=mini, maxi=maxi, nLevels=nLevels, threshold=threshold)
+
+    #_________________________
+
     def computeFMScalingMakeGrayScale(self, rawData, lol, mini, maxi, nLevels):
         t         = self.funTSelect(rawData.shape[0])
         data      = self.coarsedExtraction(rawData[t], lol, 0.5)
 
         FMScaling = computeFMScaling(data, mini=mini, maxi=maxi, nLevels=nLevels)
-        GSNT      = makeGrayScale(data, mini=mini, maxi=maxi, nLevels=nLevels, threshold=None)
-        GST       = makeGrayScale(data, mini=mini, maxi=maxi, nLevels=nLevels, threshold=self.minValue)
+        GSNT      = self.computeGrayScale(data, mini, maxi, nLevels, False)
+        GST       = self.computeGrayScale(data, mini, maxi, nLevels, True)
 
         return (FMScaling, GSNT, GST)
 

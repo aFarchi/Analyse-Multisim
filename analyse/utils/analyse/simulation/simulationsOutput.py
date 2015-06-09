@@ -156,12 +156,24 @@ class SimulationsOutput:
 
         #_________________________
 
+        self.launcherPlotApplyGSTransportFiles               = {}
+        self.launcherPlotApplyGSTransportFiles['directory']  = self.launcherDir + 'plotting/applyGSTransport/'
+        self.launcherPlotApplyGSTransportFiles['pyLauncher'] = self.launcherPlotApplyGSTransportFiles['directory'] + 'plotApplyGSTransport.py'
+        self.launcherPlotApplyGSTransportFiles['shLauncher'] = self.launcherPlotApplyGSTransportFiles['directory'] + 'plotApplyGSTransport.sh'
+        self.launcherPlotApplyGSTransportFiles['processes']  = self.launcherPlotApplyGSTransportFiles['directory'] + 'processesPlotApplyGSTransport.dat'
+        self.launcherPlotApplyGSTransportFiles['config']     = self.launcherPlotApplyGSTransportFiles['directory'] + 'plotApplyGSTransport.cfg'
+        self.launcherPlotApplyGSTransportFiles['nodes']      = self.launcherPlotApplyGSTransportFiles['directory'] + 'nodesPlotApplyGSTransport.dat'
+        self.launcherPlotApplyGSTransportFiles['log']        = self.launcherPlotApplyGSTransportFiles['directory'] + 'logPlotApplyGSTransport'
+
+        #_________________________
+
         self.simulationfigDir           = self.figDir + 'simulation/'
         self.fieldfigDir                = self.figDir + 'fields/fields/'
         self.fieldAttachGrayScalefigDir = self.figDir + 'fields/fieldsAttachGrayScale/'
         self.OTfigDir                   = self.figDir + 'optimalTransport/'
         self.OT2DfigDir                 = self.OTfigDir + 'OT2D/'
         self.OTGSfigDir                 = self.OTfigDir + 'OTGS/'
+        self.applyGSTransportfigDir     = self.OTfigDir + 'applyGSTransport/'
 
     #_________________________
 
@@ -371,6 +383,14 @@ class SimulationsOutput:
 
     def configFilePlotOTGSP0P1FieldSpecies(self, configName, p0, p1, AOG, field, LOL, species, TS):
         return ( self.plotOTGSP0P1FieldSpeciesDir(configName, p0, p1, AOG, field, LOL, species, TS) + 'plotting_' + configName + '.cfg' )
+
+    #_________________________
+
+    def plotApplyGSTransportFieldSpeciesDir(self, AOG, field, LOL, species, TS):
+        return ( self.applyGSTransportfigDir + AOG + field.name + '/' + LOL + '/' + species + '/' + TS + '/' )
+
+    def plotApplyGSTransportP0P1FieldSpeciesDir(self, configName, p0, p1, AOG, field, LOL, species, TS):
+        return ( self.plotApplyGSTransportFieldSpeciesDir(AOG, field, LOL, species, TS) + str(p0) + '-' + str(p1) + '/' + configName + '/' )
 
     #_________________________
 

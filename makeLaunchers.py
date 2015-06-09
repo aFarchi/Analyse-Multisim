@@ -4,27 +4,28 @@
 # makeLaunchers.py
 #_________________
 
-from analyse.utils.sys.argv                                   import extractArgv
+from analyse.utils.sys.argv                                             import extractArgv
 
-from analyse.preprocess.makeLauncherPreprocess                import makeLauncherPreprocessRawDataForAllSpecies
+from analyse.preprocess.makeLauncherPreprocess                          import makeLauncherPreprocessRawDataForAllSpecies
 
-from analyse.plotting.simulation.makeLauncherPlotSimulation   import makeLauncherPlotSimulation
-from analyse.plotting.fields.makeLauncherPlotFields           import makeLauncherPlotFields
+from analyse.plotting.simulation.makeLauncherPlotSimulation             import makeLauncherPlotSimulation
+from analyse.plotting.fields.makeLauncherPlotFields                     import makeLauncherPlotFields
+from analyse.plotting.applyGSTransport.makeLauncherPlotApplyGSTransport import makeLauncherPlotApplyGSTransport
 
-from analyse.statiticalAnalyse.makeLauncherStatisticalAnalyse import makeLauncherStatisticalAnalyse
+from analyse.statiticalAnalyse.makeLauncherStatisticalAnalyse           import makeLauncherStatisticalAnalyse
 
-from analyse.optimalTransport.OTGS.makeLaunchersOTGS          import makeLauncherInterpolateIntoOTGSResolution
-from analyse.optimalTransport.OTGS.makeLaunchersOTGS          import makeLauncherMergeOTGSResults
-from analyse.optimalTransport.OTGS.makeLaunchersOTGS          import makeLauncherPerformOTGS
-from analyse.optimalTransport.OTGS.makeLaunchersOTGS          import makeLauncherPlotOTGSSingleConfig
-from analyse.optimalTransport.OTGS.makeLaunchersOTGS          import makeLauncherPlotOTGSMultiConfig
-from analyse.optimalTransport.OTGS.makeLaunchersOTGS          import makeLauncherApplyGSTransport
+from analyse.optimalTransport.OTGS.makeLaunchersOTGS                    import makeLauncherInterpolateIntoOTGSResolution
+from analyse.optimalTransport.OTGS.makeLaunchersOTGS                    import makeLauncherMergeOTGSResults
+from analyse.optimalTransport.OTGS.makeLaunchersOTGS                    import makeLauncherPerformOTGS
+from analyse.optimalTransport.OTGS.makeLaunchersOTGS                    import makeLauncherPlotOTGSSingleConfig
+from analyse.optimalTransport.OTGS.makeLaunchersOTGS                    import makeLauncherPlotOTGSMultiConfig
+from analyse.optimalTransport.OTGS.makeLaunchersOTGS                    import makeLauncherApplyGSTransport
 
-from analyse.optimalTransport.OT2D.makeLaunchersOT2D          import makeLauncherInterpolateIntoOT2DResolution
-from analyse.optimalTransport.OT2D.makeLaunchersOT2D          import makeLauncherMergeOT2DResults
-from analyse.optimalTransport.OT2D.makeLaunchersOT2D          import makeLauncherPerformOT2D
-from analyse.optimalTransport.OT2D.makeLaunchersOT2D          import makeLauncherPlotOT2DSingleConfig
-from analyse.optimalTransport.OT2D.makeLaunchersOT2D          import makeLauncherPlotOT2DMultiConfig
+from analyse.optimalTransport.OT2D.makeLaunchersOT2D                    import makeLauncherInterpolateIntoOT2DResolution
+from analyse.optimalTransport.OT2D.makeLaunchersOT2D                    import makeLauncherMergeOT2DResults
+from analyse.optimalTransport.OT2D.makeLaunchersOT2D                    import makeLauncherPerformOT2D
+from analyse.optimalTransport.OT2D.makeLaunchersOT2D                    import makeLauncherPlotOT2DSingleConfig
+from analyse.optimalTransport.OT2D.makeLaunchersOT2D                    import makeLauncherPlotOT2DMultiConfig
 
 #__________________________________________________
 
@@ -44,6 +45,11 @@ if arguments['FUNCTION'] == 'plotSimulation':
 
 if arguments['FUNCTION'] == 'plotFields':
     makeLauncherPlotFields(arguments['CONFIG_FILE'])
+
+#__________________________________________________
+
+if arguments['FUNCTION'] == 'plotApplyGSTransport':
+    makeLauncherPlotApplyGSTransport(arguments['CONFIG_FILE'])
 
 #__________________________________________________
 
