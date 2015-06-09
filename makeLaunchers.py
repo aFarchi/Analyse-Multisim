@@ -18,6 +18,7 @@ from analyse.optimalTransport.OTGS.makeLaunchersOTGS          import makeLaunche
 from analyse.optimalTransport.OTGS.makeLaunchersOTGS          import makeLauncherPerformOTGS
 from analyse.optimalTransport.OTGS.makeLaunchersOTGS          import makeLauncherPlotOTGSSingleConfig
 from analyse.optimalTransport.OTGS.makeLaunchersOTGS          import makeLauncherPlotOTGSMultiConfig
+from analyse.optimalTransport.OTGS.makeLaunchersOTGS          import makeLauncherApplyGSTransport
 
 from analyse.optimalTransport.OT2D.makeLaunchersOT2D          import makeLauncherInterpolateIntoOT2DResolution
 from analyse.optimalTransport.OT2D.makeLaunchersOT2D          import makeLauncherMergeOT2DResults
@@ -58,6 +59,11 @@ if arguments['FUNCTION'] == 'interpolateIntoOTGSResolution':
 
 if arguments['FUNCTION'] == 'mergeOTGSResults':
     makeLauncherMergeOTGSResults(arguments['CONFIG_FILE'])
+
+#__________________________________________________
+
+if arguments['FUNCTION'] == 'applyGSTransport':
+    makeLauncherApplyGSTransport(arguments['CONFIG_FILE'])
 
 #__________________________________________________
 

@@ -54,6 +54,7 @@ class SimulationsOutput:
         self.OTDir         = self.workingDir + 'optimalTransport/'
         self.OT2DDir       = self.OTDir + 'OT2D/'
         self.OTGSDir       = self.OTDir + 'OTGS/'
+        self.applyOTGSDir  = self.OTDir + 'applyOTGS/'
 
         #_________________________
 
@@ -106,6 +107,15 @@ class SimulationsOutput:
         self.fileNodesMergeOTGSResults      = self.launcherMergeOTGSResultsDir + 'nodesMergeOTGSResults.dat'
         self.pythonLauncherMergeOTGSResults = self.launcherMergeOTGSResultsDir + 'mergeOTGSResults.py'
         self.bashLauncherMergeOTGSResults   = self.launcherMergeOTGSResultsDir + 'mergeOTGSResults.sh'
+
+        self.launcherApplyGSTransportFiles               = {}
+        self.launcherApplyGSTransportFiles['directory']  = self.launcherOTGSDir + 'applyGSTransport/'
+        self.launcherApplyGSTransportFiles['pyLauncher'] = self.launcherApplyGSTransportFiles['directory'] + 'applyGSTransport.py'
+        self.launcherApplyGSTransportFiles['shLauncher'] = self.launcherApplyGSTransportFiles['directory'] + 'applyGSTransport.sh'
+        self.launcherApplyGSTransportFiles['processes']  = self.launcherApplyGSTransportFiles['directory'] + 'processesApplyGSTransport.dat'
+        self.launcherApplyGSTransportFiles['config']     = self.launcherApplyGSTransportFiles['directory'] + 'applyGSTransport.cfg'
+        self.launcherApplyGSTransportFiles['nodes']      = self.launcherApplyGSTransportFiles['directory'] + 'nodesApplyGSTransport.dat'
+        self.launcherApplyGSTransportFiles['log']        = self.launcherApplyGSTransportFiles['directory'] + 'logApplyGSTransport'
 
         self.launcherOT2DDir = self.launcherOTDir + '2D/'
         self.launcherInterpolateIntoOT2DResolutionDir    = self.launcherOT2DDir + 'interpolateIntoOT2DResolution/'
@@ -284,8 +294,25 @@ class SimulationsOutput:
     def resultsFileOTGSP0P1FieldSpecies(self, configName, p0, p1, AOG, field, LOL, species, TS):
         return ( self.performOTGSP0P1FieldSpeciesDir(configName, p0, p1, AOG, field, LOL, species, TS) + 'result.bin' )
 
+    def TmapFileOTGSP0P1FieldSpecies(self, configName, p0, p1, AOG, field, LOL, species, TS):
+        return ( self.performOTGSP0P1FieldSpeciesDir(configName, p0, p1, AOG, field, LOL, species, TS) + 'Tmap.npy' )    
+
     def mergedResultsFileOTGSFieldSpecies(self, configName, AOG, field, LOL, species, TS):
         return ( self.performOTGSFieldSpeciesDir(AOG, field, LOL, species, TS) + 'results_'+configName )
+
+    #_________________________
+
+    def applyOTGSFieldSpeciesDir(self, AOG, field, LOL, species, TS):
+        return ( self.applyOTGSDir + AOG + field.name + '/' + LOL + '/' + species + '/' + TS + '/' )
+
+    def applyOTGSP0P1FieldSpeciesDir(self, configName, p0, p1, AOG, field, LOL, species, TS):
+        return ( self.applyOTGSFieldSpeciesDir(AOG, field, LOL, species, TS) + str(p0) + '-' + str(p1) + '/' + configName + '/' )
+
+    def applyOTGSForwardP0P1FieldSpecies(self, configName, p0, p1, AOG, field, LOL, species, TS):
+        return ( self.applyOTGSP0P1FieldSpeciesDir(configName, p0, p1, AOG, field, LOL, species, TS) + 'forwardTransport.npy' )
+
+    def applyOTGSBackwardP0P1FieldSpecies(self, configName, p0, p1, AOG, field, LOL, species, TS):
+        return ( self.applyOTGSP0P1FieldSpeciesDir(configName, p0, p1, AOG, field, LOL, species, TS) + 'backwardTransport.npy' )
 
     #_________________________
 

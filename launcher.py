@@ -76,6 +76,28 @@ if arguments['FUNCTION'] == 'mergeOTGSResults':
 
 #__________________________________________________
 
+if arguments['FUNCTION'] == 'applyGSTransport':
+
+    config       = OTGSConfiguration(arguments['CONFIG_FILE'])
+    applier      = config.OTGSTransportApplier()
+    args         = {}
+
+    try:
+        args['AOG']     = arguments['AOG']
+        args['species'] = arguments['SPECIES']
+
+        if arguments['PARLLELIZE'] == 'more':
+            args['field']      = arguments['FIELD']
+            args['LOL']        = arguments['LOL']
+            args['TS']         = arguments['TS']
+            args['configName'] = arguments['CONFIG_NAME']
+    except:
+        pass
+
+    applier.run(**args)
+
+#__________________________________________________
+
 if arguments['FUNCTION'] == 'interpolateIntoOT2DResolution':
 
     config       = OT2DConfiguration(arguments['CONFIG_FILE'])

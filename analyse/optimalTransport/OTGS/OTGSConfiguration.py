@@ -5,6 +5,7 @@
 from ...utils.configuration.defaultConfiguration                  import DefaultConfiguration
 from interpolateIntoOTGSResolution.interpolatorIntoOTGSResolution import InterpolatorIntoOTGSResolution
 from mergeOTGSResults.OTGSResultsMerger                           import OTGSResultsMerger
+from applyOTGS.GSTransportApplier                                 import GSTransportApplier
 
 #__________________________________________________
 
@@ -32,6 +33,11 @@ class OTGSConfiguration(DefaultConfiguration):
 
     def OTGSResultMerger(self):
         return OTGSResultsMerger(self)
+
+    #_________________________
+
+    def OTGSTransportApplier(self):
+        return GSTransportApplier(self)
 
     #_________________________
 
@@ -83,5 +89,14 @@ class OTGSConfiguration(DefaultConfiguration):
 
         self.addAttribute('OTGS_plottingParametersFileAllConfig',
                           defaultVal='OTGSPlottingParameters.cfg')
+
+        #_______________
+
+        self.addAttribute('OTGS_applyOTGS_Error',
+                          defaultVal=0.001,
+                          attrType='float')
+
+        self.addAttribute('OTGS_applyOTGS_parallelize',
+                          defaultVal='more')
 
 #__________________________________________________

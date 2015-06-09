@@ -356,3 +356,77 @@ def makeLauncherPlotOTGSMultiConfig(configFile):
 
 #__________________________________________________
 
+def makeLauncherApplyGSTransport(configFile):
+    
+    config    = OTGSConfiguration(configFile)
+    simOutput = buildSimulationsOutput(config)
+
+    createDirectories([simOutput.launcherApplyGSTransportFiles['directory']], config.printIO)
+    config.writeConfig(simOutput.launcherApplyGSTransportFiles['config'])
+
+    args                    = {}
+    args['$fileProcesses$'] = simOutput.launcherApplyGSTransportFiles['processes']
+    args['$launcher$']      = simOutput.modulePath.moduleLauncher
+    args['$interpretor$']   = 'python'
+    args['$startString$']   = 'Preparing all fields'
+
+    args['$logFile$']       = simOutput.launcherApplyGSTransportFiles['log']
+    args['$nodesFile$']     = simOutput.launcherApplyGSTransportFiles['nodes']
+
+    writeDefaultPythonLauncher(simOutput.launcherApplyGSTransportFiles['pyLauncher'], args, makeExecutable=True, printIO=config.printIO)
+    writeDefaultBashLauncher(simOutput.launcherApplyGSTransportFiles['shLauncher'], args, makeExecutable=True, printIO=config.printIO)
+    writeDefaultNodesFile(simOutput.launcherApplyGSTransportFiles['nodes'])
+    
+    f = open(simOutput.launcherApplyGSTransportFiles['processes'], 'w')
+    f.write('FUNCTION'    + '\t' +
+            'CONFIG_FILE' + '\t' +
+            'PARLLELIZE'  + '\t' +
+            'AOG'         + '\t' +
+            'SPECIES'     + '\t' +
+            'FIELD'       + '\t' +
+            'LOL'         + '\t' +
+            'TS'          + '\t' +
+            'CONFIG_NAME' + '\n' )
+
+    dirsToCreate = []
+    for (AOG, GOR) in product(AirOrGround(), GazOrRadios()):
+        for species in simOutput.simConfig.speciesList[GOR]:
+            for (field, LOL, TS, configName) in product(simOutput.fieldList[AOG], LinOrLog(), ThresholdNoThreshold(), config.OTGS_configurationNames):
+                for p1 in xrange(len(simOutput.procList)):
+                    for p0 in xrange(p1):
+                        dirsToCreate.append(simOutput.applyOTGSP0P1FieldSpeciesDir(configName, p0, p1, AOG, field, LOL, species, TS))
+
+            if config.OTGS_applyOTGS_parallelize == 'less':
+                f.write('applyGSTransport'                                + '\t' +
+                        simOutput.launcherApplyGSTransportFiles['config'] + '\t' +
+                        'less'                                            + '\t' +
+                        AOG                                               + '\t' +
+                        species                                           + '\t' +
+                        'None'                                            + '\t' +
+                        'None'                                            + '\t' +
+                        'None'                                            + '\t' +
+                        'None'                                            + '\n' )
+
+            elif config.OTGS_applyOTGS_parallelize =='more':
+                
+                for (field, LOL, TS, configName) in product(simOutput.fieldList[AOG], LinOrLog(), ThresholdNoThreshold(), config.OTGS_configurationNames):
+                    f.write('applyGSTransport'                                + '\t' +
+                            simOutput.launcherApplyGSTransportFiles['config'] + '\t' +
+                            'more'                                            + '\t' +
+                            AOG                                               + '\t' +
+                            species                                           + '\t' +
+                            field.name                                        + '\t' +
+                            LOL                                               + '\t' +
+                            TS                                                + '\t' +
+                            configName                                        + '\n' )
+
+    f.close()
+    createDirectories(dirsToCreate, config.printIO)
+    print('Written '+simOutput.launcherApplyGSTransportFiles['pyLauncher']+' ...')
+    print('Written '+simOutput.launcherApplyGSTransportFiles['shLauncher']+' ...')
+    print('Written '+simOutput.launcherApplyGSTransportFiles['processes']+' ...')
+    print('Written '+simOutput.launcherApplyGSTransportFiles['nodes']+' ...')
+
+    print('Do not forget to specify nodes / log files and number of processes.')
+
+#__________________________________________________

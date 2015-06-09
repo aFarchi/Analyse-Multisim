@@ -30,3 +30,11 @@ OTGS_algorithmParametersFiles = pd : str : OTGSAlgorithmParameters.cfg
 # OTGS plotting parameters
 OTGS_plottingParametersFiles          = pd : str : OTGSPlottingParameters.cfg
 OTGS_plottingParametersFileAllConfig  = OTGSPlottingParameters.cfg
+
+#__________________________________________________
+# Apply OTGS parameters
+
+OTGS_applyOTGS_parallelize = more
+OTGS_applyOTGS_Error       = 0.001
+
+#__________________________________________________
