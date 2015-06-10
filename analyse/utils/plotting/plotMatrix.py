@@ -28,12 +28,20 @@ def plotMatrix(ax, matrix, plotter, xmin=0.0, xmax=1.0, ymin=0.0, ymax=1.0, cmap
 #__________________________________________________
 
 def fillKwargs(plotter, xmin, xmax, ymin, ymax, cmapName, **kwargs):
-    cmap   = colormap(cmapName)
-    if kwargs.has_key('vmin') and kwargs.has_key('vmax'):
-        norm = mpl.colors.Normalize(vmin=kwargs['vmin'], vmax=kwargs['vmax'], clip=False)
-        kwargs['norm'] = norm
+    if plotter == 'imshow' or plotter == 'contourf':
+        cmap   = colormap(cmapName)
+        if kwargs.has_key('vmin') and kwargs.has_key('vmax'):
+            norm = mpl.colors.Normalize(vmin=kwargs['vmin'], vmax=kwargs['vmax'], clip=False)
+            kwargs['norm'] = norm
 
-    kwargs['cmap'] = cmap
+        kwargs['cmap'] = cmap
+
+    elif plotter == 'contour':
+        kwargs['cmap'] = None
+        try:
+            del kwargs['norm']
+        except:
+            pass
 
     if not kwargs.has_key('origin'):
         kwargs['origin'] = 'lower'
