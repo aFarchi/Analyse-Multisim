@@ -11,6 +11,7 @@ class PreprocessConfiguration(DefaultConfiguration):
 
     def __init__(self, configFile=None):
         DefaultConfiguration.__init__(self, configFile)
+        self.xTSelect = self.preprocessRawData_xTSelect
 
     #_________________________
 
