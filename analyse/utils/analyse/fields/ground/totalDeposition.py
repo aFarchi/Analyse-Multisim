@@ -3,7 +3,7 @@
 #___________________
 
 from ..field                    import Field
-from ...filters.zeroFilterLog10 import zeroFilterLog10Coarsed
+from ...filters.zeroFilterLog10 import zeroFilterLog10
 
 #__________________________________________________
 
@@ -14,15 +14,15 @@ class TotalDeposition(Field):
 
     #_________________________
 
-    def coarsedExtraction(self, rawData, lol, coarseFactor):
-        data = zeroFilterLog10Coarsed(rawData, self.minValue, lol, coarseFactor)
-        return data[:,:].transpose()
+    def extraction(self, rawData, LOL, TS):
+        data = zeroFilterLog10(rawData,self.minValue, LOL, TS)
+        return ( data[:,:].transpose() )
 
     #_________________________
 
-    def coarsedExtractionAllIterations(self, rawData, lol, coarseFactor):
-        data = zeroFilterLog10Coarsed(rawData, self.minValue, lol, coarseFactor)
-        return data[:,:,:].transpose((0,2,1))
+    def extractionAllIterations(self, rawData, LOL, TS):
+        data = zeroFilterLog10(rawData,self.minValue, LOL, TS)
+        return ( data[:,:,:].transpose((0,2,1)) )
 
 #__________________________________________________
 

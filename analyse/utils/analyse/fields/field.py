@@ -26,16 +26,27 @@ class Field:
 
     #_________________________
 
-    def extract(self, rawData, lol):
+    def extract(self, rawData, LOL, TS):
         t     = self.funTSelect(rawData.shape[0])
-        data  = self.coarsedExtraction(rawData[t], lol, 1.0)
+        data  = self.extraction(rawData[t], LOL, TS)
         scale = computeScaling(data)
+
+        if LOL == 'lin':
+            scale.mini = self.minValue
+            if scale.maxi <= self.minValue:
+                scale.maxi = 2 * self.minValue
+
+        elif LOL == 'log':
+            scale.mini = 0.0
+            if scale.maxi <= 0.0:
+                scale.maxi = 1.0
+
         return (data, scale)
 
     #_________________________
 
-    def extractAllIterations(self, rawData, lol):
-        return self.coarsedExtractionAllIterations(rawData, lol, 1.0)
+    def extractAllIterations(self, rawData, LOL, TS):
+        return self.extractionAllIterations(rawData, LOL, TS)
 
     #_________________________
 
@@ -48,15 +59,22 @@ class Field:
 
     #_________________________
 
-    def computeFMScalingMakeGrayScale(self, rawData, lol, mini, maxi, nLevels):
-        t         = self.funTSelect(rawData.shape[0])
-        data      = self.coarsedExtraction(rawData[t], lol, 0.5)
+    def computeFMScaling(self, rawData, LOL, mini, maxi, nLevels):
+        t    = self.funTSelect(rawData.shape[0])
+        data = self.extraction(rawData[t], LOL, TS) 
+        return computeFMScaling(data, mini=mini, maxi=maxi, nLevels=nLevels)
 
-        FMScaling = computeFMScaling(data, mini=mini, maxi=maxi, nLevels=nLevels)
-        GSNT      = self.computeGrayScale(data, mini, maxi, nLevels, False)
-        GST       = self.computeGrayScale(data, mini, maxi, nLevels, True)
+    #_________________________
 
-        return (FMScaling, GSNT, GST)
+    #def computeFMScalingMakeGrayScale(self, rawData, LOL, TS, mini, maxi, nLevels):
+    #    t         = self.funTSelect(rawData.shape[0])
+    #    data      = self.extraction(rawData[t], lol, 0.5)
+
+    #    FMScaling = computeFMScaling(data, mini=mini, maxi=maxi, nLevels=nLevels)
+    #    GSNT      = self.computeGrayScale(data, mini, maxi, nLevels, False)
+    #    GST       = self.computeGrayScale(data, mini, maxi, nLevels, True)
+
+    #    return (FMScaling, GSNT, GST)
 
     #_________________________
 

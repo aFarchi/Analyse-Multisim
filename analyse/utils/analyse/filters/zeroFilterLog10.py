@@ -6,18 +6,21 @@ import numpy as np
 
 #__________________________________________________
 
-def zeroFilterLog10(rawData, minValue, lol):
-    data = np.maximum(rawData, minValue)
-    if lol == 'log':
-        data = np.log10(data) - np.log10(minValue)
-    return data
+def zeroFilterLog10(rawData, minValue, LOL, TS):
 
-#__________________________________________________
+    if TS == 'Threshold':
+        minValueFiltered = -1.0
+    else:
+        minValueFiltered = minValue
 
-def zeroFilterLog10Coarsed(rawData, minValue, lol, coarseFactor):
-    data = np.maximum(rawData, coarseFactor*minValue)
-    if lol == 'log':
-        data = np.log10(data) - np.log10(minValue)
-    return data
+    if LOL == 'lin':
+        return ( minValueFiltered * ( rawData <= minValue ) +
+                 rawData          * ( rawData >  minValue ) )
+    
+    elif LOL == 'log':
+        data = np.log10(np.maximum(rawData, 0.1 * minValue)) - np.log10(minValue)
 
+        return ( minValueFiltered * ( data <= 0.0 ) +
+                 data             * ( data >  0.0 ) )
+    
 #__________________________________________________

@@ -5,7 +5,7 @@
 import numpy as np
 
 from ..field                    import Field
-from ...filters.zeroFilterLog10 import zeroFilterLog10Coarsed
+from ...filters.zeroFilterLog10 import zeroFilterLog10
 
 #__________________________________________________
 
@@ -17,14 +17,14 @@ class AirColumn(Field):
 
     #_________________________
 
-    def coarsedExtraction(self, rawData, lol, coarseFactor):
-        data = zeroFilterLog10Coarsed(rawData, self.minValue, lol, coarseFactor)
-        return np.average(data[:,:,:], axis=0, weights=self.weights).transpose()
-        
+    def extraction(self, rawData, LOL, TS):
+        data = zeroFilterLog10(rawData, self.minValue, LOL, TS)
+        return ( np.average(data[:,:,:], axis=0, weights=self.weights).transpose() )
+
     #_________________________
 
-    def coarsedExtractionAllIterations(self, rawData, lol, coarseFactor):
-        data = zeroFilterLog10Coarsed(rawData, self.minValue, lol, coarseFactor)
-        return np.average(data[:,:,:,:], axis=1, weights=self.weights).transpose((0,2,1))
+    def extractionAllIterations(self, rawData, LOL, TS):
+        data = zeroFilterLog10(rawData,self.minValue, LOL, TS)
+        return ( np.average(data[:,:,:,:], axis=1, weights=self.weights).transpose((0,2,1)) )
                                     
 #__________________________________________________

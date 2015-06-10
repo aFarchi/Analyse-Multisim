@@ -41,22 +41,8 @@ def computeScaling(matrix):
     scaling      = Scaling()
     scaling.mean = matrix.mean()
     scaling.var  = matrix.var()
-
-    mini         = matrix.min()
-    maxi         = matrix.max()
-    extent       = maxi - mini
-
-    if extent <= 0.0:
-        extent = abs(mini)
-        maxi   = mini + extent
-
-    if extent == 0.0: # in case we are with a log scale and there is nothing
-        extent = 1.0
-        maxi   = 1.0
-
-    scaling.mini = mini - 0.001 * extent
-    scaling.maxi = maxi + 0.001 * extent
-    
+    scaling.mini = matrix.min()
+    scaling.maxi = matrix.max()
     return scaling
 
 #__________________________________________________
