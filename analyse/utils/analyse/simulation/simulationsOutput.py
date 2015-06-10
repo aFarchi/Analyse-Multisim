@@ -207,11 +207,11 @@ class SimulationsOutput:
     def procPreprocessedFieldDir(self, proc, AOG, field, LOL):
         return ( self.procPreprocessedDataDir(proc) + 'rawResolution/' + AOG + field.name + '/' + LOL + '/' )
 
-    def fileProcPreprocessedField(self, proc, AOG, field, LOL, species):
-        return ( self.procPreprocessedFieldDir(proc, AOG, field, LOL) + species + '.npy' )
+    def fileProcPreprocessedField(self, proc, AOG, field, LOL, species, TS):
+        return ( self.procPreprocessedFieldDir(proc, AOG, field, LOL) + species + '_' + TS + '.npy' )
 
     def fileProcPreprocessedFieldGS(self, proc, AOG, field, LOL, species, TS):
-        return ( self.procPreprocessedFieldDir(proc, AOG, field, LOL) + species + 'grayScale' + TS + '.npy' )
+        return ( self.procPreprocessedFieldDir(proc, AOG, field, LOL) + species + '_grayScale_' + TS + '.npy' )
 
     #_________________________
 

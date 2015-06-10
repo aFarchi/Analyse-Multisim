@@ -14,14 +14,14 @@ class TotalDeposition(Field):
 
     #_________________________
 
-    def extraction(self, rawData, LOL, TS):
-        data = zeroFilterLog10(rawData,self.minValue, LOL, TS)
+    def extraction(self, rawData, LOL):
+        data = zeroFilterLog10(rawData,self.minValue, LOL)
         return ( data[:,:].transpose() )
 
     #_________________________
 
-    def extractionAllIterations(self, rawData, LOL, TS):
-        data = zeroFilterLog10(rawData,self.minValue, LOL, TS)
+    def extractionAllIterations(self, rawData, LOL):
+        data = zeroFilterLog10(rawData,self.minValue, LOL)
         return ( data[:,:,:].transpose((0,2,1)) )
 
 #__________________________________________________

@@ -37,12 +37,17 @@ def arrayToScaling(array):
 
 #__________________________________________________
 
-def computeScaling(matrix):
+def computeScaling(matrix, minValue, defaultMaxValue):
     scaling      = Scaling()
     scaling.mean = matrix.mean()
     scaling.var  = matrix.var()
-    scaling.mini = matrix.min()
+
+    scaling.mini = minValue
     scaling.maxi = matrix.max()
+
+    if scaling.maxi <= minValue:
+        scaling.maxi = defaultMaxValue
+
     return scaling
 
 #__________________________________________________
@@ -80,7 +85,7 @@ def mergeScalings(simOutput, scalings, maximums, AOG):
             scale.meanMeans                 = meanMeans
             scale.geomMeanMeans             = geomMeanMeans
             scale.meanVars                  = meanVars
-            scale.sumMaximum                = maximums[lol][field.name].sum()
+            scale.sumMaximum                = np.maximum(maximums[lol][field.name], 0.0).sum()
             mergedScalings[field.name][lol] = scale
 
     return mergedScalings

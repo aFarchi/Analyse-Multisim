@@ -6,12 +6,9 @@ import numpy as np
 
 #__________________________________________________
 
-def zeroFilterLog10(rawData, minValue, LOL, TS):
+def zeroFilterLog10(rawData, minValue, LOL):
 
-    if TS == 'Threshold':
-        minValueFiltered = -1.0
-    else:
-        minValueFiltered = minValue
+    minValueFiltered = - 1.0
 
     if LOL == 'lin':
         return ( minValueFiltered * ( rawData <= minValue ) +

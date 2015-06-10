@@ -26,27 +26,35 @@ class Field:
 
     #_________________________
 
-    def extract(self, rawData, LOL, TS):
-        t     = self.funTSelect(rawData.shape[0])
-        data  = self.extraction(rawData[t], LOL, TS)
-        scale = computeScaling(data)
+    def extract(self, rawData, LOL, copy=True):
+        t               = self.funTSelect(rawData.shape[0])
+        data            = self.extraction(rawData[t], LOL)
 
-        if LOL == 'lin':
-            scale.mini = self.minValue
-            if scale.maxi <= self.minValue:
-                scale.maxi = 2 * self.minValue
+        defaultMaxValue = 2.0 * self.minValue
+        if LOL == 'log':
+            defaultMaxValue = np.log10(2.0)
 
-        elif LOL == 'log':
-            scale.mini = 0.0
-            if scale.maxi <= 0.0:
-                scale.maxi = 1.0
+        scale = computeScaling(data, self.minValue, defaultMaxValue)
 
-        return (data, scale)
+        if copy:
+            return (data.copy(), scale)
+        else:
+            return (data, scale)
 
     #_________________________
 
-    def extractAllIterations(self, rawData, LOL, TS):
-        return self.extractionAllIterations(rawData, LOL, TS)
+    def extractAllIterations(self, rawData, LOL, copy=True):
+        return self.extractionAllIterations(rawData, LOL, copy)
+
+    #_________________________
+
+    def removeFilter(self, data, LOL):
+        if LOL == 'lin':
+            mini = self.minValue
+        elif LOL == 'log':
+            mini = 0.0
+
+        return np.maximum(data, mini)
 
     #_________________________
 

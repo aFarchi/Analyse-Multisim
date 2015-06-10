@@ -17,14 +17,14 @@ class AirColumn(Field):
 
     #_________________________
 
-    def extraction(self, rawData, LOL, TS):
-        data = zeroFilterLog10(rawData, self.minValue, LOL, TS)
+    def extraction(self, rawData, LOL):
+        data = zeroFilterLog10(rawData, self.minValue, LOL)
         return ( np.average(data[:,:,:], axis=0, weights=self.weights).transpose() )
 
     #_________________________
 
-    def extractionAllIterations(self, rawData, LOL, TS):
-        data = zeroFilterLog10(rawData,self.minValue, LOL, TS)
+    def extractionAllIterations(self, rawData, LOL):
+        data = zeroFilterLog10(rawData,self.minValue, LOL)
         return ( np.average(data[:,:,:,:], axis=1, weights=self.weights).transpose((0,2,1)) )
                                     
 #__________________________________________________
