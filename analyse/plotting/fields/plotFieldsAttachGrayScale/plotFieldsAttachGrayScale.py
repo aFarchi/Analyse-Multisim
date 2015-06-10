@@ -50,7 +50,7 @@ def plotProcFieldAttachGS(simOutput,
                           EPSILON,
                           printIO): 
 
-    (data, mini, maxi)       = extractProcessedData(simOutput, procList, AOG, field, LOL, species, True, printIO)
+    (data, mini, maxi)       = extractProcessedData(simOutput, procList, AOG, field, LOL, species, 'NoThreshold', True, printIO)
     (GS, miniGS, maxiGS)     = extractGrayScales(simOutput, procList, AOG, field, LOL, species, scaleGS, printIO)
     (xmin, xmax, ymin, ymax) = field.axExtend2d()
     (xLabel,yLabel,cLabel)   = field.labels2d(xLabel, yLabel, False)

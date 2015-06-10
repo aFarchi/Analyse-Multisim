@@ -48,16 +48,18 @@ def extractRawDataMultiProc(simOutput, AOG, GOR, species, printIO):
 
 #__________________________________________________
 
-def extractFieldAllIterations(rawData, procList, field, lol):
+def extractFieldAllIterations(rawData, procList, field, LOL):
     data  = {}
     minis = []
     maxis = []
     for proc in procList:
-        data[proc] = field.extractAllIterations(rawData[proc], lol)
+        data[proc] = field.extractAllIterations(rawData[proc], LOL, copy=False)
+        data[proc] = field.removeFilter(data[proc], LOL)
         minis.append(data[proc].min())
         maxis.append(data[proc].max())
         tmax       = data[proc].shape[0]
-        
+
+    mini  = 0.0
     mini  = np.min(minis)
     maxi  = np.min(maxis)
 

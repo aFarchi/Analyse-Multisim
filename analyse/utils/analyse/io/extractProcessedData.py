@@ -10,14 +10,14 @@ from ..scaling.buildTmap import buildTmap
 
 #__________________________________________________
 
-def extractProcessedData(simOutput, procList, AOG, field, LOL, species, applyGlobalScaling, printIO=False):
+def extractProcessedData(simOutput, procList, AOG, field, LOL, species, TS, applyGlobalScaling, printIO=False):
 
     datas = {}
     minis = []
     maxis = []
 
     for proc in procList:
-        fn = simOutput.fileProcPreprocessedField(proc, AOG, field, LOL, species)
+        fn = simOutput.fileProcPreprocessedField(proc, AOG, field, LOL, species, TS)
         if printIO:
             print('Reading '+fn+' ...')
         data        = np.load(fn)
@@ -25,20 +25,20 @@ def extractProcessedData(simOutput, procList, AOG, field, LOL, species, applyGlo
         minis.append(data.min())
         maxis.append(data.max())
 
+    fn      = simOutput.fileScalingFieldSpecies(AOG, field, LOL, species)
+    if printIO:
+        print ('Reading '+fn+' ...')
+    array   = np.load(fn)
+    scaling = arrayToScaling(array)
+
     if applyGlobalScaling:
-        
-        fn      = simOutput.fileScalingFieldSpecies(AOG, field, LOL, species)
-        if printIO:
-            print ('Reading '+fn+' ...')
-        array   = np.load(fn)
-        scaling = arrayToScaling(array)
-
-        mini    = scaling.mini
-        maxi    = scaling.maxi
-
+        maxi = scaling.maxi
+        mini = scaling.mini
     else:
-        mini    = np.min(minis)
-        maxi    = np.max(maxis)
+        maxi = np.max(maxis)
+        mini = np.min(minis)
+        if mini < scaling.mini:
+            mini = scaling.mini
 
     return (datas, mini, maxi)
 

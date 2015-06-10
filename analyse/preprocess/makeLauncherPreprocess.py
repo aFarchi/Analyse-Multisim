@@ -2,15 +2,15 @@
 # makeLauncherPreprocess.py
 #__________________________
 
-from itertools                                     import product
+from itertools                                    import product
 
-from preprocessConfiguration                       import PreprocessConfiguration
-from ..utils.analyse.io.navigate                   import *
-from ..utils.analyse.simulation.simulationsOutput  import buildSimulationsOutput
-from ..utils.io.write                              import createDirectories
-from ..utils.io.writeLaunchers                     import writeDefaultPythonLauncher
-from ..utils.io.writeLaunchers                     import writeDefaultBashLauncher
-from ..utils.io.writeLaunchers                     import writeDefaultNodesFile
+from preprocessConfiguration                      import PreprocessConfiguration
+from ..utils.analyse.io.navigate                  import *
+from ..utils.analyse.simulation.simulationsOutput import buildSimulationsOutput
+from ..utils.io.write                             import createDirectories
+from ..utils.io.writeLaunchers                    import writeDefaultPythonLauncher
+from ..utils.io.writeLaunchers                    import writeDefaultBashLauncher
+from ..utils.io.writeLaunchers                    import writeDefaultNodesFile
 
 #__________________________________________________
 
@@ -29,7 +29,6 @@ def makeLauncherPreprocessRawData(configFile, availableProc=None):
     args['$startString$']   = 'Preparing all fields'
     args['$logFile$']       = simOutput.launcherPreprocessRawDataFiles['log']
     args['$nodesFile$']     = simOutput.launcherPreprocessRawDataFiles['nodes']
-
     if availableProc is not None:
         args['$nProcessors$'] = str(availableProc)
 

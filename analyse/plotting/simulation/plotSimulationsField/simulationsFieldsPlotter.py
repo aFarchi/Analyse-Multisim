@@ -18,20 +18,19 @@ class SimulationsFieldPlotter:
         self.simOutput = buildSimulationsOutput(plotSimOutputConfig)
 
     def plot(self, **kwargs):
-        if self.config.plotSimulationsField:
-            try:
-                AOG       = kwargs['AOG']
-                GOR       = kwargs['GOR']
-                species   = kwargs['species']
-                field     = None
-                LOL       = None
-                if kwargs.has_key('field'):
-                    field = kwargs['field']
-                if kwargs.has_key('LOL'):
-                    LOL   = kwargs['LOL']
-                self.plotAOGFields(AOG, GOR, species, field, LOL)
-            except:
-                self.plotFieldsForAllSpecies()
+        try:
+            AOG       = kwargs['AOG']
+            GOR       = kwargs['GOR']
+            species   = kwargs['species']
+            field     = None
+            LOL       = None
+            if kwargs.has_key('field'):
+                field = kwargs['field']
+            if kwargs.has_key('LOL'):
+                LOL   = kwargs['LOL']
+            self.plotAOGFields(AOG, GOR, species, field, LOL)
+        except:
+            self.plotFieldsForAllSpecies()
 
     def plotFieldsForAllSpecies(self):
         for (AOG, GOR) in product(AirOrGround(), GazOrRadios()):

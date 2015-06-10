@@ -48,7 +48,7 @@ def plotProcField(simOutput,
                   EPSILON,
                   printIO): 
 
-    (data, mini, maxi)       = extractProcessedData(simOutput, procList, AOG, field, LOL, species, applyGlobalScaling, printIO)
+    (data, mini, maxi)       = extractProcessedData(simOutput, procList, AOG, field, LOL, species, 'NoThreshold', applyGlobalScaling, printIO)
     (xmin, xmax, ymin, ymax) = field.axExtend2d()
     (xLabel, yLabel, cLabel) = field.labels2d(xLabel, yLabel, cLabel)
 

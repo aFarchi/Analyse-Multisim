@@ -43,13 +43,13 @@ if function == 'preprocessRawData':
 
 #__________________________________________________
 
-if arguments['FUNCTION'] == 'plotSimulation':
-    makeLauncherPlotSimulation(arguments['CONFIG_FILE'])
+if function == 'plotSimulation':
+    makeLauncherPlotSimulation(configFile, availableProc)
 
 #__________________________________________________
 
-if arguments['FUNCTION'] == 'plotFields':
-    makeLauncherPlotFields(arguments['CONFIG_FILE'])
+if function == 'plotFields':
+    makeLauncherPlotFields(configFile, availableProc)
 
 #__________________________________________________
 

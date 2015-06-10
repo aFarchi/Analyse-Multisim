@@ -11,42 +11,46 @@ from analyse.plotting.applyGSTransport.plotTransportConfiguration import PlotTra
 
 #__________________________________________________
 
-arguments = extractArgv()
+arguments  = extractArgv()
+function   = arguments['FUNCTION']
+configFile = arguments['CONFIG_FILE']
 
 #__________________________________________________
 
-if arguments['FUNCTION'] == 'plotSimulation':
+if function == 'plotSimulation':
 
-    config  = PlotSimulationConfiguration(arguments['CONFIG_FILE'])
+    config  = PlotSimulationConfiguration(configFile)
     plotter = config.plotter()
 
-    args              = {}
-    args['AOG']       = arguments['AOG']
-    args['GOR']       = arguments['GOR']
-    args['species']   = arguments['SPECIES']
-
-    if arguments['PARLLELIZE'] == 'more':
-        args['field'] = arguments['FIELD']
-        args['LOL']   = arguments['LOL']
+    args    = {}
+    try:
+        args['AOG']       = arguments['AOG']
+        args['GOR']       = arguments['GOR']
+        args['species']   = arguments['SPECIES']
+        if arguments['PARLLELIZE'] == 'more':
+            args['field'] = arguments['FIELD']
+            args['LOL']   = arguments['LOL']
+    except:
+        pass
         
     plotter.plot(**args)
 
 #__________________________________________________
 
-if arguments['FUNCTION'] == 'plotFields':
+if function == 'plotFields':
 
-    config  = PlotFieldsConfiguration(arguments['CONFIG_FILE'])
+    config  = PlotFieldsConfiguration(configFile)
     plotter = config.plotter()
 
-    args              = {}
-    args['AOG']       = arguments['AOG']
-    args['GOR']       = arguments['GOR']
-    args['species']   = arguments['SPECIES']
-
-    if arguments['PARLLELIZE'] == 'more':
-        args['field'] = arguments['FIELD']
-        args['LOL']   = arguments['LOL']
-        
+    args    = {}
+    try:
+        args['AOG']       = arguments['AOG']
+        args['species']   = arguments['SPECIES']
+        if arguments['PARLLELIZE'] == 'more':
+            args['field'] = arguments['FIELD']
+            args['LOL']   = arguments['LOL']
+    except:
+        pass
     plotter.plot(**args)
 
 #__________________________________________________

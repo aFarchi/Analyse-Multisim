@@ -69,7 +69,7 @@ class SimulationsOutput:
 
         #_________________________
 
-        self.launcherPreprocessRawDataFiles = {}
+        self.launcherPreprocessRawDataFiles               = {}
         self.launcherPreprocessRawDataFiles['directory']  = self.launcherDir + 'preprocessRawData/' 
         self.launcherPreprocessRawDataFiles['pyLauncher'] = self.launcherPreprocessRawDataFiles['directory'] + 'preprocessRawData.py'
         self.launcherPreprocessRawDataFiles['shLauncher'] = self.launcherPreprocessRawDataFiles['directory'] + 'preprocessRawData.sh'
@@ -80,7 +80,7 @@ class SimulationsOutput:
 
         #_________________________
 
-        self.launcherStatisticalAnalyseFiles = {}
+        self.launcherStatisticalAnalyseFiles               = {}
         self.launcherStatisticalAnalyseFiles['directory']  = self.launcherDir + 'statisticalAnalyse/performStatisticalAnalyse/'
         self.launcherStatisticalAnalyseFiles['pyLauncher'] = self.launcherStatisticalAnalyseFiles['directory'] + 'performStatisticalAnalyse.py'
         self.launcherStatisticalAnalyseFiles['shLauncher'] = self.launcherStatisticalAnalyseFiles['directory'] + 'performStatisticalAnalyse.sh'
@@ -137,23 +137,25 @@ class SimulationsOutput:
 
         #_________________________
 
-        self.launcherPlotSimulationDir    = self.launcherDir + 'plotting/simulation/'
-        self.pythonLauncherPlotSimulation = self.launcherPlotSimulationDir + 'plotSimulation.py'
-        self.bashLauncherPlotSimulation   = self.launcherPlotSimulationDir + 'plotSimulation.sh'
-        self.fileProcessesPlotSimulation  = self.launcherPlotSimulationDir + 'processesPlotSimulation.dat'
-        self.configFilePlotSimulation     = self.launcherPlotSimulationDir + 'plotSimulation.cfg'
-        self.fileLogPlotSimulation        = self.launcherPlotSimulationDir + 'logPlotSimulation'
-        self.fileNodesPlotSimulation      = self.launcherPlotSimulationDir + 'nodesPlotSimulation.dat'
+        self.launcherPlotSimulationFiles               = {}
+        self.launcherPlotSimulationFiles['directory']  = self.launcherDir + 'plotting/simulation/' 
+        self.launcherPlotSimulationFiles['pyLauncher'] = self.launcherPlotSimulationFiles['directory'] + 'plotSimulation.py' 
+        self.launcherPlotSimulationFiles['shLauncher'] = self.launcherPlotSimulationFiles['directory'] + 'plotSimulation.sh'
+        self.launcherPlotSimulationFiles['processes']  = self.launcherPlotSimulationFiles['directory'] + 'processesPlotSimulation.dat'
+        self.launcherPlotSimulationFiles['config']     = self.launcherPlotSimulationFiles['directory'] + 'plotSimulation.cfg'
+        self.launcherPlotSimulationFiles['nodes']      = self.launcherPlotSimulationFiles['directory'] + 'nodesPlotSimulation.dat'
+        self.launcherPlotSimulationFiles['log']        = self.launcherPlotSimulationFiles['directory'] + 'logPlotSimulation'
 
         #_________________________
 
-        self.launcherPlotFieldsDir    = self.launcherDir + 'plotting/fields/'
-        self.pythonLauncherPlotFields = self.launcherPlotFieldsDir + 'plotFields.py'
-        self.bashLauncherPlotFields   = self.launcherPlotFieldsDir + 'plotFields.sh'
-        self.fileProcessesPlotFields  = self.launcherPlotFieldsDir + 'processesPlotFields.dat'
-        self.configFilePlotFields     = self.launcherPlotFieldsDir + 'plotFields.cfg'
-        self.fileLogPlotFields        = self.launcherPlotFieldsDir + 'logPlotFields'
-        self.fileNodesPlotFields      = self.launcherPlotFieldsDir + 'nodesPlotFields.dat'
+        self.launcherPlotFieldFiles = {}
+        self.launcherPlotFieldFiles['directory']  = self.launcherDir + 'plotting/fields/' 
+        self.launcherPlotFieldFiles['pyLauncher'] = self.launcherPlotFieldFiles['directory'] + 'plotFields.py'
+        self.launcherPlotFieldFiles['shLauncher'] = self.launcherPlotFieldFiles['directory'] + 'plotFields.sh'
+        self.launcherPlotFieldFiles['processes']  = self.launcherPlotFieldFiles['directory'] + 'processesPlotFields.dat'
+        self.launcherPlotFieldFiles['config']     = self.launcherPlotFieldFiles['directory'] + 'plotFields.cfg'
+        self.launcherPlotFieldFiles['nodes']      = self.launcherPlotFieldFiles['directory'] + 'nodesPlotFields.dat'
+        self.launcherPlotFieldFiles['log']        = self.launcherPlotFieldFiles['directory'] + 'logPlotFields'
 
         #_________________________
 

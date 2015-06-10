@@ -20,7 +20,6 @@ class FieldsAttachGrayScalePlotter:
         if self.config.plotFieldsAttachGrayScale:
             try:
                 AOG       = kwargs['AOG']
-                GOR       = kwargs['GOR']
                 species   = kwargs['species']
                 field     = None
                 LOL       = None
@@ -28,16 +27,16 @@ class FieldsAttachGrayScalePlotter:
                     field = kwargs['field']
                 if kwargs.has_key('LOL'):
                     LOL   = kwargs['LOL']
-                self.plotAOGFields(AOG, GOR, species, field, LOL)
+                self.plotAOGFields(AOG, species, field, LOL)
             except:
                 self.plotFieldsForAllSpecies()
 
     def plotFieldsForAllSpecies(self):
         for (AOG, GOR) in product(AirOrGround(), GazOrRadios()):
             for species in self.simOutput.simConfig.speciesList[GOR]:
-                self.plotAOGFields(AOG, GOR, species)
+                self.plotAOGFields(AOG, species)
 
-    def plotAOGFields(self, AOG, GOR, species, field=None, LOL=None):
+    def plotAOGFields(self, AOG, species, field=None, LOL=None):
 
         (fieldList, LOLList) = self.simOutput.fieldLOLList(AOG, field, LOL)
 

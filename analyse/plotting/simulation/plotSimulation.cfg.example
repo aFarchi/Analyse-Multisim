@@ -13,7 +13,6 @@ EPSILON        = 1.e-8
 #__________________________________________________
 # Plot simulations output
 
-plotSimulationsField = True
 plotSimulationsField_extensions      = str : .pdf
 plotSimulationsField_extensions      = str : .eps
 plotSimulationsField_AOO             = all

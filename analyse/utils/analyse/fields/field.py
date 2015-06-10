@@ -44,7 +44,8 @@ class Field:
     #_________________________
 
     def extractAllIterations(self, rawData, LOL, copy=True):
-        return self.extractionAllIterations(rawData, LOL, copy)
+        data = self.extractionAllIterations(rawData, LOL)
+        return data.copy()
 
     #_________________________
 
