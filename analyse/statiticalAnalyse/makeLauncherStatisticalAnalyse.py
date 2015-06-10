@@ -14,7 +14,7 @@ from ..utils.io.writeLaunchers                    import writeDefaultNodesFile
 
 #__________________________________________________
 
-def makeLauncherStatisticalAnalyse(configFile):
+def makeLauncherStatisticalAnalyse(configFile, availableProc=None):
 
     config    = StatisticalAnalyseConfiguration(configFile)
     simOutput = buildSimulationsOutput(config)
@@ -27,9 +27,10 @@ def makeLauncherStatisticalAnalyse(configFile):
     args['$launcher$']      = simOutput.modulePath.moduleLauncher
     args['$interpretor$']   = 'python'
     args['$startString$']   = 'Starting statistical analyse ...'
-
     args['$logFile$']       = simOutput.launcherStatisticalAnalyseFiles['log']
     args['$nodesFile$']     = simOutput.launcherStatisticalAnalyseFiles['nodes']
+    if availableProc is not None:
+        args['$nProcessors$'] = str(availableProc)
 
     writeDefaultPythonLauncher(simOutput.launcherStatisticalAnalyseFiles['pyLauncher'], args, makeExecutable=True, printIO=config.printIO)
     writeDefaultBashLauncher(simOutput.launcherStatisticalAnalyseFiles['shLauncher'], args, makeExecutable=True, printIO=config.printIO)

@@ -145,9 +145,9 @@ if arguments['FUNCTION'] == 'mergeOT2DResults':
 
 #__________________________________________________
 
-if arguments['FUNCTION'] == 'performStatisticalAnalyse':
+if function == 'performStatisticalAnalyse':
 
-    config   = StatisticalAnalyseConfiguration(arguments['CONFIG_FILE'])
+    config   = StatisticalAnalyseConfiguration(configFile)
     analyser = config.analyser()
     args     = {}
 

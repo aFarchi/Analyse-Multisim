@@ -2,8 +2,8 @@
 # statisticalAnalyseConfiguration.py
 #___________________________________
 
-from analyser                                   import Analyser
-from ..utils.configuration.defaultConfiguration import DefaultConfiguration
+from performStatisticalAnalyse.statisticalAnalyser import StatisticalAnalyser
+from ..utils.configuration.defaultConfiguration    import DefaultConfiguration
 
 #__________________________________________________
 
@@ -20,7 +20,7 @@ class StatisticalAnalyseConfiguration(DefaultConfiguration):
     #_________________________
 
     def analyser(self):
-        return Analyser(self)
+        return StatisticalAnalyser(self)
                         
     #_________________________
 

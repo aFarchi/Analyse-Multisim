@@ -58,8 +58,8 @@ if arguments['FUNCTION'] == 'plotApplyGSTransport':
 
 #__________________________________________________
 
-if arguments['FUNCTION'] == 'performStatisticalAnalyse':
-    makeLauncherStatisticalAnalyse(arguments['CONFIG_FILE'])
+if function == 'performStatisticalAnalyse':
+    makeLauncherStatisticalAnalyse(configFile, availableProc)
 
 #__________________________________________________
 

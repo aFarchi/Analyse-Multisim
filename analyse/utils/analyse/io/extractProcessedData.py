@@ -78,7 +78,7 @@ def extractProcessedDataFullScaling(simOutput, AOG, field, LOL, species, printIO
     datas = {}
 
     for proc in simOutput.procList:
-        fn = simOutput.fileProcPreprocessedField(proc, AOG, field, LOL, species)
+        fn = simOutput.fileProcPreprocessedField(proc, AOG, field, LOL, species, 'NoThreshold')
         if printIO:
             print('Reading '+fn+' ...')
         data        = np.load(fn)
