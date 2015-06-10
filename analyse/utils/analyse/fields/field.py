@@ -2,11 +2,9 @@
 # field.py
 #_________
 
-from ..processRawData.interpolateRawData    import interpolateRawData
-from ..scaling.scaling                      import computeScaling
-from ..scaling.fmScaling                    import computeFMScaling
-from ..scaling.grayScale                    import makeGrayScale
-from ..timeSelection.defaultTSelect         import selectLastT
+from ..processRawData.interpolateRawData import interpolateRawData
+from ..scaling.scaling                   import computeScaling
+from ..timeSelection.defaultTSelect      import selectLastT
 
 #__________________________________________________
 
@@ -55,34 +53,6 @@ class Field:
             mini = 0.0
 
         return np.maximum(data, mini)
-
-    #_________________________
-
-    def computeGrayScale(self, data, mini, maxi, nLevels, threshold=True):
-        if threshold:
-            threshold = self.minValue
-        else:
-            threshold = None
-        return makeGrayScale(data, mini=mini, maxi=maxi, nLevels=nLevels, threshold=threshold)
-
-    #_________________________
-
-    def computeFMScaling(self, rawData, LOL, mini, maxi, nLevels):
-        t    = self.funTSelect(rawData.shape[0])
-        data = self.extraction(rawData[t], LOL, TS) 
-        return computeFMScaling(data, mini=mini, maxi=maxi, nLevels=nLevels)
-
-    #_________________________
-
-    #def computeFMScalingMakeGrayScale(self, rawData, LOL, TS, mini, maxi, nLevels):
-    #    t         = self.funTSelect(rawData.shape[0])
-    #    data      = self.extraction(rawData[t], lol, 0.5)
-
-    #    FMScaling = computeFMScaling(data, mini=mini, maxi=maxi, nLevels=nLevels)
-    #    GSNT      = self.computeGrayScale(data, mini, maxi, nLevels, False)
-    #    GST       = self.computeGrayScale(data, mini, maxi, nLevels, True)
-
-    #    return (FMScaling, GSNT, GST)
 
     #_________________________
 
