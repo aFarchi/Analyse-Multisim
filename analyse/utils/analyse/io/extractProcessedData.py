@@ -4,8 +4,9 @@
 
 import numpy as np
 
-from navigate          import *
-from ..scaling.scaling import arrayToScaling
+from navigate            import *
+from ..scaling.scaling   import arrayToScaling
+from ..scaling.buildTmap import buildTmap
 
 #__________________________________________________
 
@@ -146,5 +147,17 @@ def extractProcessedDataBackwardTransport(simOutput, configName, p0, p1, AOG, fi
     scaling = extractScalingFieldSpecies(simOutput, AOG, field, LOL, species, printIO)
 
     return (data0, data1, scaling.mini, scaling.maxi)
+
+#__________________________________________________
+
+def extractTmapOTGSP0P1FieldSpecies(simOutput, configName, p0, p1, AOG, field, LOL, species, TS, TmapError, printIO=False):
+
+    fn     = simOutput.TmapFileOTGSP0P1FieldSpecies(configName, p0, p1, AOG, field, LOL, species, TS)
+    if printIO:
+        print('Reading '+fn+' ...')
+    f      = open(fn)
+    Tarray = np.load(f)
+    Tarray = np.load(f)
+    return buildTmap(Tarray, TmapError)
 
 #__________________________________________________

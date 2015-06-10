@@ -7,11 +7,11 @@ import numpy as np
 from matplotlib import pyplot as plt
 
 from ....utils.analyse.io.extractProcessedData import extractScalingFieldSpecies
+from ....utils.analyse.io.extractProcessedData import extractTmapOTGSP0P1FieldSpecies
 from ....utils.plotting.plotting               import adaptAxesExtent
 from ....utils.plotting.plotting               import addTitleLabelsGrid
 from ....utils.plotting.plotting               import tryAddCustomLegend
 from ....utils.plotting.saveFig                import saveFig
-from ....utils.analyse.scaling.buildTmap       import buildTmap
 
 #__________________________________________________
 
@@ -38,9 +38,8 @@ def plotTransportMap(simOutput,
                      printIO,
                      EPSILON):
 
-    Tarray              = np.load(simOutput.TmapFileOTGSP0P1FieldSpecies(configName, p0, p1, AOG, field, LOL, species, TS))
-    (Tmap, inverseTmap) = buildTmap(Tarray, TmapError)
 
+    (Tmap, inverseTmap) = extractTmapOTGSP0P1FieldSpecies(simOutput, configName, p0, p1, AOG, field, LOL, species, TS, TmapError, printIO)
     scaling             = extractScalingFieldSpecies(simOutput, AOG, field, LOL, species, printIO)
 
     def normalize(x):

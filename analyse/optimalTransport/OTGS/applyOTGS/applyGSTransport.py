@@ -5,8 +5,8 @@
 import numpy   as np
 
 from ....utils.analyse.io.extractProcessedData import extractProcessedDataFullScaling
+from ....utils.analyse.io.extractProcessedData import extractTmapOTGSP0P1FieldSpecies
 from ....utils.io.write                        import saveSymMatrixEig
-from ....utils.analyse.scaling.buildTmap       import buildTmap
 
 #__________________________________________________
 
@@ -31,8 +31,7 @@ def applyGSTransportForField(simOutput,
     for p1 in xrange(len(simOutput.procList)):
         for p0 in xrange(p1):
 
-            Tarray              = np.load(simOutput.TmapFileOTGSP0P1FieldSpecies(configName, p0, p1, AOG, field, LOL, species, TS))
-            (Tmap, inverseTmap) = buildTmap(Tarray, error)
+            (Tmap, inverseTmap) = extractTmapOTGSP0P1FieldSpecies(simOutput, configName, p0, p1, AOG, field, LOL, species, TS, error, printIO)
             data0               = data[simOutput.procList[p0]]
             data1               = data[simOutput.procList[p1]]
 
