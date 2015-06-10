@@ -12,20 +12,24 @@ from analyse.optimalTransport.OT2D.OT2DConfiguration           import OT2DConfig
 
 #__________________________________________________
 
-arguments = extractArgv()
+arguments  = extractArgv()
+function   = arguments['FUNCTION']
+configFile = arguments['CONFIG_FILE']
 
 #__________________________________________________
 
-if arguments['FUNCTION'] == 'preprocessRawData':
+if function == 'preprocessRawData':
 
-    config  = PreprocessConfiguration(arguments['CONFIG_FILE'])
+    config  = PreprocessConfiguration(configFile)
     process = config.process()
     args    = {}
 
-    if arguments['RUN_AOO'] == 'one':
+    try:
         args['AOG']     = arguments['AOG']
         args['GOR']     = arguments['GOR']
         args['species'] = arguments['SPECIES']
+    except:
+        pass
 
     process.run(**args)
 

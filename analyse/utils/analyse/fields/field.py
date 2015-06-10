@@ -2,6 +2,8 @@
 # field.py
 #_________
 
+import numpy as np
+
 from ..processRawData.interpolateRawData import interpolateRawData
 from ..scaling.scaling                   import computeScaling
 from ..timeSelection.defaultTSelect      import selectLastT

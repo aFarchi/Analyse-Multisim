@@ -70,7 +70,7 @@ class SimulationsOutput:
         #_________________________
 
         self.launcherPreprocessRawDataFiles = {}
-        self.launcherPreprocessRawDataFiles['directory']  = 'preprocessRawData/' 
+        self.launcherPreprocessRawDataFiles['directory']  = self.launcherDir + 'preprocessRawData/' 
         self.launcherPreprocessRawDataFiles['pyLauncher'] = self.launcherPreprocessRawDataFiles['directory'] + 'preprocessRawData.py'
         self.launcherPreprocessRawDataFiles['shLauncher'] = self.launcherPreprocessRawDataFiles['directory'] + 'preprocessRawData.sh'
         self.launcherPreprocessRawDataFiles['processes']  = self.launcherPreprocessRawDataFiles['directory'] + 'processesPreprocessRawData.dat'
