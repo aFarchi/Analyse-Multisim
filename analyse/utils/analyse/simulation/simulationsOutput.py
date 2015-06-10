@@ -69,13 +69,14 @@ class SimulationsOutput:
 
         #_________________________
 
-        self.launcherPreprocessRawDataDir    = self.launcherDir + 'preprocess/preprocessRawData/'
-        self.pythonLauncherPreprocessRawData = self.launcherPreprocessRawDataDir + 'preprocessRawData.py'
-        self.bashLauncherPreprocessRawData   = self.launcherPreprocessRawDataDir + 'preprocessRawData.sh'
-        self.fileProcessesPreprocessRawData  = self.launcherPreprocessRawDataDir + 'processesPreprocessRawData.dat'
-        self.configFilePreprocessRawData     = self.launcherPreprocessRawDataDir + 'preprocessRawData.cfg'
-        self.fileLogPreprocessRawData        = self.launcherPreprocessRawDataDir + 'logPreprocessRawData'
-        self.fileNodesPreprocessRawData      = self.launcherPreprocessRawDataDir + 'nodesPreprocessRawData.dat'
+        self.launcherPreprocessRawDataFiles = {}
+        self.launcherPreprocessRawDataFiles['directory']  = 'preprocessRawData/' 
+        self.launcherPreprocessRawDataFiles['pyLauncher'] = self.launcherPreprocessRawDataFiles['directory'] + 'preprocessRawData.py'
+        self.launcherPreprocessRawDataFiles['shLauncher'] = self.launcherPreprocessRawDataFiles['directory'] + 'preprocessRawData.sh'
+        self.launcherPreprocessRawDataFiles['processes']  = self.launcherPreprocessRawDataFiles['directory'] + 'processesPreprocessRawData.dat'
+        self.launcherPreprocessRawDataFiles['config']     = self.launcherPreprocessRawDataFiles['directory'] + 'preprocessRawData.cfg'
+        self.launcherPreprocessRawDataFiles['nodes']      = self.launcherPreprocessRawDataFiles['directory'] + 'nodesPreprocessRawData.dat'
+        self.launcherPreprocessRawDataFiles['log']        = self.launcherPreprocessRawDataFiles['directory'] + 'logPreprocessRawData'
 
         #_________________________
 

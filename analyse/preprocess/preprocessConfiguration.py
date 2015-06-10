@@ -2,7 +2,7 @@
 # preprocessConfiguration.py
 #___________________________
 
-from preprocessor                               import Preprocessor
+from preprocessRawData.rawDataPreprocessor      import RawDataPreprocessor
 from ..utils.configuration.defaultConfiguration import DefaultConfiguration
 
 #__________________________________________________
@@ -20,7 +20,7 @@ class PreprocessConfiguration(DefaultConfiguration):
     #_________________________
 
     def process(self):
-        return Preprocessor(self)
+        return RawDataPreprocessor(self)
                         
     #_________________________
 
@@ -44,9 +44,7 @@ class PreprocessConfiguration(DefaultConfiguration):
                           defaultVal=1.e-8,
                           attrType='float')
 
-        self.addAttribute('preprocessRawData', 
-                          defaultVal=True,
-                          attrType='bool')
+        #_______________
 
         self.addAttribute('preprocessRawData_bigMemory', 
                           defaultVal=True,
@@ -56,8 +54,12 @@ class PreprocessConfiguration(DefaultConfiguration):
                           defaultVal=1.0,
                           attrType='float')
 
+        self.addAttribute('preprocessRawData_nLevelsFM', 
+                          defaultVal=10,
+                          attrType='int')
+
         self.addAttribute('preprocessRawData_nLevelsGrayScale', 
-                          defaultVal=1000,
+                          defaultVal=50,
                           attrType='int')
 
 #__________________________________________________

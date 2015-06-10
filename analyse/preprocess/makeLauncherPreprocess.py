@@ -14,31 +14,32 @@ from ..utils.io.writeLaunchers                     import writeDefaultNodesFile
 
 #__________________________________________________
 
-def makeLauncherPreprocessRawDataForAllSpecies(configFile):
+def makeLauncherPreprocessRawData(configFile, availableProc=None):
 
     config    = PreprocessConfiguration(configFile)
     simOutput = buildSimulationsOutput(config)
 
-    createDirectories([simOutput.launcherPreprocessRawDataDir], config.printIO)
-    config.writeConfig(simOutput.configFilePreprocessRawData)
+    createDirectories([simOutput.launcherPreprocessRawDataFiles['directory']], config.printIO)
+    config.writeConfig(simOutput.launcherPreprocessRawDataFiles['config'])
 
     args                    = {}
-    args['$fileProcesses$'] = simOutput.fileProcessesPreprocessRawData
+    args['$fileProcesses$'] = simOutput.launcherPreprocessRawDataFiles['processes']
     args['$launcher$']      = simOutput.modulePath.moduleLauncher
     args['$interpretor$']   = 'python'
     args['$startString$']   = 'Preparing all fields'
+    args['$logFile$']       = simOutput.launcherPreprocessRawDataFiles['log']
+    args['$nodesFile$']     = simOutput.launcherPreprocessRawDataFiles['nodes']
 
-    args['$logFile$']       = simOutput.fileLogPreprocessRawData
-    args['$nodesFile$']     = simOutput.fileNodesPreprocessRawData
+    if availableProc is not None:
+        args['$nProcessors$'] = str(availableProc)
 
-    writeDefaultPythonLauncher(simOutput.pythonLauncherPreprocessRawData, args, makeExecutable=True, printIO=config.printIO)
-    writeDefaultBashLauncher(simOutput.bashLauncherPreprocessRawData, args, makeExecutable=True, printIO=config.printIO)
-    writeDefaultNodesFile(simOutput.fileNodesPreprocessRawData)
+    writeDefaultPythonLauncher(simOutput.launcherPreprocessRawDataFiles['pyLauncher'], args, makeExecutable=True, printIO=config.printIO)
+    writeDefaultBashLauncher(simOutput.launcherPreprocessRawDataFiles['shLauncher'], args, makeExecutable=True, printIO=config.printIO)
+    writeDefaultNodesFile(simOutput.launcherPreprocessRawDataFiles['nodes'])
 
-    f = open(simOutput.fileProcessesPreprocessRawData, 'w')
+    f = open(simOutput.launcherPreprocessRawDataFiles['processes'], 'w')
     f.write('FUNCTION'    + '\t' +
             'CONFIG_FILE' + '\t' +
-            'RUN_AOO'     + '\t' +
             'AOG'         + '\t' +
             'GOR'         + '\t' +
             'SPECIES'     + '\n' )
@@ -53,19 +54,18 @@ def makeLauncherPreprocessRawDataForAllSpecies(configFile):
 
     for (AOG, GOR) in product(AirOrGround(), GazOrRadios()):
         for species in simOutput.simConfig.speciesList[GOR]:
-            f.write('preprocessRawData'                   + '\t' +
-                    simOutput.configFilePreprocessRawData + '\t' +
-                    'one'                                 + '\t' +
-                    AOG                                   + '\t' +
-                    GOR                                   + '\t' +
-                    species                               + '\n' )
+            f.write('preprocessRawData'                                + '\t' +
+                    simOutput.launcherPreprocessRawDataFiles['config'] + '\t' +
+                    AOG                                                + '\t' +
+                    GOR                                                + '\t' +
+                    species                                            + '\n' )
     f.close()
 
     createDirectories(dirsToCreate, config.printIO)
-    print('Written '+simOutput.pythonLauncherPreprocessRawData+' ...')
-    print('Written '+simOutput.bashLauncherPreprocessRawData+' ...')
-    print('Written '+simOutput.fileProcessesPreprocessRawData+' ...')
-    print('Written '+simOutput.fileNodesPreprocessRawData+' ...')
+    print('Written '+simOutput.launcherPreprocessRawDataFiles['pyLauncher']+' ...')
+    print('Written '+simOutput.launcherPreprocessRawDataFiles['shLauncher']+' ...')
+    print('Written '+simOutput.launcherPreprocessRawDataFiles['processes']+' ...')
+    print('Written '+simOutput.launcherPreprocessRawDataFiles['nodes']+' ...')
 
     print('Do not forget to specify nodes / log files and number of processes.')
 

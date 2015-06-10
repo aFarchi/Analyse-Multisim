@@ -6,7 +6,7 @@
 
 from analyse.utils.sys.argv                                             import extractArgv
 
-from analyse.preprocess.makeLauncherPreprocess                          import makeLauncherPreprocessRawDataForAllSpecies
+from analyse.preprocess.makeLauncherPreprocess                          import makeLauncherPreprocessRawData
 
 from analyse.plotting.simulation.makeLauncherPlotSimulation             import makeLauncherPlotSimulation
 from analyse.plotting.fields.makeLauncherPlotFields                     import makeLauncherPlotFields
@@ -29,12 +29,17 @@ from analyse.optimalTransport.OT2D.makeLaunchersOT2D                    import m
 
 #__________________________________________________
 
-arguments = extractArgv()
+arguments     = extractArgv()
+function      = arguments['FUNCTION']
+configFile    = arguments['CONFIG_FILE']
+availableProc = None
+if arguments.has_key('PROCESSORS'):
+    availableProc = arguments['PROCESSORS']
 
 #__________________________________________________
 
-if arguments['FUNCTION'] == 'preprocessRawData':
-    makeLauncherPreprocessRawDataForAllSpecies(arguments['CONFIG_FILE'])
+if function == 'preprocessRawData':
+    makeLauncherPreprocessRawData(configFile, availableProc)
 
 #__________________________________________________
 
