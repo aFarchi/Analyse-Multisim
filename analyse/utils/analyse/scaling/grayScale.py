@@ -14,39 +14,35 @@ def makeGrayScale(matrix, levels=None, mini=None, maxi=None, nLevels=32, thresho
     else:
         nLevels = len(levels)
 
-    try:
-        spacing = levels[1] - levels[0]
-    except:
-        spacing = 1.0
-    if spacing == 0.0:
-        spacing = 1.0
-
     # threshold
     if threshold is None:
         threshold = matrix.min() - 1
 
     # compute CDF
     CDF = np.zeros(nLevels)
-    for i in xrange(nLevels-2):
-        CDF[i+1]   = ( ( matrix < levels[i] ) * ( matrix > threshold ) ).mean()
-    CDF[nLevels-1] = ( matrix > threshold ).mean()
+    for i in xrange(nLevels-1):
+        CDF[i] = ( ( matrix < levels[i] ) * ( matrix > threshold ) ).mean()
+
+    CDF[0]     = 0.0 # should be aready the case, but just to make sure...
+    CDF[-1]    = ( matrix > threshold ).mean()
+
 
     # rescale CDF
-    if CDF[nLevels-1] == 0.0:
-        PDF = np.zeros(nLevels)
-        PDF[0] = 1.0# / spacing
+    if CDF[-1] == 0.0:
+        PDF    = np.zeros(nLevels)
+        PDF[0] = 1.0
         return PDF
 
-    CDF /= CDF[nLevels-1]
+    CDF /= CDF[-1]
 
     # derivate CDF
-    dCDF = ( CDF[1:] - CDF[:nLevels-1] )# / spacing
+    dCDF = ( CDF[1:] - CDF[:-1] )
 
     # interpolate PDF = derivate(CDF)
-    PDF              = np.zeros(nLevels)
-    PDF[0]           = dCDF[0] / 2.0
-    PDF[1:nLevels-1] = ( dCDF[1:] + dCDF[:nLevels-2] ) / 2.0
-    PDF[nLevels-1]   = dCDF[nLevels-2] / 2.0
+    PDF       = np.zeros(nLevels)
+    PDF[0]    = dCDF[0] / 2.0
+    PDF[1:-1] = ( dCDF[1:] + dCDF[:-2] ) / 2.0
+    PDF[-1]   = dCDF[-2] / 2.0
 
     return PDF
 

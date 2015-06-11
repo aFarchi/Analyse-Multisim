@@ -39,10 +39,10 @@ def computeFMScalingMakeGSAOGFields(simOutput,
 
             if TS == 'Threshold':
                 scalingFM[LOL][field.name][proc] = computeFMScaling(data, mini=scaling.mini, maxi=scaling.maxi, nLevels=nLevelsFM)
-                threshold = halfMinValueFiltered()
-            else:
-                threshold = None
-
+                #threshold = halfMinValueFiltered()
+            #else:
+                #threshold = None
+            threshold = halfMinValueFiltered()
             grayScale = makeGrayScale(data, mini=scaling.mini, maxi=scaling.maxi, nLevels=nLevelsGrayScale, threshold=threshold)
             fn        = simOutput.fileProcPreprocessedFieldGS(proc, AOG, field, LOL, species, TS)
             if printIO:
