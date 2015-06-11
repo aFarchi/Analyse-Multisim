@@ -70,6 +70,6 @@ plotFieldsAttachGrayScale_scaleGS            = False
 plotFieldsAttachGrayScale_extendDirectionGS  = vertical
 plotFieldsAttachGrayScale_options            = Threshold   : str : g-
 plotFieldsAttachGrayScale_options            = NoThreshold : str : k-
-plotFieldsAttachGrayScale_directionGS        = vertical
+plotFieldsAttachGrayScale_directionGS        = horizontal
 
 #__________________________________________________

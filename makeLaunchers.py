@@ -63,33 +63,33 @@ if function == 'performStatisticalAnalyse':
 
 #__________________________________________________
 
-if arguments['FUNCTION'] == 'interpolateIntoOTGSResolution':
-    makeLauncherInterpolateIntoOTGSResolution(arguments['CONFIG_FILE'])
+if function == 'interpolateIntoOTGSResolution':
+    makeLauncherInterpolateIntoOTGSResolution(configFile, availableProc)
 
 #__________________________________________________
 
-if arguments['FUNCTION'] == 'mergeOTGSResults':
-    makeLauncherMergeOTGSResults(arguments['CONFIG_FILE'])
+if function == 'mergeOTGSResults':
+    makeLauncherMergeOTGSResults(configFile, availableProc)
 
 #__________________________________________________
 
-if arguments['FUNCTION'] == 'applyGSTransport':
-    makeLauncherApplyGSTransport(arguments['CONFIG_FILE'])
+if function == 'applyGSTransport':
+    makeLauncherApplyGSTransport(configFile, availableProc)
 
 #__________________________________________________
 
-if arguments['FUNCTION'] == 'performOTGS':
-    makeLauncherPerformOTGS(arguments['CONFIG_FILE'])
+if function == 'performOTGS':
+    makeLauncherPerformOTGS(configFile, availableProc)
 
 #__________________________________________________
 
-if arguments['FUNCTION'] == 'plotOTGSSingleConfig':
-    makeLauncherPlotOTGSSingleConfig(arguments['CONFIG_FILE'])
+if function == 'plotOTGSSingleConfig':
+    makeLauncherPlotOTGSSingleConfig(configFile, availableProc)
 
 #__________________________________________________
 
-if arguments['FUNCTION'] == 'plotOTGSMultiConfig':
-    makeLauncherPlotOTGSMultiConfig(arguments['CONFIG_FILE'])
+if function == 'plotOTGSMultiConfig':
+    makeLauncherPlotOTGSMultiConfig(configFile, availableProc)
 
 #__________________________________________________
 

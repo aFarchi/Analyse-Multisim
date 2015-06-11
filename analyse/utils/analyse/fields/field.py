@@ -22,7 +22,7 @@ class Field:
         if simOutput.funTSelect is None:
             self.funTSelect = selectLastT
         else:
-            self.funTSelect = funTSelect
+            self.funTSelect = simOutput.funTSelect
 
     #_________________________
 

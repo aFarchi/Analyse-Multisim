@@ -271,6 +271,6 @@ class PlotFieldsConfiguration(DefaultConfiguration):
 
         self.addAttribute('plotFieldsAttachGrayScale_directionGS',
                           isSubAttr=[('plotFieldsAttachGrayScale', True)],
-                          defaultVal='vertical')
+                          defaultVal='horizontal')
 
 #__________________________________________________

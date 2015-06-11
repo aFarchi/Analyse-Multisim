@@ -41,8 +41,8 @@ def makeGrayScale(matrix, levels=None, mini=None, maxi=None, nLevels=32, thresho
     # interpolate PDF = derivate(CDF)
     PDF       = np.zeros(nLevels)
     PDF[0]    = dCDF[0] / 2.0
-    PDF[1:-1] = ( dCDF[1:] + dCDF[:-2] ) / 2.0
-    PDF[-1]   = dCDF[-2] / 2.0
+    PDF[1:-1] = ( dCDF[1:] + dCDF[:-1] ) / 2.0
+    PDF[-1]   = dCDF[-1] / 2.0
 
     return PDF
 

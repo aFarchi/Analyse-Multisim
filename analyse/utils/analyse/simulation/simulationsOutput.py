@@ -92,22 +92,31 @@ class SimulationsOutput:
         #_________________________
 
         self.launcherOTDir   = self.launcherDir + 'optimalTransport/'
-        self.launcherOTGSDir = self.launcherOTDir + 'GS/'
-        self.launcherInterpolateIntoOTGSResolutionDir    = self.launcherOTGSDir + 'interpolateIntoOTGSResolution/'
-        self.configFileInterpolateIntoOTGSResolution     = self.launcherInterpolateIntoOTGSResolutionDir + 'interpolateIntoOTGSResolution.cfg'
-        self.fileProcessesInterpolateIntoOTGSResolution  = self.launcherInterpolateIntoOTGSResolutionDir + 'processesInterpolateIntoOTGSResolution.dat'
-        self.fileLogInterpolateIntoOTGSResolution        = self.launcherInterpolateIntoOTGSResolutionDir + 'logInterpolateIntoOTGSResolution'
-        self.fileNodesInterpolateIntoOTGSResolution      = self.launcherInterpolateIntoOTGSResolutionDir + 'nodesInterpolateIntoOTGSResolution.dat'
-        self.pythonLauncherInterpolateIntoOTGSResolution = self.launcherInterpolateIntoOTGSResolutionDir + 'interpolateIntoOTGSResolution.py'
-        self.bashLauncherInterpolateIntoOTGSResolution   = self.launcherInterpolateIntoOTGSResolutionDir + 'interpolateIntoOTGSResolution.sh'
+        self.launcherOTGSDir = self.launcherOTDir + 'OTGS/'
+        
+        self.launcherInterpolateIntoOTGSResolutionFiles               = {}
+        self.launcherInterpolateIntoOTGSResolutionFiles['directory']  = self.launcherOTGSDir + 'interpolateIntoOTGSResolution/'
+        self.launcherInterpolateIntoOTGSResolutionFiles['pyLauncher'] = ( self.launcherInterpolateIntoOTGSResolutionFiles['directory'] +
+                                                                          'interpolateIntoOTGSResolution.py' )
+        self.launcherInterpolateIntoOTGSResolutionFiles['shLauncher'] = ( self.launcherInterpolateIntoOTGSResolutionFiles['directory'] + 
+                                                                          'interpolateIntoOTGSResolution.sh' )
+        self.launcherInterpolateIntoOTGSResolutionFiles['processes']  = ( self.launcherInterpolateIntoOTGSResolutionFiles['directory'] + 
+                                                                          'processesInterpolateIntoOTGSResolution.dat' )
+        self.launcherInterpolateIntoOTGSResolutionFiles['config']     = ( self.launcherInterpolateIntoOTGSResolutionFiles['directory'] + 
+                                                                          'interpolateIntoOTGSResolution.cfg' )
+        self.launcherInterpolateIntoOTGSResolutionFiles['nodes']      = ( self.launcherInterpolateIntoOTGSResolutionFiles['directory'] + 
+                                                                          'nodesInterpolateIntoOTGSResolution.dat' )
+        self.launcherInterpolateIntoOTGSResolutionFiles['log']        = ( self.launcherInterpolateIntoOTGSResolutionFiles['directory'] + 
+                                                                          'logInterpolateIntoOTGSResolution' )
 
-        self.launcherMergeOTGSResultsDir    = self.launcherOTGSDir + 'mergeOTGSResults/'
-        self.configFileMergeOTGSResults     = self.launcherMergeOTGSResultsDir + 'mergeOTGSResults.cfg'
-        self.fileProcessesMergeOTGSResults  = self.launcherMergeOTGSResultsDir + 'processesMergeOTGSResults.dat'
-        self.fileLogMergeOTGSResults        = self.launcherMergeOTGSResultsDir + 'logMergeOTGSResults'
-        self.fileNodesMergeOTGSResults      = self.launcherMergeOTGSResultsDir + 'nodesMergeOTGSResults.dat'
-        self.pythonLauncherMergeOTGSResults = self.launcherMergeOTGSResultsDir + 'mergeOTGSResults.py'
-        self.bashLauncherMergeOTGSResults   = self.launcherMergeOTGSResultsDir + 'mergeOTGSResults.sh'
+        self.launcherMergeOTGSResultsFiles               = {}
+        self.launcherMergeOTGSResultsFiles['directory']  = self.launcherOTGSDir + 'mergeOTGSResults/' 
+        self.launcherMergeOTGSResultsFiles['pyLauncher'] = self.launcherMergeOTGSResultsFiles['directory'] + 'mergeOTGSResults.py'
+        self.launcherMergeOTGSResultsFiles['shLauncher'] = self.launcherMergeOTGSResultsFiles['directory'] + 'mergeOTGSResults.sh'
+        self.launcherMergeOTGSResultsFiles['processes']  = self.launcherMergeOTGSResultsFiles['directory'] + 'processesMergeOTGSResults.dat'
+        self.launcherMergeOTGSResultsFiles['config']     = self.launcherMergeOTGSResultsFiles['directory'] + 'mergeOTGSResults.cfg'
+        self.launcherMergeOTGSResultsFiles['nodes']      = self.launcherMergeOTGSResultsFiles['directory'] + 'nodesMergeOTGSResults.dat'
+        self.launcherMergeOTGSResultsFiles['log']        = self.launcherMergeOTGSResultsFiles['directory'] + 'logMergeOTGSResults'
 
         self.launcherApplyGSTransportFiles               = {}
         self.launcherApplyGSTransportFiles['directory']  = self.launcherOTGSDir + 'applyGSTransport/'

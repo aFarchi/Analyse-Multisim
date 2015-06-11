@@ -35,15 +35,14 @@ if function == 'preprocessRawData':
 
 #__________________________________________________
 
-if arguments['FUNCTION'] == 'interpolateIntoOTGSResolution':
+if function == 'interpolateIntoOTGSResolution':
 
-    config       = OTGSConfiguration(arguments['CONFIG_FILE'])
+    config       = OTGSConfiguration(configFile)
     interpolator = config.interpolatorIntoOTGSResolution()
     args         = {}
 
     try:
         args['AOG']     = arguments['AOG']
-        args['GOR']     = arguments['GOR']
         args['species'] = arguments['SPECIES']
 
         if arguments['PARLLELIZE'] == 'more':
@@ -57,15 +56,14 @@ if arguments['FUNCTION'] == 'interpolateIntoOTGSResolution':
 
 #__________________________________________________
 
-if arguments['FUNCTION'] == 'mergeOTGSResults':
+if function == 'mergeOTGSResults':
 
-    config       = OTGSConfiguration(arguments['CONFIG_FILE'])
+    config       = OTGSConfiguration(configFile)
     merger       = config.OTGSResultMerger()
     args         = {}
 
     try:
         args['AOG']     = arguments['AOG']
-        args['GOR']     = arguments['GOR']
         args['species'] = arguments['SPECIES']
 
         if arguments['PARLLELIZE'] == 'more':
@@ -80,9 +78,9 @@ if arguments['FUNCTION'] == 'mergeOTGSResults':
 
 #__________________________________________________
 
-if arguments['FUNCTION'] == 'applyGSTransport':
+if function == 'applyGSTransport':
 
-    config       = OTGSConfiguration(arguments['CONFIG_FILE'])
+    config       = OTGSConfiguration(configFile)
     applier      = config.OTGSTransportApplier()
     args         = {}
 

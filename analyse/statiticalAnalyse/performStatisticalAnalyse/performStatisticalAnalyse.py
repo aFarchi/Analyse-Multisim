@@ -18,7 +18,7 @@ def analyseFieldSpecies(simOutput,
                         chooseScaling,
                         printIO=False):
 
-    (data, scaling, scalingFM) = extractProcessedDataFullScaling(simOutput, AOG, field, LOL, species, printIO)
+    (data, scaling, scalingFM) = extractProcessedDataFullScaling(simOutput, AOG, field, LOL, species, 'NoThreshold', printIO)
     analyse                    = AnalyseResults(len(simOutput.procList), scaling, scalingFM, nLevelsAlpha, chooseScaling)
     applyScaling               = ( LOL == 'lin' )
 

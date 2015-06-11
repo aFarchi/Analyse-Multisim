@@ -73,12 +73,12 @@ def extractGrayScales(simOutput, procList, AOG, field, LOL, species, scaleGS, pr
 
 #__________________________________________________
 
-def extractProcessedDataFullScaling(simOutput, AOG, field, LOL, species, printIO=False):
+def extractProcessedDataFullScaling(simOutput, AOG, field, LOL, species, TS, printIO=False):
 
     datas = {}
 
     for proc in simOutput.procList:
-        fn = simOutput.fileProcPreprocessedField(proc, AOG, field, LOL, species, 'NoThreshold')
+        fn = simOutput.fileProcPreprocessedField(proc, AOG, field, LOL, species, TS)
         if printIO:
             print('Reading '+fn+' ...')
         data        = np.load(fn)

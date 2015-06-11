@@ -25,6 +25,22 @@ def makeInterpolatorPP(X, Y, copy=True):
 
 #__________________________________________________
 
+def makeInterpolatorPPId(X, Y, copy=True):
+    if copy:
+        return makeInterpolatorPPId(X.copy(), Y.copy(), copy=False)
+
+    interpolator = interp1d(X, Y, copy=False, bounds_error=True)
+
+    def interpolatorPPId(x):
+        try:
+            return interpolator(x)
+        except:
+            return x
+
+    return interpolatorPPId
+
+#__________________________________________________
+
 def buildTmap(Tarray, error):
     N             = Tarray.size
 
@@ -42,8 +58,8 @@ def buildTmap(Tarray, error):
 
     # Interpolates Tmap and its inverse
     X             = np.linspace(0.0, 1.0, N)
-    Tmap          = makeInterpolatorPP(X, TFiltered, copy=True)
-    inverseTmap   = makeInterpolatorPP(TFiltered, X, copy=False)
+    Tmap          = makeInterpolatorPPId(X, TFiltered, copy=True)
+    inverseTmap   = makeInterpolatorPPId(TFiltered, X, copy=False)
 
     return (Tmap, inverseTmap)
 
