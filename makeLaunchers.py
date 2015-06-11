@@ -53,8 +53,8 @@ if function == 'plotFields':
 
 #__________________________________________________
 
-if arguments['FUNCTION'] == 'plotApplyGSTransport':
-    makeLauncherPlotApplyGSTransport(arguments['CONFIG_FILE'])
+if function == 'plotApplyGSTransport':
+    makeLauncherPlotApplyGSTransport(configFile, availableProc)
 
 #__________________________________________________
 

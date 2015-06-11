@@ -14,7 +14,7 @@ from ...utils.io.writeLaunchers                     import writeDefaultNodesFile
 
 #__________________________________________________
 
-def makeLauncherPlotApplyGSTransport(configFile):
+def makeLauncherPlotApplyGSTransport(configFile, availableProc=None):
 
     config    = PlotTransportConfiguration(configFile)
     simOutput = buildSimulationsOutput(config)
@@ -27,9 +27,10 @@ def makeLauncherPlotApplyGSTransport(configFile):
     args['$launcher$']      = simOutput.modulePath.moduleLauncherPlotting
     args['$interpretor$']   = 'python'
     args['$startString$']   = 'Plotting apply GS transport'
-
     args['$logFile$']       = simOutput.launcherPlotApplyGSTransportFiles['log']
     args['$nodesFile$']     = simOutput.launcherPlotApplyGSTransportFiles['nodes']
+    if availableProc is not None:
+        args['$nProcessors$'] = str(availableProc)
 
     writeDefaultPythonLauncher(simOutput.launcherPlotApplyGSTransportFiles['pyLauncher'], args, makeExecutable=True, printIO=config.printIO)
     writeDefaultBashLauncher(simOutput.launcherPlotApplyGSTransportFiles['shLauncher'], args, makeExecutable=True, printIO=config.printIO)

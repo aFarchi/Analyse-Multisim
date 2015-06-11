@@ -11,6 +11,8 @@ from ....utils.plotting.plotting               import adaptAxesExtent
 from ....utils.plotting.plotting               import addTitleLabelsGrid
 from ....utils.plotting.plotMatrix             import plotGrayScale
 from ....utils.plotting.saveFig                import saveFig
+from ....utils.analyse.scaling.grayScale       import makeGrayScale
+from ....utils.analyse.filters.zeroFilterLog10 import halfMinValueFiltered
 
 #__________________________________________________
 
@@ -46,9 +48,10 @@ def plotBackwardTransport(simOutput,
 
     (data0, data1, mini, maxi)  = extractProcessedDataBackwardTransport(simOutput, configName, p0, p1, AOG, field, LOL, species, TS, printIO)
 
-    grayScales                  = {} 
-    grayScales['d0']            = field.computeGrayScale(data0, mini, maxi, nLevelsGS, threshold=(TS=='Threshold'))
-    grayScales['Tod1']          = field.computeGrayScale(data1, mini, maxi, nLevelsGS, threshold=(TS=='Threshold'))
+    threshold                   = halfMinValueFiltered()
+    grayScales                  = {}
+    grayScales['d0']            = makeGrayScale(data0, mini=mini, maxi=maxi, nLevels=nLevelsGS, threshold=threshold)
+    grayScales['Tod1']          = makeGrayScale(data1, mini=mini, maxi=maxi, nLevels=nLevelsGS, threshold=threshold)
 
     maxiGS                      = max(grayScales['d0'].max(), grayScales['Tod1'].max())
 

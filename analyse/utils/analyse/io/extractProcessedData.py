@@ -107,7 +107,7 @@ def extractProcessedDataForwardTransport(simOutput, configName, p0, p1, AOG, fie
         print('Reading '+fn+' ...')
     data0 = np.load(fn)
 
-    fn = simOutput.fileProcPreprocessedField(proc1, AOG, field, LOL, species)
+    fn = simOutput.fileProcPreprocessedField(proc1, AOG, field, LOL, species, TS)
     if printIO:
         print('Reading '+fn+' ...')
     data1 = np.load(fn)
@@ -139,7 +139,7 @@ def extractProcessedDataBackwardTransport(simOutput, configName, p0, p1, AOG, fi
         print('Reading '+fn+' ...')
     data1 = np.load(fn)
 
-    fn = simOutput.fileProcPreprocessedField(proc0, AOG, field, LOL, species)
+    fn = simOutput.fileProcPreprocessedField(proc0, AOG, field, LOL, species, TS)
     if printIO:
         print('Reading '+fn+' ...')
     data0 = np.load(fn)

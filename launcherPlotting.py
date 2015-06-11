@@ -55,21 +55,23 @@ if function == 'plotFields':
 
 #__________________________________________________
 
-if arguments['FUNCTION'] == 'plotApplyGSTransport':
+if function == 'plotApplyGSTransport':
 
-    config  = PlotTransportConfiguration(arguments['CONFIG_FILE'])
+    config  = PlotTransportConfiguration(configFile)
     plotter = config.plotter()
 
     args              = {}
-    args['AOG']       = arguments['AOG']
-    args['species']   = arguments['SPECIES']
+    try:
+        args['AOG']       = arguments['AOG']
+        args['species']   = arguments['SPECIES']
 
-    if arguments['PARLLELIZE'] == 'more':
-        args['field']      = arguments['FIELD']
-        args['LOL']        = arguments['LOL']
-        args['TS']         = arguments['TS']
-        args['configName'] = arguments['CONFIG_NAME']
-        
+        if arguments['PARLLELIZE'] == 'more':
+            args['field']      = arguments['FIELD']
+            args['LOL']        = arguments['LOL']
+            args['TS']         = arguments['TS']
+            args['configName'] = arguments['CONFIG_NAME']
+    except:
+        pass
     plotter.plot(**args)
 
 #__________________________________________________

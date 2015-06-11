@@ -31,11 +31,14 @@ def makeInterpolatorPPId(X, Y, copy=True):
 
     interpolator = interp1d(X, Y, copy=False, bounds_error=True)
 
+    mini = X.min()
+    maxi = X.max()
+
     def interpolatorPPId(x):
-        try:
-            return interpolator(x)
-        except:
-            return x
+        xx = np.minimum(maxi, np.maximum(mini, x))
+        return ( x * ( x <= mini ) + 
+                 x * ( x >= maxi ) +
+                 interpolator(xx) * ( x > mini ) * ( x < maxi ) )
 
     return interpolatorPPId
 
