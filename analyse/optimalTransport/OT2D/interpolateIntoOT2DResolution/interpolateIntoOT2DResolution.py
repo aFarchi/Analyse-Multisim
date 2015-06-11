@@ -17,7 +17,7 @@ def interpolateAOGFieldsIntoOT2DResolution(simOutput,
                                            OTShape,
                                            printIO):
 
-    fn   = simOutput.fileProcPreprocessedField(proc, AOG, field, LOL, species)
+    fn   = simOutput.fileProcPreprocessedField(proc, AOG, field, LOL, species, 'NoThreshold')
     if printIO:
         print ('Reading '+fn+' ...')
     data = np.load(fn)

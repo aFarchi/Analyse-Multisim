@@ -252,8 +252,8 @@ def makeLauncherPlotOT2DSingleConfig(configFile, availableProc=None):
         writeDefaultNodesFile(simOutput.fileNodesPlotOT2D(configName))
         
         args = {}
-        args['$EPSILON$']     = str(config.EPSILON)
-        args['$singleOrMulti$'] = str(0)
+        args['$EPSILON$']       = str(config.EPSILON)
+        args['$singleOrMulti$'] = 'single'
 
         f = open(simOutput.fileProcessesPlotOT2D(configName), 'w')
         f.write('CONFIG_FILE' + '\t' +
@@ -314,8 +314,8 @@ def makeLauncherPlotOT2DMultiConfig(configFile, availableProc=None):
     writeDefaultNodesFile(simOutput.fileNodesPlotOT2D(configName))
         
     args = {}
-    args['$EPSILON$']     = str(config.EPSILON)
-    args['$singleOrMulti$'] = str(1)
+    args['$EPSILON$']       = str(config.EPSILON)
+    args['$singleOrMulti$'] = 'multi'
 
     f = open(simOutput.fileProcessesPlotOT2D(configName), 'w')
     f.write('CONFIG_FILE' + '\t' +
