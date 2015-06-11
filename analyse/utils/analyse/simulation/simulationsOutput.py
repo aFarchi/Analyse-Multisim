@@ -127,22 +127,31 @@ class SimulationsOutput:
         self.launcherApplyGSTransportFiles['nodes']      = self.launcherApplyGSTransportFiles['directory'] + 'nodesApplyGSTransport.dat'
         self.launcherApplyGSTransportFiles['log']        = self.launcherApplyGSTransportFiles['directory'] + 'logApplyGSTransport'
 
-        self.launcherOT2DDir = self.launcherOTDir + '2D/'
-        self.launcherInterpolateIntoOT2DResolutionDir    = self.launcherOT2DDir + 'interpolateIntoOT2DResolution/'
-        self.configFileInterpolateIntoOT2DResolution     = self.launcherInterpolateIntoOT2DResolutionDir + 'interpolateIntoOT2DResolution.cfg'
-        self.fileProcessesInterpolateIntoOT2DResolution  = self.launcherInterpolateIntoOT2DResolutionDir + 'processesInterpolateIntoOT2DResolution.dat'
-        self.fileLogInterpolateIntoOT2DResolution        = self.launcherInterpolateIntoOT2DResolutionDir + 'logInterpolateIntoOT2DResolution'
-        self.fileNodesInterpolateIntoOT2DResolution      = self.launcherInterpolateIntoOT2DResolutionDir + 'nodesInterpolateIntoOT2DResolution.dat'
-        self.pythonLauncherInterpolateIntoOT2DResolution = self.launcherInterpolateIntoOT2DResolutionDir + 'interpolateIntoOT2DResolution.py'
-        self.bashLauncherInterpolateIntoOT2DResolution   = self.launcherInterpolateIntoOT2DResolutionDir + 'interpolateIntoOT2DResolution.sh'
+        self.launcherOT2DDir = self.launcherOTDir + 'OT2D/'
 
-        self.launcherMergeOT2DResultsDir    = self.launcherOT2DDir + 'mergeOT2DResults/'
-        self.configFileMergeOT2DResults     = self.launcherMergeOT2DResultsDir + 'mergeOT2DResults.cfg'
-        self.fileProcessesMergeOT2DResults  = self.launcherMergeOT2DResultsDir + 'processesMergeOT2DResults.dat'
-        self.fileLogMergeOT2DResults        = self.launcherMergeOT2DResultsDir + 'logMergeOT2DResults'
-        self.fileNodesMergeOT2DResults      = self.launcherMergeOT2DResultsDir + 'nodesMergeOT2DResults.dat'
-        self.pythonLauncherMergeOT2DResults = self.launcherMergeOT2DResultsDir + 'mergeOT2DResults.py'
-        self.bashLauncherMergeOT2DResults   = self.launcherMergeOT2DResultsDir + 'mergeOT2DResults.sh'
+        self.launcherInterpolateIntoOT2DResolutionFiles               = {}
+        self.launcherInterpolateIntoOT2DResolutionFiles['directory']  = self.launcherOT2DDir + 'interpolateIntoOT2DResolution/'
+        self.launcherInterpolateIntoOT2DResolutionFiles['pyLauncher'] = ( self.launcherInterpolateIntoOT2DResolutionFiles['directory'] +
+                                                                          'interpolateIntoOT2DResolution.py' )
+        self.launcherInterpolateIntoOT2DResolutionFiles['shLauncher'] = ( self.launcherInterpolateIntoOT2DResolutionFiles['directory'] +
+                                                                          'interpolateIntoOT2DResolution.sh' )
+        self.launcherInterpolateIntoOT2DResolutionFiles['processes']  = ( self.launcherInterpolateIntoOT2DResolutionFiles['directory'] +
+                                                                          'processesInterpolateIntoOT2DResolution.dat' )
+        self.launcherInterpolateIntoOT2DResolutionFiles['config']     = ( self.launcherInterpolateIntoOT2DResolutionFiles['directory'] +
+                                                                          'interpolateIntoOT2DResolution.cfg' )
+        self.launcherInterpolateIntoOT2DResolutionFiles['nodes']      = ( self.launcherInterpolateIntoOT2DResolutionFiles['directory'] +
+                                                                          'nodesInterpolateIntoOT2DResolution.dat' )
+        self.launcherInterpolateIntoOT2DResolutionFiles['log']        = ( self.launcherInterpolateIntoOT2DResolutionFiles['directory'] +
+                                                                          'logInterpolateIntoOT2DResolution' )
+
+        self.launcherMergeOT2DResultsFiles               = {}
+        self.launcherMergeOT2DResultsFiles['directory']  = self.launcherOT2DDir + 'mergeOT2DResults/'
+        self.launcherMergeOT2DResultsFiles['pyLauncher'] = self.launcherMergeOT2DResultsFiles['directory'] + 'mergeOT2DResults.py'
+        self.launcherMergeOT2DResultsFiles['shLauncher'] = self.launcherMergeOT2DResultsFiles['directory'] + 'mergeOT2DResults.sh'
+        self.launcherMergeOT2DResultsFiles['processes']  = self.launcherMergeOT2DResultsFiles['directory'] + 'processesMergeOT2DResults.dat'
+        self.launcherMergeOT2DResultsFiles['config']     = self.launcherMergeOT2DResultsFiles['directory'] + 'mergeOT2DResults.cfg'
+        self.launcherMergeOT2DResultsFiles['nodes']      = self.launcherMergeOT2DResultsFiles['directory'] + 'nodesMergeOT2DResults.dat'
+        self.launcherMergeOT2DResultsFiles['log']        = self.launcherMergeOT2DResultsFiles['directory'] + 'logMergeOT2DResults'
 
         #_________________________
 

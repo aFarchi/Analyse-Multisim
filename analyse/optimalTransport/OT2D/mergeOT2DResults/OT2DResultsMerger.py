@@ -21,7 +21,6 @@ class OT2DResultsMerger:
     def run(self, **kwargs):
         try:
             AOG            = kwargs['AOG']
-            GOR            = kwargs['GOR']
             species        = kwargs['species']
             try:
                 field      = kwargs['field']
@@ -36,13 +35,13 @@ class OT2DResultsMerger:
             except:
                 configName = None
 
-            self.mergeOT2DResultsForSpecies(AOG, GOR, species, field, LOL, configName)
+            self.mergeOT2DResultsForSpecies(AOG, species, field, LOL, configName)
         except:
             self.mergeOT2DResultsForAllSpecies()
 
     #_________________________
 
-    def mergeOT2DResultsForSpecies(self, AOG, GOR, species, field=None, LOL=None, configName=None):
+    def mergeOT2DResultsForSpecies(self, AOG, species, field=None, LOL=None, configName=None):
 
         (fieldList, LOLList) = self.simOutput.fieldLOLList(AOG, field, LOL)
         if configName is None:
@@ -65,6 +64,6 @@ class OT2DResultsMerger:
 
         for (AOG, GOR) in product(AirOrGround(), GazOrRadios()):
             for species in self.simOutput.simConfig.speciesList[GOR]:
-                self.mergeOT2DResultsForSpecies(AOG, GOR, species)
+                self.mergeOT2DResultsForSpecies(AOG, species)
 
 #__________________________________________________

@@ -93,27 +93,27 @@ if function == 'plotOTGSMultiConfig':
 
 #__________________________________________________
 
-if arguments['FUNCTION'] == 'performOT2D':
-    makeLauncherPerformOT2D(arguments['CONFIG_FILE'])
+if function == 'performOT2D':
+    makeLauncherPerformOT2D(configFile, availableProc)
 
 #__________________________________________________
 
-if arguments['FUNCTION'] == 'plotOT2DSingleConfig':
-    makeLauncherPlotOT2DSingleConfig(arguments['CONFIG_FILE'])
+if function == 'plotOT2DSingleConfig':
+    makeLauncherPlotOT2DSingleConfig(configFile, availableProc)
 
 #__________________________________________________
 
-if arguments['FUNCTION'] == 'plotOT2DMultiConfig':
-    makeLauncherPlotOT2DMultiConfig(arguments['CONFIG_FILE'])
+if function == 'plotOT2DMultiConfig':
+    makeLauncherPlotOT2DMultiConfig(configFile, availableProc)
 
 #__________________________________________________
 
-if arguments['FUNCTION'] == 'interpolateIntoOT2DResolution':
-    makeLauncherInterpolateIntoOT2DResolution(arguments['CONFIG_FILE'])
+if function == 'interpolateIntoOT2DResolution':
+    makeLauncherInterpolateIntoOT2DResolution(configFile, availableProc)
 
 #__________________________________________________
 
-if arguments['FUNCTION'] == 'mergeOT2DResults':
-    makeLauncherMergeOT2DResults(arguments['CONFIG_FILE'])
+if function == 'mergeOT2DResults':
+    makeLauncherMergeOT2DResults(configFile, availableProc)
 
 #__________________________________________________

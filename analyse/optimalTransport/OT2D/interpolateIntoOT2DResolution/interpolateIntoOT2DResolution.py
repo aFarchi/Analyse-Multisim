@@ -4,7 +4,7 @@
 
 import numpy as np
 
-from itertools                     import product
+from itertools import product
 
 #__________________________________________________
 

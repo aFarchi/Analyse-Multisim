@@ -21,7 +21,6 @@ class InterpolatorIntoOT2DResolution:
     def run(self, **kwargs):
         try:
             AOG     = kwargs['AOG']
-            GOR     = kwargs['GOR']
             species = kwargs['species']
             try:
                 field = kwargs['field']
@@ -32,13 +31,13 @@ class InterpolatorIntoOT2DResolution:
             except:
                 LOL   = None
 
-            self.interpolateIntoOT2DResolutionForSpecies(AOG, GOR, species, field, LOL)
+            self.interpolateIntoOT2DResolutionForSpecies(AOG, species, field, LOL)
         except:
             self.interpolateIntoOT2DResolutionForAllSpecies()
 
     #_________________________
 
-    def interpolateIntoOT2DResolutionForSpecies(self, AOG, GOR, species, field=None, LOL=None):
+    def interpolateIntoOT2DResolutionForSpecies(self, AOG, species, field=None, LOL=None):
 
         (fieldList, LOLList) = self.simOutput.fieldLOLList(AOG, field, LOL)
 
@@ -58,6 +57,6 @@ class InterpolatorIntoOT2DResolution:
 
         for (AOG, GOR) in product(AirOrGround(), GazOrRadios()):
             for species in self.simOutput.simConfig.speciesList[GOR]:
-                self.interpolateIntoOT2DResolutionForSpecies(AOG, GOR, species)
+                self.interpolateIntoOT2DResolutionForSpecies(AOG, species)
 
 #__________________________________________________

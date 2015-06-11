@@ -100,15 +100,14 @@ if function == 'applyGSTransport':
 
 #__________________________________________________
 
-if arguments['FUNCTION'] == 'interpolateIntoOT2DResolution':
+if function == 'interpolateIntoOT2DResolution':
 
-    config       = OT2DConfiguration(arguments['CONFIG_FILE'])
+    config       = OT2DConfiguration(configFile)
     interpolator = config.interpolatorIntoOT2DResolution()
     args         = {}
 
     try:
         args['AOG']     = arguments['AOG']
-        args['GOR']     = arguments['GOR']
         args['species'] = arguments['SPECIES']
 
         if arguments['PARLLELIZE'] == 'more':
@@ -121,15 +120,14 @@ if arguments['FUNCTION'] == 'interpolateIntoOT2DResolution':
 
 #__________________________________________________
 
-if arguments['FUNCTION'] == 'mergeOT2DResults':
+if function == 'mergeOT2DResults':
 
-    config       = OT2DConfiguration(arguments['CONFIG_FILE'])
+    config       = OT2DConfiguration(configFile)
     merger       = config.OT2DResultMerger()
     args         = {}
 
     try:
         args['AOG']     = arguments['AOG']
-        args['GOR']     = arguments['GOR']
         args['species'] = arguments['SPECIES']
 
         if arguments['PARLLELIZE'] == 'more':
