@@ -17,13 +17,8 @@ class OTGSConfiguration(DefaultConfiguration):
     #_________________________
 
     def __repr__(self):
-        return 'PreprocessConfiguration class'            
+        return 'OTGSConfiguration class'            
 
-    #_________________________
-
-    def checkAttributes(self):
-        DefaultConfiguration.checkAttributes(self)
-        
     #_________________________
 
     def interpolatorIntoOTGSResolution(self):

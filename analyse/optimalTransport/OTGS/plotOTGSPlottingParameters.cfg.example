@@ -2,8 +2,8 @@
 # OTGSPlottingParameters.cfg
 #__________________________________________________
 
-extension = str : .pdf
-extension = str : .eps
+extensions = str : .pdf
+extensions = str : .eps
 
 #__________________________________________________
 # Plot analyse

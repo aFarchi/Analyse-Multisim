@@ -19,33 +19,33 @@ from ...utils.analyse.timeSelection.defaultTimeResolution import maxTimeRes
 
 #__________________________________________________
 
-def makeLauncherInterpolateIntoOTGSResolution(configFile):
+def makeLauncherInterpolateIntoOTGSResolution(configFile, availableProc=None):
     
     config    = OTGSConfiguration(configFile)
     simOutput = buildSimulationsOutput(config)
 
-    createDirectories([simOutput.launcherInterpolateIntoOTGSResolutionDir], config.printIO)
-    config.writeConfig(simOutput.configFileInterpolateIntoOTGSResolution)
+    createDirectories([simOutput.launcherInterpolateIntoOTGSResolutionFiles['directory']], config.printIO)
+    config.writeConfig(simOutput.launcherInterpolateIntoOTGSResolutionFiles['config'])
 
     args                    = {}
-    args['$fileProcesses$'] = simOutput.fileProcessesInterpolateIntoOTGSResolution
+    args['$fileProcesses$'] = simOutput.launcherInterpolateIntoOTGSResolutionFiles['processes']
     args['$launcher$']      = simOutput.modulePath.moduleLauncher
     args['$interpretor$']   = 'python'
     args['$startString$']   = 'Preparing all fields'
+    args['$logFile$']       = simOutput.launcherInterpolateIntoOTGSResolutionFiles['log']
+    args['$nodesFile$']     = simOutput.launcherInterpolateIntoOTGSResolutionFiles['nodes']
+    if availableProc is not None:
+        args['$nProcessors$'] = str(availableProc)
 
-    args['$logFile$']       = simOutput.fileLogInterpolateIntoOTGSResolution
-    args['$nodesFile$']     = simOutput.fileNodesInterpolateIntoOTGSResolution
-
-    writeDefaultPythonLauncher(simOutput.pythonLauncherInterpolateIntoOTGSResolution, args, makeExecutable=True, printIO=config.printIO)
-    writeDefaultBashLauncher(simOutput.bashLauncherInterpolateIntoOTGSResolution, args, makeExecutable=True, printIO=config.printIO)
-    writeDefaultNodesFile(simOutput.fileNodesInterpolateIntoOTGSResolution)
+    writeDefaultPythonLauncher(simOutput.launcherInterpolateIntoOTGSResolutionFiles['pyLauncher'], args, makeExecutable=True, printIO=config.printIO)
+    writeDefaultBashLauncher(simOutput.launcherInterpolateIntoOTGSResolutionFiles['shLauncher'], args, makeExecutable=True, printIO=config.printIO)
+    writeDefaultNodesFile(simOutput.launcherInterpolateIntoOTGSResolutionFiles['nodes'])
     
-    f = open(simOutput.fileProcessesInterpolateIntoOTGSResolution, 'w')
+    f = open(simOutput.launcherInterpolateIntoOTGSResolutionFiles['processes'], 'w')
     f.write('FUNCTION'    + '\t' +
             'CONFIG_FILE' + '\t' +
             'PARLLELIZE'  + '\t' +
             'AOG'         + '\t' +
-            'GOR'         + '\t' +
             'SPECIES'     + '\t' +
             'FIELD'       + '\t' +
             'LOL'         + '\t' +
@@ -60,67 +60,65 @@ def makeLauncherInterpolateIntoOTGSResolution(configFile):
         for species in simOutput.simConfig.speciesList[GOR]:
 
             if config.OTGS_interpolateIntoOTGSResolution_parallelize == 'less':
-                f.write('interpolateIntoOTGSResolution'                   + '\t' +
-                        simOutput.configFileInterpolateIntoOTGSResolution + '\t' +
-                        'less'                                            + '\t' +
-                        AOG                                               + '\t' +
-                        GOR                                               + '\t' +
-                        species                                           + '\t' +
-                        'None'                                            + '\t' +
-                        'None'                                            + '\t' +
-                        'None'                                            + '\n' )
+                f.write('interpolateIntoOTGSResolution'                                + '\t' +
+                        simOutput.launcherInterpolateIntoOTGSResolutionFiles['config'] + '\t' +
+                        'less'                                                         + '\t' +
+                        AOG                                                            + '\t' +
+                        species                                                        + '\t' +
+                        'None'                                                         + '\t' +
+                        'None'                                                         + '\t' +
+                        'None'                                                         + '\n' )
 
             elif config.OTGS_interpolateIntoOTGSResolution_parallelize =='more':                
                 for (field, LOL, TS) in product(simOutput.fieldList[AOG], LinOrLog(), ThresholdNoThreshold()):
-                    f.write('interpolateIntoOTGSResolution'                   + '\t' +
-                            simOutput.configFileInterpolateIntoOTGSResolution + '\t' +
-                            'more'                                            + '\t' +
-                            AOG                                               + '\t' +
-                            GOR                                               + '\t' +
-                            species                                           + '\t' +
-                            field.name                                        + '\t' +
-                            LOL                                               + '\t' +
-                            TS                                                + '\n' )
+                    f.write('interpolateIntoOTGSResolution'                                + '\t' +
+                            simOutput.launcherInterpolateIntoOTGSResolutionFiles['config'] + '\t' +
+                            'more'                                                         + '\t' +
+                            AOG                                                            + '\t' +
+                            species                                                        + '\t' +
+                            field.name                                                     + '\t' +
+                            LOL                                                            + '\t' +
+                            TS                                                             + '\n' )
 
     f.close()
 
     createDirectories(dirsToCreate, config.printIO)
-    print('Written '+simOutput.pythonLauncherInterpolateIntoOTGSResolution+' ...')
-    print('Written '+simOutput.bashLauncherInterpolateIntoOTGSResolution+' ...')
-    print('Written '+simOutput.fileProcessesInterpolateIntoOTGSResolution+' ...')
-    print('Written '+simOutput.fileNodesInterpolateIntoOTGSResolution+' ...')
+    print('Written '+simOutput.launcherInterpolateIntoOTGSResolutionFiles['pyLauncher']+' ...')
+    print('Written '+simOutput.launcherInterpolateIntoOTGSResolutionFiles['shLauncher']+' ...')
+    print('Written '+simOutput.launcherInterpolateIntoOTGSResolutionFiles['processes']+' ...')
+    print('Written '+simOutput.launcherInterpolateIntoOTGSResolutionFiles['nodes']+' ...')
 
     print('Do not forget to specify nodes / log files and number of processes.')
 
 #__________________________________________________
 
-def makeLauncherMergeOTGSResults(configFile):
+def makeLauncherMergeOTGSResults(configFile, availableProc=None):
     
     config    = OTGSConfiguration(configFile)
     simOutput = buildSimulationsOutput(config)
 
-    createDirectories([simOutput.launcherMergeOTGSResultsDir], config.printIO)
-    config.writeConfig(simOutput.configFileMergeOTGSResults)
+    createDirectories([simOutput.launcherMergeOTGSResultsFiles['directory']], config.printIO)
+    config.writeConfig(simOutput.launcherMergeOTGSResultsFiles['config'])
 
     args                    = {}
-    args['$fileProcesses$'] = simOutput.fileProcessesMergeOTGSResults
+    args['$fileProcesses$'] = simOutput.launcherMergeOTGSResultsFiles['processes']
     args['$launcher$']      = simOutput.modulePath.moduleLauncher
     args['$interpretor$']   = 'python'
-    args['$startString$']   = 'Preparing all fields'
+    args['$startString$']   = 'Merging OTGS results'
+    args['$logFile$']       = simOutput.launcherMergeOTGSResultsFiles['log']
+    args['$nodesFile$']     = simOutput.launcherMergeOTGSResultsFiles['nodes']
+    if availableProc is not None:
+        args['$nProcessors$'] = str(availableProc)
 
-    args['$logFile$']       = simOutput.fileLogMergeOTGSResults
-    args['$nodesFile$']     = simOutput.fileNodesMergeOTGSResults
+    writeDefaultPythonLauncher(simOutput.launcherMergeOTGSResultsFiles['pyLauncher'], args, makeExecutable=True, printIO=config.printIO)
+    writeDefaultBashLauncher(simOutput.launcherMergeOTGSResultsFiles['shLauncher'], args, makeExecutable=True, printIO=config.printIO)
+    writeDefaultNodesFile(simOutput.launcherMergeOTGSResultsFiles['nodes'])
 
-    writeDefaultPythonLauncher(simOutput.pythonLauncherMergeOTGSResults, args, makeExecutable=True, printIO=config.printIO)
-    writeDefaultBashLauncher(simOutput.bashLauncherMergeOTGSResults, args, makeExecutable=True, printIO=config.printIO)
-    writeDefaultNodesFile(simOutput.fileNodesMergeOTGSResults)
-    
-    f = open(simOutput.fileProcessesMergeOTGSResults, 'w')
+    f = open(simOutput.launcherMergeOTGSResultsFiles['processes'], 'w')
     f.write('FUNCTION'    + '\t' +
             'CONFIG_FILE' + '\t' +
             'PARLLELIZE'  + '\t' +
             'AOG'         + '\t' +
-            'GOR'         + '\t' +
             'SPECIES'     + '\t' +
             'FIELD'       + '\t' +
             'LOL'         + '\t' +
@@ -131,43 +129,41 @@ def makeLauncherMergeOTGSResults(configFile):
         for species in simOutput.simConfig.speciesList[GOR]:
 
             if config.OTGS_mergeOTGSResults_parallelize == 'less':
-                f.write('mergeOTGSResults'                   + '\t' +
-                        simOutput.configFileMergeOTGSResults + '\t' +
-                        'less'                               + '\t' +
-                        AOG                                  + '\t' +
-                        GOR                                  + '\t' +
-                        species                              + '\t' +
-                        'None'                               + '\t' +
-                        'None'                               + '\t' +
-                        'None'                               + '\t' +
-                        'None'                               + '\n' )
+                f.write('mergeOTGSResults'                                + '\t' +
+                        simOutput.launcherMergeOTGSResultsFiles['config'] + '\t' +
+                        'less'                                            + '\t' +
+                        AOG                                               + '\t' +
+                        species                                           + '\t' +
+                        'None'                                            + '\t' +
+                        'None'                                            + '\t' +
+                        'None'                                            + '\t' +
+                        'None'                                            + '\n' )
 
             elif config.OTGS_mergeOTGSResults_parallelize =='more':
                 
                 for (field, LOL, TS, configName) in product(simOutput.fieldList[AOG], LinOrLog(), ThresholdNoThreshold(), config.OTGS_configurationNames):
-                    f.write('mergeOTGSResults'                   + '\t' +
-                            simOutput.configFileMergeOTGSResults + '\t' +
-                            'more'                               + '\t' +
-                            AOG                                  + '\t' +
-                            GOR                                  + '\t' +
-                            species                              + '\t' +
-                            field.name                           + '\t' +
-                            LOL                                  + '\t' +
-                            TS                                   + '\t' +
-                            configName                           + '\n' )
+                    f.write('mergeOTGSResults'                                + '\t' +
+                            simOutput.launcherMergeOTGSResultsFiles['config'] + '\t' +
+                            'more'                                            + '\t' +
+                            AOG                                               + '\t' +
+                            species                                           + '\t' +
+                            field.name                                        + '\t' +
+                            LOL                                               + '\t' +
+                            TS                                                + '\t' +
+                            configName                                        + '\n' )
 
     f.close()
 
-    print('Written '+simOutput.pythonLauncherMergeOTGSResults+' ...')
-    print('Written '+simOutput.bashLauncherMergeOTGSResults+' ...')
-    print('Written '+simOutput.fileProcessesMergeOTGSResults+' ...')
-    print('Written '+simOutput.fileNodesMergeOTGSResults+' ...')
+    print('Written '+simOutput.launcherMergeOTGSResultsFiles['pyLauncher']+' ...')
+    print('Written '+simOutput.launcherMergeOTGSResultsFiles['shLauncher']+' ...')
+    print('Written '+simOutput.launcherMergeOTGSResultsFiles['processes']+' ...')
+    print('Written '+simOutput.launcherMergeOTGSResultsFiles['nodes']+' ...')
 
     print('Do not forget to specify nodes / log files and number of processes.')
 
 #__________________________________________________
 
-def makeLauncherPerformOTGS(configFile):
+def makeLauncherPerformOTGS(configFile, availableProc=None):
 
     config    = OTGSConfiguration(configFile)
     simOutput = buildSimulationsOutput(config)
@@ -181,9 +177,10 @@ def makeLauncherPerformOTGS(configFile):
         args['$launcher$']      = simOutput.modulePath.OT1DLauncher
         args['$interpretor$']   = 'python'
         args['$startString$']   = 'Starting OTGS ...'
-        
         args['$logFile$']       = simOutput.fileLogPerformOTGS(configName)
         args['$nodesFile$']     = simOutput.fileNodesPerformOTGS(configName)
+        if availableProc is not None:
+            args['$nProcessors$'] = str(availableProc)
 
         writeDefaultPythonLauncher(simOutput.pythonLauncherPerformOTGS(configName), args, makeExecutable=True, printIO=config.printIO)
         writeDefaultBashLauncher(simOutput.bashLauncherPerformOTGS(configName), args, makeExecutable=True, printIO=config.printIO)
@@ -231,7 +228,7 @@ def makeLauncherPerformOTGS(configFile):
 
 #__________________________________________________
 
-def makeLauncherPlotOTGSSingleConfig(configFile):
+def makeLauncherPlotOTGSSingleConfig(configFile, availableProc=None):
 
     config    = OTGSConfiguration(configFile)
     simOutput = buildSimulationsOutput(config)
@@ -245,17 +242,18 @@ def makeLauncherPlotOTGSSingleConfig(configFile):
         args['$launcher$']      = simOutput.modulePath.OT1DLauncherPlotting
         args['$interpretor$']   = 'python'
         args['$startString$']   = 'Plotting OTGS ...'
-        
         args['$logFile$']       = simOutput.fileLogPlotOTGS(configName)
         args['$nodesFile$']     = simOutput.fileNodesPlotOTGS(configName)
+        if availableProc is not None:
+            args['$nProcessors$'] = str(availableProc)
 
         writeDefaultPythonLauncher(simOutput.pythonLauncherPlotOTGS(configName), args, makeExecutable=True, printIO=config.printIO)
         writeDefaultBashLauncher(simOutput.bashLauncherPlotOTGS(configName), args, makeExecutable=True, printIO=config.printIO)
         writeDefaultNodesFile(simOutput.fileNodesPlotOTGS(configName))
         
         args = {}
-        args['$EPSILON$']     = str(config.EPSILON)
-        args['$singleOrMulti$'] = str(0)
+        args['$EPSILON$']       = str(config.EPSILON)
+        args['$singleOrMulti$'] = 'single'
 
         f = open(simOutput.fileProcessesPlotOTGS(configName), 'w')
         f.write('CONFIG_FILE' + '\t' +
@@ -293,7 +291,7 @@ def makeLauncherPlotOTGSSingleConfig(configFile):
 
 #__________________________________________________
 
-def makeLauncherPlotOTGSMultiConfig(configFile):
+def makeLauncherPlotOTGSMultiConfig(configFile, availableProc=None):
 
     config     = OTGSConfiguration(configFile)
     simOutput  = buildSimulationsOutput(config)
@@ -306,17 +304,18 @@ def makeLauncherPlotOTGSMultiConfig(configFile):
     args['$launcher$']      = simOutput.modulePath.OT1DLauncherPlotting
     args['$interpretor$']   = 'python'
     args['$startString$']   = 'Plotting OTGS ...'
-        
     args['$logFile$']       = simOutput.fileLogPlotOTGS(configName)
     args['$nodesFile$']     = simOutput.fileNodesPlotOTGS(configName)
+    if availableProc is not None:
+        args['$nProcessors$'] = str(availableProc)
 
     writeDefaultPythonLauncher(simOutput.pythonLauncherPlotOTGS(configName), args, makeExecutable=True, printIO=config.printIO)
     writeDefaultBashLauncher(simOutput.bashLauncherPlotOTGS(configName), args, makeExecutable=True, printIO=config.printIO)
     writeDefaultNodesFile(simOutput.fileNodesPlotOTGS(configName))
         
     args = {}
-    args['$EPSILON$']     = str(config.EPSILON)
-    args['$singleOrMulti$'] = str(1)
+    args['$EPSILON$']       = str(config.EPSILON)
+    args['$singleOrMulti$'] = 'multi'
 
     f = open(simOutput.fileProcessesPlotOTGS(configName), 'w')
     f.write('CONFIG_FILE' + '\t' +
@@ -356,7 +355,7 @@ def makeLauncherPlotOTGSMultiConfig(configFile):
 
 #__________________________________________________
 
-def makeLauncherApplyGSTransport(configFile):
+def makeLauncherApplyGSTransport(configFile, availableProc=None):
     
     config    = OTGSConfiguration(configFile)
     simOutput = buildSimulationsOutput(config)
@@ -369,9 +368,10 @@ def makeLauncherApplyGSTransport(configFile):
     args['$launcher$']      = simOutput.modulePath.moduleLauncher
     args['$interpretor$']   = 'python'
     args['$startString$']   = 'Preparing all fields'
-
     args['$logFile$']       = simOutput.launcherApplyGSTransportFiles['log']
     args['$nodesFile$']     = simOutput.launcherApplyGSTransportFiles['nodes']
+    if availableProc is not None:
+        args['$nProcessors$'] = str(availableProc)
 
     writeDefaultPythonLauncher(simOutput.launcherApplyGSTransportFiles['pyLauncher'], args, makeExecutable=True, printIO=config.printIO)
     writeDefaultBashLauncher(simOutput.launcherApplyGSTransportFiles['shLauncher'], args, makeExecutable=True, printIO=config.printIO)

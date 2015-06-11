@@ -20,7 +20,7 @@ def applyGSTransportForField(simOutput,
                              error,
                              printIO=False):
 
-    (data, scaling, scalingFM) = extractProcessedDataFullScaling(simOutput, AOG, field, LOL, species, printIO)
+    (data, scaling, scalingFM) = extractProcessedDataFullScaling(simOutput, AOG, field, LOL, species, 'Threshold', printIO)
 
     def normalize(x):
         return ( x - scaling.mini ) / ( scaling.maxi - scaling.mini )

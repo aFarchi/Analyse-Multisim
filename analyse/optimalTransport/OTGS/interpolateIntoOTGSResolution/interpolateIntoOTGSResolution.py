@@ -25,12 +25,7 @@ def interpolateProcPreprocessedDieldGSIntoOTGSResolution(simOutput,
     data = np.load(fn)
     data = interpolateGS(data, OTGSResolution+1)
 
-    data[1]                += data[0]
-    data[0]                 = 0.0
-    data[OTGSResolution-2] += data[OTGSResolution-1]
-    data[OTGSResolution-1]  = 0.0
-
-    fn = simOutput.fileProcPreprocessedFieldGSOTResolution(proc, AOG, field, LOL, species, TS)
+    fn   = simOutput.fileProcPreprocessedFieldGSOTResolution(proc, AOG, field, LOL, species, TS)
     if printIO:
         print ('Writing '+fn+' ...')
     np.save(fn, data)
