@@ -151,7 +151,7 @@ if function == 'performStatisticalAnalyse':
         args['AOG']     = arguments['AOG']
         args['species'] = arguments['SPECIES']
 
-        if arguments['PARLLELIZE'] == 'more':
+        if arguments['PARALLELIZE'] == 'more':
             args['field']      = arguments['FIELD']
             args['LOL']        = arguments['LOL']
     except:

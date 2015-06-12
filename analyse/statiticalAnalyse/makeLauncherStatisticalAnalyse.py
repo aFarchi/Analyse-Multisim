@@ -56,6 +56,7 @@ def makeLauncherStatisticalAnalyse(configFile, availableProc=None):
             if config.statisticalAnalyse_parallelize == 'less':
                 f.write('performStatisticalAnalyse'                         + '\t' +
                         simOutput.launcherStatisticalAnalyseFiles['config'] + '\t' +
+                        'less'                                              + '\t' +
                         AOG                                                 + '\t' +
                         species                                             + '\t' +
                         'None'                                              + '\t' +
@@ -66,6 +67,7 @@ def makeLauncherStatisticalAnalyse(configFile, availableProc=None):
                 for (field, LOL) in product(simOutput.fieldList[AOG], LinOrLog()):
                     f.write('performStatisticalAnalyse'                         + '\t' +
                             simOutput.launcherStatisticalAnalyseFiles['config'] + '\t' +
+                            'more'                                              + '\t' +
                             AOG                                                 + '\t' +
                             species                                             + '\t' +
                             field.name                                          + '\t' +
