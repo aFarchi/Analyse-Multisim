@@ -69,7 +69,7 @@ def makeLauncherPlotSimulation(configFile, availableProc=None):
                 for (field, LOL) in product(simOutput.fieldList[AOG], LinOrLog()):
                     f.write('plotSimulation'                                + '\t' +
                             simOutput.launcherPlotSimulationFiles['config'] + '\t' +
-                            'less'                                          + '\t' +
+                            'more'                                          + '\t' +
                             AOG                                             + '\t' +
                             GOR                                             + '\t' +
                             species                                         + '\t' +

@@ -436,9 +436,9 @@ class SimulationsOutput:
             labelListList     = []
             suffixFigNameList = []
 
-            for (proc, label) in zip(self.simOutput.procList, self.simOutput.labelList):
+            for (proc, label) in zip(self.procList, self.labelList):
                 procListList.append([proc])
-                suffixFigNameList.append([label])
+                suffixFigNameList.append(label)
                 
                 if addSimLabel:
                     labelListList.append([label])
