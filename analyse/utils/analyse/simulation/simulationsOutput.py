@@ -293,7 +293,7 @@ class SimulationsOutput:
         return ( self.performOT2DP0P1FieldSpeciesDir(configName, p0, p1, AOG, field, LOL, species) + 'result.bin' )
 
     def mergedResultsFileOT2DFieldSpecies(self, configName, AOG, field, LOL, species):
-        return ( self.performOTGSFieldSpeciesDir(AOG, field, LOL, species) + 'results_'+configName )
+        return ( self.performOT2DFieldSpeciesDir(AOG, field, LOL, species) + 'results_'+configName )
 
     #_________________________
     
