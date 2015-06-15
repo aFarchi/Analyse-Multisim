@@ -80,8 +80,8 @@ class AnalyseResults:
     #_________________________
 
     def fill(self):
-        for i in xrange(self.MSE.shape[0]):
-            for j in xrange(i):
+        for j in xrange(self.MSE.shape[0]):
+            for i in xrange(i):
                 self.MSE[j,i]     = self.MSE[i,j]
                 self.NFMmini[j,i] = self.NFMmini[i,j]
                 self.bias[j,i]    = self.bias[i,j]
