@@ -16,6 +16,8 @@ from ...utils.io.writeOTConfig                            import writeDefaultPlo
 from ...utils.io.writeOTConfig                            import writeDefaultPlottingConfigOT2D
 from ...utils.analyse.timeSelection.defaultTimeResolution import minTimeRes
 from ...utils.analyse.timeSelection.defaultTimeResolution import maxTimeRes
+from ...utils.analyse.timeSelection.defaultTimeResolution import cst30TimeRes
+from ...utils.analyse.timeSelection.defaultTimeResolution import cst62TimeRes
 
 #__________________________________________________
 
@@ -165,6 +167,10 @@ def makeLauncherPerformOT2D(configFile, availableProc=None):
         timeResFunction = minTimeRes
     elif config.OT2D_timeResFunction == 'max':
         timeResFunction = maxTimeRes
+    elif config.OT2D_timeResFunction == 'cst30':
+        timeResFunction = cst30TimeRes
+    elif config.OT2D_timeResFunction == 'cst62':
+        timeResFunction = cst62TimeRes
 
     for configName in config.OT2D_configurationNames:
 
@@ -200,8 +206,8 @@ def makeLauncherPerformOT2D(configFile, availableProc=None):
                         directory = simOutput.performOT2DP0P1FieldSpeciesDir(configName, p0, p1, AOG, field, LOL, species)
                         createDirectories([directory], config.printIO)
                         
-                        M = config.OT2D_shape[field.axes[0]]
-                        N = config.OT2D_shape[field.axes[1]]
+                        M = config.OT2D_shape[field.axes[0]] - 1
+                        N = config.OT2D_shape[field.axes[1]] - 1
 
                         args['$outputDir$'] = directory
                         args['$M$']         = str(M)
