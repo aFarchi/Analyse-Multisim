@@ -72,9 +72,12 @@ def addAxGS(plt, gs, index, modulo):
 
 #____________________________________________________________
 
-def makeAxesGrid(plt, nbrOfItems, order, extendDirection):
+def makeAxesGrid(plt, rect, nbrOfItems, order, extendDirection):
     (nLines, nColumns) = makeGrid(nbrOfItems, extendDirection)
     gs                 = gridspec.GridSpec(nLines, nColumns)
+    gs.update(left=rect[0], bottom=rect[1], right=rect[2], top=rect[3])
+
+    figure             = plt.figure(figsize=(4*nColumns+1, 4*nLines+1))
     axes               = []
 
     if order == 'horizontalFirst':
@@ -85,7 +88,7 @@ def makeAxesGrid(plt, nbrOfItems, order, extendDirection):
     for j in xrange(nbrOfItems):
         axes.append(addAxGS(plt, gs, j, modulo))
 
-    return (gs, axes)
+    return (figure, gs, axes)
 
 #____________________________________________________________
 
@@ -93,6 +96,12 @@ def makeAxesGridAttachGrayScale(plt, nbrOfItems, order, extendDirection, extendD
     axes               = []
     (nLines, nColumns) = makeGrid(nbrOfItems, extendDirection)
     gsAxes             = []
+
+    if extendDirectionGS == 'horizontal':
+        figure         = plt.figure(figsize=(8*nColumns+1, 4*nLines+1))
+    else:
+        figure         = plt.figure(figsize=(4*nColumns+1, 8*nLines+1))
+           
     if order == 'horizontalFirst':
         modulo = nColumns
     elif order == 'verticalFirst':
@@ -106,7 +115,7 @@ def makeAxesGridAttachGrayScale(plt, nbrOfItems, order, extendDirection, extendD
             nl = int((j-nc)/modulo)
             axes.append(plt.subplot(gs[nl,2*nc]))
             gsAxes.append(plt.subplot(gs[nl,2*nc+1]))
-        return (gs, axes, gsAxes)
+        return (figure, gs, axes, gsAxes)
 
     else:
         gs = gridspec.GridSpec(2*nLines, nColumns)
@@ -116,7 +125,7 @@ def makeAxesGridAttachGrayScale(plt, nbrOfItems, order, extendDirection, extendD
             nl = int((j-nc)/modulo)
             axes.append(plt.subplot(gs[2*nl,nc]))
             gsAxes.append(plt.subplot(gs[2*nl+1,nc]))
-        return (gs, axes, gsAxes)
+        return (figure, gs, axes, gsAxes)
             
     #elif attachGS == 'one':
     #    (nLines, nColumns) = makeGrid(nbrOfItems+1, extendDirection)

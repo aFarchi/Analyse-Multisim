@@ -52,13 +52,11 @@ def plotProcField(simOutput,
     (xmin, xmax, ymin, ymax) = field.axExtend2d()
     (xLabel, yLabel, cLabel) = field.labels2d(xLabel, yLabel, cLabel)
 
-    figure     = plt.figure()
-    plt.clf()
-
-    (gs, axes) = makeAxesGrid(plt,
-                              len(procList),
-                              order=order,
-                              extendDirection=extendDirection)
+    (figure, gs, axes) = makeAxesGrid(plt,
+                                      figureRect(colorBar, False),
+                                      len(procList),
+                                      order=order,
+                                      extendDirection=extendDirection)
 
     for (proc, label, ax) in zip(procList, labelList, axes):
         plotMatrix(ax, 
@@ -92,7 +90,7 @@ def plotProcField(simOutput,
                            yLabel=yLabel,
                            grid=False)
 
-    gs.tight_layout(figure, rect=figureRect(colorBar, False))
+    #gs.tight_layout(figure)#, rect=figureRect(colorBar, False))
 
     if colorBar:
         addColorBar(plt, 

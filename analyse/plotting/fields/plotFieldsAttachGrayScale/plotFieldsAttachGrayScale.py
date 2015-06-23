@@ -50,19 +50,16 @@ def plotProcFieldAttachGS(simOutput,
                           EPSILON,
                           printIO): 
 
-    (data, mini, maxi)       = extractProcessedData(simOutput, procList, AOG, field, LOL, species, 'NoThreshold', True, printIO)
-    (GS, miniGS, maxiGS)     = extractGrayScales(simOutput, procList, AOG, field, LOL, species, scaleGS, printIO)
-    (xmin, xmax, ymin, ymax) = field.axExtend2d()
-    (xLabel,yLabel,cLabel)   = field.labels2d(xLabel, yLabel, False)
+    (data, mini, maxi)         = extractProcessedData(simOutput, procList, AOG, field, LOL, species, 'NoThreshold', True, printIO)
+    (GS, miniGS, maxiGS)       = extractGrayScales(simOutput, procList, AOG, field, LOL, species, scaleGS, printIO)
+    (xmin, xmax, ymin, ymax)   = field.axExtend2d()
+    (xLabel,yLabel,cLabel)     = field.labels2d(xLabel, yLabel, False)
 
-    figure     = plt.figure()
-    plt.clf()
-
-    (gs, axes, gsAxes) = makeAxesGridAttachGrayScale(plt, 
-                                                     len(procList), 
-                                                     order, 
-                                                     extendDirection, 
-                                                     extendDirectionGS)
+    (figure, gs, axes, gsAxes) = makeAxesGridAttachGrayScale(plt, 
+                                                             len(procList), 
+                                                             order, 
+                                                             extendDirection, 
+                                                             extendDirectionGS)
 
     for (proc, label, ax, gsAx) in zip(procList, labelList, axes, gsAxes):
         plotMatrix(ax, 
