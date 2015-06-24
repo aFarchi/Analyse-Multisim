@@ -81,7 +81,7 @@ class AnalyseResults:
 
     def fill(self):
         for j in xrange(self.MSE.shape[0]):
-            for i in xrange(i):
+            for i in xrange(j):
                 self.MSE[j,i]     = self.MSE[i,j]
                 self.NFMmini[j,i] = self.NFMmini[i,j]
                 self.bias[j,i]    = self.bias[i,j]
@@ -94,6 +94,7 @@ class AnalyseResults:
                 for k in xrange(self.nLevelsAlpha):
                     self.FAalpha[j,i,k] = self.FAalpha[i,j,k]
 
+            i = j
             self.MSE[i,i]     = 0.0
             self.NFMmini[i,i] = 1.0
             self.bias[i,i]    = 0.0
