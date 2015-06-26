@@ -11,6 +11,7 @@ from analyse.preprocess.makeLauncherPreprocess                          import m
 from analyse.plotting.simulation.makeLauncherPlotSimulation             import makeLauncherPlotSimulation
 from analyse.plotting.fields.makeLauncherPlotFields                     import makeLauncherPlotFields
 from analyse.plotting.applyGSTransport.makeLauncherPlotApplyGSTransport import makeLauncherPlotApplyGSTransport
+from analyse.plotting.operators.makeLauncherPlotOperators               import makeLauncherPlotOperators
 
 from analyse.statiticalAnalyse.makeLauncherStatisticalAnalyse           import makeLauncherStatisticalAnalyse
 
@@ -50,6 +51,11 @@ if function == 'plotSimulation':
 
 if function == 'plotFields':
     makeLauncherPlotFields(configFile, availableProc)
+
+#__________________________________________________
+
+if function == 'plotOperators':
+    makeLauncherPlotOperators(configFile, availableProc)
 
 #__________________________________________________
 

@@ -1,0 +1,27 @@
+#__________________________________________________
+# Example of configuration file
+
+#__________________________________________________
+# General parameters
+ 
+outputDir      = /cerea_raid/users/farchia/Fukushima-multisim/output/
+sessionName    = sim-test-3/
+workName       = analyse/
+printIO        = True
+EPSILON        = 1.e-8
+
+#__________________________________________________
+# Necessary parameter from other config
+OTGS_configurationNames         = str : pd
+OT2D_configurationNames         = str : pd
+preprocessRawData_nLevelsFM     = 10
+statisticalAnalyse_nLevelsAlpha = 5
+
+#__________________________________________________
+# Plot operators
+
+plotOperators_parallelize = less
+plotOperators_cmapName    = gray
+plotOperators_extensions  = str : .pdf
+
+#__________________________________________________

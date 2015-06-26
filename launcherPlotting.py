@@ -8,6 +8,7 @@ from analyse.utils.sys.argv                                       import extract
 from analyse.plotting.simulation.plotSimulationConfiguration      import PlotSimulationConfiguration
 from analyse.plotting.fields.plotFieldsConfiguration              import PlotFieldsConfiguration
 from analyse.plotting.applyGSTransport.plotTransportConfiguration import PlotTransportConfiguration
+from analyse.plotting.operators.plotOperatorsConfiguration        import PlotOperatorsConfiguration
 
 #__________________________________________________
 
@@ -74,4 +75,22 @@ if function == 'plotApplyGSTransport':
         pass
     plotter.plot(**args)
 
+#__________________________________________________
+
+if function == 'plotOperators':
+
+    config  = PlotOperatorsConfiguration(configFile)
+    plotter = config.plotter()
+
+    args    = {}
+    try:
+        args['AOG']       = arguments['AOG']
+        args['species']   = arguments['SPECIES']
+        
+        if arguments['PARALLELIZE'] == 'more':
+            args['field']      = arguments['FIELD']
+            args['LOL']        = arguments['LOL']
+    except:
+        pass
+    plotter.plot(**args)
 #__________________________________________________

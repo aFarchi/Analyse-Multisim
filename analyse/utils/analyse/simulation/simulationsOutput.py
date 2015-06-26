@@ -177,6 +177,17 @@ class SimulationsOutput:
 
         #_________________________
 
+        self.launcherPlotOperatorsFiles = {}
+        self.launcherPlotOperatorsFiles['directory']  = self.launcherDir + 'plotting/operators/'
+        self.launcherPlotOperatorsFiles['pyLauncher'] = self.launcherPlotOperatorsFiles['directory'] + 'plotOperators.py'
+        self.launcherPlotOperatorsFiles['shLauncher'] = self.launcherPlotOperatorsFiles['directory'] + 'plotOperators.sh'
+        self.launcherPlotOperatorsFiles['processes']  = self.launcherPlotOperatorsFiles['directory'] + 'processesPlotOperators.dat'
+        self.launcherPlotOperatorsFiles['config']     = self.launcherPlotOperatorsFiles['directory'] + 'plotOperators.cfg'
+        self.launcherPlotOperatorsFiles['nodes']      = self.launcherPlotOperatorsFiles['directory'] + 'nodesPlotOperators.dat'
+        self.launcherPlotOperatorsFiles['log']        = self.launcherPlotOperatorsFiles['directory'] + 'logPlotOperators'
+        
+        #_________________________
+                                                                        
         self.launcherPlotApplyGSTransportFiles               = {}
         self.launcherPlotApplyGSTransportFiles['directory']  = self.launcherDir + 'plotting/applyGSTransport/'
         self.launcherPlotApplyGSTransportFiles['pyLauncher'] = self.launcherPlotApplyGSTransportFiles['directory'] + 'plotApplyGSTransport.py'
@@ -192,9 +203,15 @@ class SimulationsOutput:
         self.fieldfigDir                = self.figDir + 'fields/fields/'
         self.fieldAttachGrayScalefigDir = self.figDir + 'fields/fieldsAttachGrayScale/'
         self.OTfigDir                   = self.figDir + 'optimalTransport/'
+        self.operatorsFigDir            = self.figDir + 'operators/'
         self.OT2DfigDir                 = self.OTfigDir + 'OT2D/'
         self.OTGSfigDir                 = self.OTfigDir + 'OTGS/'
         self.applyGSTransportfigDir     = self.OTfigDir + 'applyGSTransport/'
+
+    #_________________________
+
+    def plotOperatorsDir(self, AOG, field, LOL, species):
+        return ( self.operatorsFigDir + AOG + field.name + '/' + LOL + '/' + species + '/' )
 
     #_________________________
 

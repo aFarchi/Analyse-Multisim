@@ -13,6 +13,11 @@ from plotting                import adaptAxesExtent
 
 #__________________________________________________
 
+def plotMatrixBasic(ax, matrix, cmapName):
+    return ax.imshow(matrix, cmap=cmapName, interpolation='nearest')
+
+#__________________________________________________
+
 def plotMatrix(ax, matrix, plotter, xmin=0.0, xmax=1.0, ymin=0.0, ymax=1.0, cmapName='jet', **kwargs):
     kwargs = fillKwargs(plotter, xmin, xmax, ymin, ymax, cmapName, **kwargs)
 
