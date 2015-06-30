@@ -67,7 +67,7 @@ def makeLauncherPlotOperators(configFile, availableProc=None):
                 for (field, LOL) in product(simOutput.fieldList[AOG], LinOrLog()):
                     f.write('plotOperators'                                + '\t' +
                             simOutput.launcherPlotOperatorsFiles['config'] + '\t' +
-                            'less'                                         + '\t' +
+                            'more'                                         + '\t' +
                             AOG                                            + '\t' +
                             species                                        + '\t' +
                             field.name                                     + '\t' +

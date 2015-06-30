@@ -39,12 +39,12 @@ class OperatorsPlotter:
 
     def plotAOGOperators(self, AOG, species, field=None, LOL=None):
 
-        (fieldList, LOLList, TSList) = self.simOutput.fieldLOLList(AOG, field, LOL, None)
+        (fieldList, LOLList, TSList) = self.simOutput.fieldLOLTSList(AOG, field, LOL, None)
         OTGSConfigNameList           = self.config.OTGS_configurationNames
         OT2DConfigNameList           = self.config.OT2D_configurationNames
 
         for (field, LOL) in product(fieldList, LOLList):
-            plotStatisticalOperators(self.simOuput,
+            plotStatisticalOperators(self.simOutput,
                                      AOG,
                                      field,
                                      LOL,
