@@ -68,7 +68,7 @@ def makeLauncherPlotFields(configFile, availableProc=None):
                 for (field, LOL) in product(simOutput.fieldList[AOG], LinOrLog()):
                     f.write('plotFields'                               + '\t' +
                             simOutput.launcherPlotFieldFiles['config'] + '\t' +
-                            'less'                                     + '\t' +
+                            'more'                                     + '\t' +
                             AOG                                        + '\t' +
                             species                                    + '\t' +
                             field.name                                 + '\t' +
