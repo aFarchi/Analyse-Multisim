@@ -8,12 +8,12 @@ class ModulePath:
 
     def __init__(self):
 
-        self.moduleUpperPath         = '/Users/Alban/Desktop/Analyse-Multisim/'
+        self.moduleUpperPath         = '/cerea_raid/users/farchia/Analyse-Multisim/'
         self.modulePath              = self.moduleUpperPath + 'analyse/'
         self.moduleLauncher          = self.moduleUpperPath + 'launcher.py'
         self.moduleLauncherPlotting  = self.moduleUpperPath + 'launcherPlotting.py'
         self.moduleLauncherAnimating = self.moduleUpperPath + 'launcherAnimating.py'
-        self.OTModulePath            = '/Users/Alban/Desktop/Optimal-Transport/'
+        self.OTModulePath            = '/profils_cerea/farchia/OT/Optimal-Transport/'
         self.OT2DLauncher            = self.OTModulePath + 'launchSimulation2D.py'
         self.OT2DLauncherPlotting    = self.OTModulePath + 'plotSimulation2D.py'
         self.OT1DLauncher            = self.OTModulePath + 'launchSimulation1D.py'

@@ -35,6 +35,15 @@ def plotOperator(fn, figDir, prefixFN, label, extensionsList, cmapName='gray', a
     figName = figDir + 'permute_' + prefixFN
     saveFig(plt, figName, extensionsList)
 
+    plt.close()
+    plt.figure()
+    line    = matrix[0, 1:]
+    plt.plot(line)
+    plt.xlabel(label)
+    figName = figDir + 'line_' + prefixFN
+    saveFig(plt, figName, extensionsList)
+    plt.close()
+
 #__________________________________________________
 
 def plotStatisticalOperators(simOutput, AOG, field, LOL, species, nLevelsFM, nLevelsAlpha, cmapName, extensionsList):

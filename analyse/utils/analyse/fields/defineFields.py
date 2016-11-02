@@ -23,7 +23,7 @@ def defineGroundFields(simOutput):
 
 def defineFields(simOutput):
     fieldList            = {}
-    fieldList['air/']    = defineAirFields(simOutput)
+    fieldList['air/']    = [] # defineAirFields(simOutput)
     fieldList['ground/'] = defineGroundFields(simOutput)
     return fieldList
 

@@ -90,7 +90,7 @@ def plotProcField(simOutput,
                            yLabel=yLabel,
                            grid=False)
 
-    #gs.tight_layout(figure)#, rect=figureRect(colorBar, False))
+    gs.tight_layout(figure, rect=figureRect(colorBar, False))
 
     if colorBar:
         addColorBar(plt, 
